@@ -2,7 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.tsx";
 import Home from "./pages/Home";
-import Blog from "./pages/Blog";
+import Artists from "./pages/Artists";
+import Facilities from "./pages/Facilities";
 
 const App: React.FC = () => {
     return (
@@ -10,7 +11,8 @@ const App: React.FC = () => {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/blog" element={<Blog />} />
+                <Route path="/facilities" element={<Facilities />} />
+                <Route path="/artists" element={<Artists />} />
             </Routes>
         </div>
     );
