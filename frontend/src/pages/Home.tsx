@@ -1,7 +1,13 @@
 import React from "react";
+import Header from "../components/home/Header.tsx";
+import About from "../components/home/About.tsx";
 
 const Home: React.FC = () => {
-    return <h1 className="text-3xl font-bold">Welcome to the homepage!</h1>;
+    return (
+        <>
+    <Header></Header><About></About>
+        </>
+    );
 };
 
 export default Home;
