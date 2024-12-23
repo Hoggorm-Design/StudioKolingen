@@ -1,4 +1,5 @@
 const ApartmentShowcase = () => {
+    //This one will have to wait
     return (
         <section>
             <img src="" alt="section one"/>
