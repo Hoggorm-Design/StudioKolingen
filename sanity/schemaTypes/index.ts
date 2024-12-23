@@ -8,5 +8,10 @@ import link from './link';
 import location from './location';
 import prices from './prices';
 import about from './about';
+import apartmentInfo from './apartmentInfo';
+//import apartments from './apartments'; //No fields yet
+import artDisplay from './artDisplay';
+import artistInfo from "./artistInfo";
+import artists from './artists';
 
-export const schemaTypes = [blogPost, navbar, carousel, mainImage, contact, footer, link, location, prices, about];
+export const schemaTypes = [blogPost, apartmentInfo, artDisplay, artistInfo, artists, navbar, carousel, mainImage, contact, footer, link, location, prices, about];
