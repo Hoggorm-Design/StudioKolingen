@@ -2,7 +2,7 @@ import {defineField, defineType} from "sanity";
 
 export default defineType({
     name: "artists",
-    title: "Arttists",
+    title: "Artists",
     type: "document",
     fields: [
         defineField({
@@ -21,10 +21,22 @@ export default defineType({
             description: "Provide a short description of the image for accessibility.",
         }),
         defineField({
+            name: "header",
+            title: "Header",
+            type: "string",
+            description:"The name of the artist."
+        }),
+        defineField({
             name: "text",
             title: "Text",
             type: "text",
             description: "Here you can write the first textual content of the specific artist.",
+        }),
+        defineField({
+            name: "link",
+            title: "Link",
+            type: "url",
+            description: "Provide an optional link for the blog post."
         }),
     ],
 });
