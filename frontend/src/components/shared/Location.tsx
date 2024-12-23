@@ -1,14 +1,36 @@
+import {Link} from 'react-router-dom';
+import React from "react";
+import useLocation from "../../hooks/useLocation.ts";
+import useLinks from "../../hooks/useLink.ts";
 
-import { Link } from 'react-router-dom';
+const Location: React.FC = () => {
+    const { location, loading } = useLocation();
+    const { links } = useLinks();
 
-const Location = () => {
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!location) {
+        return <div>No location data available.</div>;
+    }
+
     return (
         <section>
-            <h2>Our Location</h2>
-            <p>textblock</p>
-            <img src="" alt="Alt text"/>
-            <Link to="">Link to location, this will need to have a map function,
-                for each new link sanity document</Link>
+            <h2>{location.header}</h2>
+            <p>{location.text}</p>
+            <img src="" alt="Location image"/>
+            <div>
+                {links.length > 0 ? (
+                    links.map((link, index) => (
+                        <Link key={index} to={link.url}>
+                            {link.alt}
+                        </Link>
+                    ))
+                ) : (
+                    <p>No links available.</p>
+                )}
+            </div>
         </section>
     );
 };
