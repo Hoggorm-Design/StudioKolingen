@@ -8,6 +8,4 @@ export interface CarouselImage {
     alt: string;
 }
 
-export interface Carousel {
-    images: CarouselImage[];
-}
+
