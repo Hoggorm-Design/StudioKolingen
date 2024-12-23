@@ -13,5 +13,6 @@ import apartmentInfo from './apartmentInfo';
 import artDisplay from './artDisplay';
 import artistInfo from "./artistInfo";
 import artists from './artists';
+import subImage from './subImage';
 
-export const schemaTypes = [blogPost, apartmentInfo, artDisplay, artistInfo, artists, navbar, carousel, mainImage, contact, footer, link, location, prices, about];
+export const schemaTypes = [subImage, blogPost, apartmentInfo, artDisplay, artistInfo, artists, navbar, carousel, mainImage, contact, footer, link, location, prices, about];
