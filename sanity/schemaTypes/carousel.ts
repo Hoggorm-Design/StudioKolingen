@@ -1,8 +1,8 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-    name: "blogPost",
-    title: "Blog Post",
+    name: "carousel",
+    title: "Carousel",
     type: "document",
     fields: [
         defineField({
