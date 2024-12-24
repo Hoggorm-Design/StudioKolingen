@@ -20,8 +20,8 @@ const ContactUs: React.FC = () => {
   }
 
   return (
-    <section className="flex justify-center items-center min-h-screen bg-[#1D192C] p-20">
-      <div className="bg-white flex flex-col lg:flex-row p-16 w-full h-full">
+    <section className="flex justify-center items-center min-h-screen bg-[#1D192C] px-3 py-5 xs:px-8 xs:py-10 md:p-20">
+      <div className="bg-white flex flex-col lg:flex-row p-4 xs:p-8 md:p-16 w-full h-full gap-10">
         {/* Left Section */}
         <section className="lg:w-1/2 flex flex-col gap-6">
           <h2>{contact.header}</h2>
@@ -31,7 +31,7 @@ const ContactUs: React.FC = () => {
             <FontAwesomeIcon icon={faEnvelope} className="text-[#B22C2B]" />
             <a
               href={`mailto:${contact.mail}`}
-              className="hover:text-[#B22C2B] transition"
+              className="hover:text-[#B22C2B] transition text-wrap"
             >
               {contact.mail}
             </a>
@@ -64,7 +64,7 @@ const ContactUs: React.FC = () => {
           </div>
 
           {/* Icons Section */}
-          <div className="flex items-center gap-12 mt-4">
+          <div className="hidden lg:flex items-center gap-12 mt-4">
             <a
               href="#"
               className="text-[#B22C2B] hover:text-[#7c1e1d] transition"
@@ -137,7 +137,7 @@ const ContactUs: React.FC = () => {
                 <input type="checkbox" id="terms" className="w-4 h-4" />
                 <label htmlFor="terms" className="text-sm">
                   I accept the{" "}
-                  <a href="#" className="underline">
+                  <a href="#" className="underline text-sm font-normal">
                     Terms
                   </a>
                 </label>
