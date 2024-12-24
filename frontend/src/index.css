@@ -13,11 +13,15 @@ body {
 }
 
 h2 {
-    @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold;
+    @apply text-3xl md:text-4xl xl:text-5xl font-semibold;
 }
 
 p, a {
     @apply text-base md:text-lg lg:text-xl font-light;
+}
+
+strong {
+    @apply text-base md:text-lg lg:text-xl
 }
 
 h1,h2,h3 {

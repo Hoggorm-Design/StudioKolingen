@@ -66,13 +66,17 @@ const ContactUs: React.FC = () => {
           {/* Icons Section */}
           <div className="hidden lg:flex items-center gap-12 mt-4">
             <a
-              href="#"
+              href="https://www.facebook.com/p/Studio-Kolingen-100064515109973/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#B22C2B] hover:text-[#7c1e1d] transition"
             >
               <FontAwesomeIcon icon={faFacebook} size="3x" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/studiokolingen_air/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#B22C2B] hover:text-[#7c1e1d] transition"
             >
               <FontAwesomeIcon icon={faInstagram} size="3x" />
@@ -82,7 +86,7 @@ const ContactUs: React.FC = () => {
 
         {/* Right Section */}
         <section className="lg:w-1/2 flex flex-col gap-4">
-          <form className="flex flex-col gap-6">
+          <form className="flex flex-col gap-6 auto">
             {/* Input with Label */}
             <div className="flex flex-col">
               <label htmlFor="name" className="mb-2">
@@ -92,7 +96,10 @@ const ContactUs: React.FC = () => {
                 id="name"
                 type="text"
                 placeholder="Enter your name"
+                autoComplete="name"
                 className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
+                name="name"
+                required
               />
             </div>
 
@@ -104,7 +111,10 @@ const ContactUs: React.FC = () => {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                autoComplete="email"
                 className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
+                name="email"
+                required
               />
             </div>
 
@@ -116,7 +126,10 @@ const ContactUs: React.FC = () => {
                 id="subject"
                 type="text"
                 placeholder="Enter the subject"
+                autoComplete="off"
                 className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
+                name="subject"
+                required
               />
             </div>
 
@@ -127,8 +140,11 @@ const ContactUs: React.FC = () => {
               <textarea
                 id="message"
                 placeholder="Type your message"
+                autoComplete="off"
                 className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
                 rows={5}
+                name="message"
+                required
               ></textarea>
             </div>
 
