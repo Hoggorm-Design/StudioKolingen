@@ -16,6 +16,10 @@ h2 {
     @apply text-3xl md:text-4xl xl:text-5xl font-semibold;
 }
 
+.menuItem {
+    @apply text-lg ;
+}
+
 p, a {
     @apply text-base md:text-lg lg:text-xl font-light;
 }

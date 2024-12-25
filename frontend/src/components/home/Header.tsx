@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <header>
+    <header className="pt-20 lg:p-0">
       <section className="flex flex-col justify-center items-center p-16 sm:p-20 gap-8">
         <img src={mainImage.image.asset.url} alt={mainImage.alt} />
         <div className="flex flex-col sm:flex-row items-center sm:gap-5 text-center">

@@ -1,17 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/shared/Navbar.tsx";
+import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import Home from "./pages/Home";
 import Artists from "./pages/Artists";
 import Facilities from "./pages/Facilities";
 import Header from "./components/home/Header.tsx";
 import Footer from "./components/shared/Footer.tsx";
+import MobileNavbar from "./components/shared/MobileNavbar.tsx";
 
 const App: React.FC = () => {
   return (
     <div>
+      <MobileNavbar />
       <Header />
-      <Navbar />
+      <DesktopNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/facilities" element={<Facilities />} />
