@@ -31,26 +31,29 @@ const DesktopNavbar: React.FC = () => {
   const logoVariants = {
     hidden: {
       x: "-100%",
-      duration: 0.5,
-      ease: "easeInOut",
       opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
     },
     visible: {
       x: 0,
       opacity: 1,
       transition: { duration: 0.5, ease: "easeInOut" },
     },
-    exit: { x: "-100%", duration: 0.5, ease: "easeInOut" },
+    exit: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
   };
 
   const linksVariants = {
     center: {
-      x: "-89px",
+      x: "-7%",
       opacity: 1,
       transition: { duration: 0.5, ease: "easeInOut" },
     },
     end: {
-      x: "20%",
+      x: "10%",
       opacity: 1,
       transition: { duration: 0.5, ease: "easeInOut" },
     },
@@ -59,7 +62,7 @@ const DesktopNavbar: React.FC = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`lg:flex items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
+      className={`hidden lg:flex items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
         isFixed ? "shadow-md" : ""
       } h-20`}
     >
@@ -79,7 +82,7 @@ const DesktopNavbar: React.FC = () => {
 
       {/* Links Section */}
       <motion.div
-        className="flex items-center justify-center space-x-10 w-full"
+        className="flex items-center justify-center gap-x-10 w-full"
         initial="center"
         animate={isFixed ? "end" : "center"}
         variants={linksVariants}
