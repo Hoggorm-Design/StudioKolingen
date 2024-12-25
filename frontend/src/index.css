@@ -20,6 +20,10 @@ h2 {
     @apply text-lg ;
 }
 
+.footerText {
+    @apply text-sm md:text-base lg:text-lg ;
+}
+
 p, a {
     @apply text-base md:text-lg lg:text-xl font-light;
 }
