@@ -2,25 +2,31 @@ import useMainImage from "../../hooks/useMainImage.ts";
 import React from "react";
 
 const Header: React.FC = () => {
-    const { mainImage, loading } = useMainImage();
+  const { mainImage, loading } = useMainImage();
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    if (!mainImage) {
-        return <div>No main image available.</div>;
-    }
+  if (!mainImage) {
+    return <div>No main image available.</div>;
+  }
 
-    return (
-        <header>
-            <section>
-                <img src={mainImage.image.asset.url} alt={mainImage.alt} />
-                <h1>{mainImage.header}</h1>
-                <h2>{mainImage.text}</h2>
-            </section>
-        </header>
-    );
+  return (
+    <header>
+      <section className="flex flex-col justify-center items-center p-16 sm:p-20 gap-8">
+        <img src={mainImage.image.asset.url} alt={mainImage.alt} />
+        <div className="flex flex-col sm:flex-row items-center sm:gap-5 text-center">
+          <h1 className="text-4xl md:text-5xl font-semibold text-nowrap">
+            {mainImage.header}
+          </h1>
+          <h2 className="text-4xl md:text-5xl font-light text-nowrap">
+            {mainImage.text}
+          </h2>
+        </div>
+      </section>
+    </header>
+  );
 };
 
 export default Header;

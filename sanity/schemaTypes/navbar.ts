@@ -1,27 +1,24 @@
-import { defineField, defineType } from "sanity";
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
-    name: "navbar",
-    title: "Navigation bar",
-    type: "document",
-    fields: [
-        defineField({
-            name: "header1",
-            title: "Header1",
-            type: "string",
-            description: "Here you can write the title of the first heading of the navigation bar"
-        }),
-        defineField({
-            name: "header2",
-            title: "Header2",
-            type: "string",
-            description: "Here you can write the title of the second heading of the navigation bar"
-        }),
-        defineField({
-            name: "header3",
-            title: "Header3",
-            type: "string",
-            description: "Here you can write the title of the third heading of the navigation bar"
-        }),
-    ],
-});
+  name: 'navbar',
+  title: 'Navigation bar',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Provide an image of the logo for the navigation bar',
+    }),
+    defineField({
+      name: 'alt',
+      title: 'Alternative text',
+      type: 'string',
+      description: 'Provide an alternative text for the image',
+    }),
+  ],
+})
