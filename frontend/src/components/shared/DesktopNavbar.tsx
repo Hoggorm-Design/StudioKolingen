@@ -62,7 +62,7 @@ const DesktopNavbar: React.FC = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`hidden lg:flex items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
+      className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
         isFixed ? "shadow-md" : ""
       } h-20`}
     >
