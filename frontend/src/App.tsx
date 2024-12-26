@@ -7,6 +7,7 @@ import Facilities from "./pages/Facilities";
 import Header from "./components/home/Header.tsx";
 import Footer from "./components/shared/Footer.tsx";
 import MobileNavbar from "./components/shared/MobileNavbar.tsx";
+import ScrollToAnchor from "./components/shared/ScrollToAnchor.tsx";
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <MobileNavbar />
       <Header />
       <DesktopNavbar />
+      <ScrollToAnchor />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/facilities" element={<Facilities />} />

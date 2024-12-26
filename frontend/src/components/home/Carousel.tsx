@@ -104,7 +104,7 @@ const MyCarousel: React.FC = () => {
           {carousels.map((image, index) => (
             <div
               key={index}
-              className="w-full h-[300px] flex-shrink-0 overflow-hidden bg-gray-100"
+              className="w-full h-[300px] flex-shrink-0 overflow-hidden "
             >
               <img
                 src={image.image.asset.url}

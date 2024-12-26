@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <footer className="p-12">
+    <footer className="p-10">
       <div className="max-w-screen  border border-black px-2 py-10 lg:p-12 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-0">
         {/* Left Section */}
         <div className="flex flex-col gap-y-10">
@@ -79,8 +79,10 @@ const Footer: React.FC = () => {
 
       {/* Footer Bottom */}
       <div className="w-full mt-5">
-        <p>Org.nr: 802544-2289</p>
-        <p>© {new Date().getFullYear()} All rights reserved.</p>
+        <p className="footerText">Org.nr: 802544-2289</p>
+        <p className="footerText">
+          © {new Date().getFullYear()} All rights reserved.
+        </p>
       </div>
     </footer>
   );

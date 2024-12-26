@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import useNavbar from "../../hooks/useNavbar.ts";
@@ -100,19 +100,19 @@ const DesktopNavbar: React.FC = () => {
           Facilities
         </Link>
         <Link
-          to=""
+          to="/#prices"
           className="hover:text-[#B22C2B] transition-colors menuItem text-center"
         >
           Prices
         </Link>
         <Link
-          to=""
+          to="/#about"
           className="hover:text-[#B22C2B] transition-colors menuItem text-center"
         >
           About Us
         </Link>
         <Link
-          to=""
+          to="/#contact"
           className="hover:text-[#B22C2B] transition-colors menuItem text-center"
         >
           Contact

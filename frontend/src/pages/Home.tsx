@@ -9,10 +9,16 @@ const Home: React.FC = () => {
   return (
     <>
       <SubImage />
-      <About />
-      <Prices />
+      <section id="about">
+        <About />
+      </section>
+      <section id="prices">
+        <Prices />
+      </section>
       <Location />
-      <ContactUs />
+      <section id="contact">
+        <ContactUs />
+      </section>
     </>
   );
 };

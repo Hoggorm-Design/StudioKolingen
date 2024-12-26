@@ -57,21 +57,21 @@ const MobileNavbar: React.FC = () => {
             Facilities
           </Link>
           <Link
-            to=""
+            to="/#prices"
             className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
             onClick={() => setIsOpen(false)}
           >
             Prices
           </Link>
           <Link
-            to=""
+            to="/#about"
             className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
             onClick={() => setIsOpen(false)}
           >
             About Us
           </Link>
           <Link
-            to=""
+            to="/#contact"
             className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
             onClick={() => setIsOpen(false)}
           >
