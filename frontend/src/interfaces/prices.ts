@@ -1,9 +1,10 @@
 export interface Prices {
-    header: string;
-    onenight: string;
-    oneweek: string;
-    twoweeks: string;
-    fourweeks: string;
-    extraPerson: string;
-    text: string;
+  header: string;
+  text: string;
+  onenight: string;
+  oneweek: string;
+  twoweeks: string;
+  fourweeks: string;
+  extraPerson: string;
+  text2: string;
 }
