@@ -7,6 +7,7 @@ import Footer from "./components/shared/Footer.tsx";
 import MobileNavbar from "./components/shared/MobileNavbar.tsx";
 import ScrollToAnchor from "./components/shared/ScrollToAnchor.tsx";
 import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
+import Blog from "./pages/Blog.tsx";
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/facilities" element={<Facilities />} />
         <Route path="/artists" element={<Artists />} />
+        <Route path="/blog" element={<Blog />} />
       </Routes>
       <Footer />
     </div>
