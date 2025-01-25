@@ -32,7 +32,7 @@ const BlogPosts = () => {
 
 				return (
 					<div key={post._id}>
-						<div className="flex">
+						<div className="flex justify-around">
 							{/* Header */}
 							<div>
 								<h1>{post.header}</h1>
@@ -44,7 +44,7 @@ const BlogPosts = () => {
 							</div>
 							{/* Image 1 (always visible) */}
 							{post.image1 && post.image1.asset && (
-								<div>
+								<div className="">
 									<img
 										src={post.image1.asset.url}
 										alt={post.imageText1 || "Image 1"}
