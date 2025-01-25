@@ -32,27 +32,27 @@ const BlogPosts = () => {
 
 				return (
 					<div key={post._id}>
-						<div className="flex justify-around">
+						<section className="flex xl:flex-row w-full min-h-screen justify-center m-5 bottom-0">
 							{/* Header */}
-							<div>
+							<section className="flex flex-col xl:w-1/2 space-y-4">
 								<h1>{post.header}</h1>
 
 								{/* First visible part (always visible) */}
 								{post.text1 && <p>{post.text1}</p>}
 								{post.text2 && <p>{post.text2}</p>}
 								{post.text3 && <p>{post.text3}</p>}
-							</div>
+							</section>
 							{/* Image 1 (always visible) */}
 							{post.image1 && post.image1.asset && (
-								<div className="">
+								<section className="xl:w-1/2">
 									<img
 										src={post.image1.asset.url}
 										alt={post.imageText1 || "Image 1"}
 									/>
 									<p>{post.imageText1}</p>
-								</div>
+								</section>
 							)}{" "}
-						</div>
+						</section>
 
 						{/* Button to toggle 'show more' */}
 						<button
