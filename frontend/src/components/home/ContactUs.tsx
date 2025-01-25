@@ -20,10 +20,10 @@ const ContactUs: React.FC = () => {
   }
 
   return (
-    <section className="flex justify-center items-center min-h-screen bg-[#1D192C] px-3 py-5 xs:px-8 xs:py-10 md:p-20">
-      <div className="bg-white flex flex-col lg:flex-row p-4 xs:p-8 md:p-16 w-full h-full gap-10">
+    <section className="flex justify-center items-center min-h-screen bg-[#1D192C] py-5 xs:py-10 md:py-20 px-3 xs:px-8 md:px-36 xl:px-64">
+      <div className="bg-white flex flex-col px-4 py-28  md:p-16 w-full h-full gap-10">
         {/* Left Section */}
-        <section className="lg:w-1/2 flex flex-col gap-6">
+        <section className="lg:w-1/2 flex flex-col gap-12 md:gap-6">
           <h2>{contact.header}</h2>
 
           {/* Email */}
@@ -82,91 +82,6 @@ const ContactUs: React.FC = () => {
               <FontAwesomeIcon icon={faInstagram} size="3x" />
             </a>
           </div>
-        </section>
-
-        {/* Right Section */}
-        <section className="lg:w-1/2 flex flex-col gap-4">
-          <form className="flex flex-col gap-6 auto">
-            {/* Input with Label */}
-            <div className="flex flex-col">
-              <label htmlFor="name" className="mb-2">
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter your name"
-                autoComplete="name"
-                className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
-                name="name"
-                required
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="email" className="mb-2">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                autoComplete="email"
-                className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
-                name="email"
-                required
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="subject" className="mb-2">
-                Subject
-              </label>
-              <input
-                id="subject"
-                type="text"
-                placeholder="Enter the subject"
-                autoComplete="off"
-                className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
-                name="subject"
-                required
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="message" className="mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                placeholder="Type your message"
-                autoComplete="off"
-                className="p-3 border border-black  focus:outline-none focus:ring-2 focus:ring-[#B22C2B]"
-                rows={5}
-                name="message"
-                required
-              ></textarea>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <input type="checkbox" id="terms" className="w-4 h-4" />
-                <label htmlFor="terms" className="text-sm">
-                  I accept the{" "}
-                  <a href="#" className="underline text-sm font-normal">
-                    Terms
-                  </a>
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                className="bg-[#B22C2B] text-white py-2 px-6 hover:bg-[#7c1e1d] transition border-[1px] border-[#1D192C]"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
         </section>
       </div>
     </section>
