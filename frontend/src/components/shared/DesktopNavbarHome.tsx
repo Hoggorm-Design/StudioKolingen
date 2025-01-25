@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import useNavbar from "../../hooks/useNavbar.ts";
 
-const DesktopNavbar: React.FC = () => {
+const DesktopNavbarHome: React.FC = () => {
   const { navbar, loading } = useNavbar();
   const [isFixed, setIsFixed] = useState(false);
   const navbarRef = useRef<HTMLDivElement | null>(null);
@@ -26,22 +27,66 @@ const DesktopNavbar: React.FC = () => {
   if (!navbar) {
     return <div>No navbar content available.</div>;
   }
+
+  const logoVariants = {
+    hidden: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    exit: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
+
+  const linksVariants = {
+    center: {
+      x: "-7%",
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    end: {
+      x: "10%",
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
+
   return (
     <nav
       ref={navbarRef}
-      className={`hidden lg:flex overflow-hidden items-center px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
+      className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
         isFixed ? "shadow-md" : ""
       } h-20`}
     >
       {/* Logo Section */}
-      <div className="flex items-center h-14">
+      <motion.div
+        className="flex items-center h-14"
+        initial="hidden"
+        animate={isFixed ? "visible" : "hidden"}
+        exit="exit"
+        variants={logoVariants}
+        transition={{ duration: 0.5 }}
+      >
         <Link to="/">
           <img src={navbar.image.asset.url} alt={navbar.alt} className="h-14" />
         </Link>
-      </div>
+      </motion.div>
 
       {/* Links Section */}
-      <div className="flex items-center justify-end gap-x-10 w-full">
+      <motion.div
+        className="flex items-center justify-center gap-x-10 w-full"
+        initial="center"
+        animate={isFixed ? "end" : "center"}
+        variants={linksVariants}
+      >
         <Link
           to="/blog"
           className="hover:text-[#B22C2B] transition-colors menuItem text-center"
@@ -84,9 +129,9 @@ const DesktopNavbar: React.FC = () => {
         >
           Makers Space
         </Link>
-      </div>
+      </motion.div>
     </nav>
   );
 };
 
-export default DesktopNavbar;
+export default DesktopNavbarHome;

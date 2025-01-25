@@ -4,10 +4,14 @@ import SubImage from "../components/home/SubImage.tsx";
 import Prices from "../components/shared/Prices.tsx";
 import Location from "../components/shared/Location.tsx";
 import ContactUs from "../components/home/ContactUs.tsx";
+import DesktopNavbarHome from "../components/shared/DesktopNavbarHome.tsx";
+import Header from "../components/home/Header.tsx";
 
 const Home: React.FC = () => {
   return (
     <>
+      <Header />
+      <DesktopNavbarHome />
       <SubImage />
       <section id="about">
         <About />
