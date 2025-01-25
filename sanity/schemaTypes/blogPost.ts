@@ -36,11 +36,5 @@ export default defineType({
         description: `Provide a description or caption for image ${i + 1}.`,
       }),
     ]).flat(),
-    defineField({
-      name: 'link',
-      title: 'Link',
-      type: 'url',
-      description: 'Provide an optional link for the blog post.',
-    }),
   ],
 })
