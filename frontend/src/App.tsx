@@ -1,20 +1,18 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import Home from "./pages/Home";
 import Artists from "./pages/Artists";
 import Facilities from "./pages/Facilities";
-import Header from "./components/home/Header.tsx";
 import Footer from "./components/shared/Footer.tsx";
 import MobileNavbar from "./components/shared/MobileNavbar.tsx";
 import ScrollToAnchor from "./components/shared/ScrollToAnchor.tsx";
+import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import Blog from "./pages/Blog.tsx";
 
 const App: React.FC = () => {
   return (
     <div>
       <MobileNavbar />
-      <Header />
       <DesktopNavbar />
       <ScrollToAnchor />
       <Routes>
