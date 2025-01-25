@@ -31,18 +31,17 @@ const BlogPosts = () => {
 				].filter((image) => image && image.asset); // Filter out undefined or null images
 
 				return (
-					<div key={post._id} className="flex">
-						{/* Header */}
-						<div>
-							<h1>{post.header}</h1>
+					<div key={post._id}>
+						<div className="flex">
+							{/* Header */}
+							<div>
+								<h1>{post.header}</h1>
 
-							{/* First visible part (always visible) */}
-							{post.text1 && <p>{post.text1}</p>}
-							{post.text2 && <p>{post.text2}</p>}
-							{post.text3 && <p>{post.text3}</p>}
-						</div>
-
-						<div>
+								{/* First visible part (always visible) */}
+								{post.text1 && <p>{post.text1}</p>}
+								{post.text2 && <p>{post.text2}</p>}
+								{post.text3 && <p>{post.text3}</p>}
+							</div>
 							{/* Image 1 (always visible) */}
 							{post.image1 && post.image1.asset && (
 								<div>
@@ -52,13 +51,16 @@ const BlogPosts = () => {
 									/>
 									<p>{post.imageText1}</p>
 								</div>
-							)}
-
-							{/* Button to toggle 'show more' */}
-							<button onClick={handleShowMoreClick}>
-								{showMore ? "Show Less" : "Show More"}
-							</button>
+							)}{" "}
 						</div>
+
+						{/* Button to toggle 'show more' */}
+						<button
+							onClick={handleShowMoreClick}
+							className="bg-[#B22C2B] w-screen flex items-start p-7 text-white"
+						>
+							{showMore ? "Show Less" : "Show More"}
+						</button>
 
 						{/* Show additional content if 'showMore' is true */}
 						{showMore && (
