@@ -124,7 +124,7 @@ const DesktopNavbar: React.FC = () => {
           Artists
         </Link>
         <Link
-          to="#"
+          to="/makersspace"
           className="hover:text-[#B22C2B] transition-colors menuItem text-center"
         >
           Makers Space
