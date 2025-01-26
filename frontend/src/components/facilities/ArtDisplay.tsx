@@ -13,7 +13,7 @@ const ArtDisplay = () => {
           <div className="grid grid-cols-1 xs:grid-cols-2 md:sm:grid-cols-3 xl:grid-cols-4 gap-16 xs:gap-8 xl:gap-14">
             {artDisplay.map((image, index) => (
               <Link
-                to={`/apartment/${image.header}`}
+                to={`/facilities/${image.header}`}
                 key={index}
                 className="group block bg-white overflow-hidden transform transition duration-300 hover:scale-105"
               >
