@@ -1,28 +1,30 @@
+import React from "react";
+
 const BlogCard: React.FC<{ post: any; onClick: () => void }> = ({
   post,
   onClick,
 }) => {
   return (
     <div
-      className="max-w-sm rounded-lg overflow-hidden shadow-lg border cursor-pointer"
       onClick={onClick}
+      className="group block bg-white overflow-hidden transform transition duration-300 hover:scale-105"
     >
-      {/* Header */}
-      <h2 className="text-xl font-semibold p-4">{post.header}</h2>
+      {/* Kvadratisk bildecontainer */}
+      <div className="w-full aspect-square overflow-hidden">
+        <img
+          src={post.image1.asset.url}
+          alt={post.imageText1 || "Image 1"}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-      {/* Image */}
-      {post.image1 && post.image1.asset && (
-        <div>
-          <img
-            className="w-full h-48 object-cover"
-            src={post.image1.asset.url}
-            alt={post.imageText1 || "Image 1"}
-          />
-        </div>
-      )}
-
-      {/* First text */}
-      {post.text1 && <p className="p-4">{post.text1}</p>}
+      {/* Header og tekst */}
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2 group-hover:text-[#B22C2B]">
+          {post.header}
+        </h3>
+        {post.text1 && <p>{post.text1}</p>}
+      </div>
     </div>
   );
 };
