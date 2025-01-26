@@ -5,7 +5,10 @@ const BlogCard: React.FC<{ post: any; onClick: () => void }> = ({
   onClick,
 }) => {
   return (
-    <div onClick={onClick} className="group block bg-white overflow-hidden">
+    <div
+      onClick={onClick}
+      className="group block bg-white overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
+    >
       {/* Kvadratisk bildecontainer */}
       <div className="w-full aspect-video overflow-hidden">
         <img

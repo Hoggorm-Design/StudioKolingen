@@ -65,7 +65,7 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
   };
 
   return (
-    <section className="w-full flex flex-col items-center px-6 sm:px-14 py-12">
+    <section className="w-full flex flex-col items-center sm:px-14 py-12">
       <div className="relative w-full max-w-screen-xl pb-16">
         <Carousel
           responsive={responsive}
@@ -77,7 +77,7 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
           customTransition="transform 0.5s ease-in-out"
           transitionDuration={500}
           containerClass="carousel-container"
-          itemClass="px-4"
+          itemClass="sm:px-4"
           renderButtonGroupOutside={true}
           customButtonGroup={
             <ButtonGroup next={() => {}} previous={() => {}} />
