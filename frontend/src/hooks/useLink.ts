@@ -1,7 +1,7 @@
 import { LinkData } from "../interfaces/linkData.ts";
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
-import { useLoading } from "../context/LoadingContext";
+import { useLoading } from "../context/LoadingContext.tsx";
 
 const useLinks = () => {
   const [links, setLinks] = useState<LinkData[]>([]);

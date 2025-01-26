@@ -8,7 +8,7 @@ const AboutMakersSpace = () => {
 
   return (
     <>
-      {!isLoading && aboutMakersSpace && (
+      {!isLoading && aboutMakersSpace && invitedArtists && (
         <section className="">
           <section
             style={{ backgroundColor: "#1D192C" }}
@@ -24,9 +24,9 @@ const AboutMakersSpace = () => {
               <h2 className="text-3xl font-extrabold">
                 {aboutMakersSpace.subHeader}
               </h2>
-              <p>{aboutMakersSpace.subTitleText}</p>
+              <p className="pb-10 pt-10">{aboutMakersSpace.subTitleText}</p>
               <InvitedArtists invitedArtists={invitedArtists} />
-              <p>{aboutMakersSpace.subTitleText2}</p>
+              <p className="pb-10 pt-10">{aboutMakersSpace.subTitleText2}</p>
             </article>
             <div className="w-full">
               <img

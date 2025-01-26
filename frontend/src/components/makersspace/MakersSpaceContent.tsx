@@ -1,104 +1,109 @@
 import useMakersSpaceContent from "../../hooks/useMakersSpaceContent.ts";
+import MakersSpaceCard from "./CompressedMakersSpaceCard.tsx";
+import { useEffect, useState } from "react";
+import MyCarousel from "../blog/BlogCarousel.tsx";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const MakersSpaceContent = () => {
   const { makersSpaceContent } = useMakersSpaceContent();
   const { isLoading } = useLoading();
+  const [selectedPost, setSelectedPost] = useState<any | null>(null);
+
+  useEffect(() => {
+    if (makersSpaceContent) {
+      if (makersSpaceContent.length > 0) {
+        setSelectedPost(makersSpaceContent[0]);
+      }
+    }
+  }, [makersSpaceContent]);
+
+  const handleCardClick = (post: any) => {
+    setSelectedPost(post);
+  };
 
   return (
     <>
       {!isLoading && makersSpaceContent && (
         <section className="w-full">
-          <article className="flex flex-col space-y-8 bg-[#1D192C] p-6">
-            <div className="flex flex-row space-x-4">
-              {[
-                makersSpaceContent.image1,
-                makersSpaceContent.image2,
-                makersSpaceContent.image3,
-              ].map((image, index) => (
-                <div key={index} className="flex-1">
+          {/* Selected Post Section */}
+          {selectedPost && (
+            <article className="flex flex-col space-y-8 bg-[#FFFFFF]">
+              {/* Carousel Section */}
+              <article className="flex flex-col space-y-8 bg-[#1D192C] p-6">
+                <div className="flex flex-row justify-center items-center space-x-4 gap-10 m-50">
                   <img
-                    src={image?.asset?.url}
-                    alt={image?.altText || `Makers Space Image ${index + 1}`}
-                    className="w-full h-96 object-cover rounded-lg"
+                    className="w-[400px] h-[400px] object-cover "
+                    src={selectedPost.image1?.asset?.url}
+                    alt={selectedPost.image1?.asset?.altText}
+                  />
+                  <img
+                    className="w-[400px] h-[400px] object-cover "
+                    src={selectedPost.image2?.asset?.url}
+                    alt={selectedPost.image2?.asset?.altText}
+                  />
+                  <img
+                    className="w-[400px] h-[400px] object-cover "
+                    src={selectedPost.image3?.asset?.url}
+                    alt={selectedPost.image3?.asset?.altText}
                   />
                 </div>
-              ))}
-            </div>
-            <div className="flex flex-row space-x-4">
-              {[
-                makersSpaceContent.image4,
-                makersSpaceContent.image5,
-                makersSpaceContent.image6,
-                makersSpaceContent.image7,
-              ].map((image, index) => (
-                <div key={index} className="flex-1">
-                  <img
-                    src={image?.asset?.url}
-                    alt={image?.altText || `Makers Space Image ${index + 4}`}
-                    className="w-full h-96 object-cover rounded-lg"
-                  />
-                </div>
-              ))}
-            </div>
-          </article>
 
-          <article className="bg-white flex flex-col gap-y-3 p-5 items-center justify-center">
-            <p>{makersSpaceContent.text1}</p>
-            <p>{makersSpaceContent.text2}</p>
-            <p>{makersSpaceContent.text3}</p>
-          </article>
+                <MyCarousel
+                  images={[
+                    selectedPost.image1,
+                    selectedPost.image2,
+                    selectedPost.image3,
+                    selectedPost.image4,
+                    selectedPost.image5,
+                    selectedPost.image6,
+                    selectedPost.image7,
+                    selectedPost.image8,
+                    selectedPost.image9,
+                    selectedPost.image10,
+                  ].filter((image) => image && image.asset)}
+                />
+              </article>
+              <div className="text-black space-y-3 p-6">
+                <p>{selectedPost.text1}</p>
+                <p>{selectedPost.text2}</p>
+                <p>{selectedPost.text3}</p>
+              </div>
+            </article>
+          )}
 
-          <article className="flex flex-col space-y-8 bg-[#1D192C] p-6">
-            <div className="flex flex-row space-x-4">
-              {[
-                makersSpaceContent.image8,
-                makersSpaceContent.image9,
-                makersSpaceContent.image10,
-              ].map((image, index) => (
-                <div key={index} className="flex-1">
-                  <img
-                    src={image?.asset?.url}
-                    alt={image?.altText || `Makers Space Image ${index + 1}`}
-                    className="w-full h-96 object-cover rounded-lg"
+          {/* Makers Space Cards Section */}
+          {selectedPost && (
+            <article className="flex flex-col space-y-8 bg-[#1D192C] p-6 gap-20 mt-">
+              <div className="flex flex-row justify-center items-center space-x-4 gap-10 mt-20">
+                <img
+                  className="w-[400px] h-[400px] object-cover "
+                  src={selectedPost.image4?.asset?.url}
+                  alt={selectedPost.image4?.asset?.altText}
+                />
+                <img
+                  className="w-[400px] h-[400px] object-cover "
+                  src={selectedPost.image5?.asset?.url}
+                  alt={selectedPost.image5?.asset?.altText}
+                />
+                <img
+                  className="w-[400px] h-[400px] object-cover "
+                  src={selectedPost.image6?.asset?.url}
+                  alt={selectedPost.image6?.asset?.altText}
+                />
+              </div>
+              <h3 className="text-white ">More posts</h3>
+              <div className="flex flex-row justify-center items-center space-x-4 gap-10 m-50">
+                {makersSpaceContent.map((post) => (
+                  <MakersSpaceCard
+                    key={post._id}
+                    post={post}
+                    onClick={() => handleCardClick(post)}
                   />
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-row space-x-4">
-              {[
-                makersSpaceContent.image4,
-                makersSpaceContent.image5,
-                makersSpaceContent.image6,
-              ].map((image, index) => (
-                <div key={index} className="flex-1">
-                  <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-                    <img
-                      src={image?.asset?.url}
-                      alt={image?.altText || `Makers Space Image ${index + 4}`}
-                      className="w-full h-96 object-cover"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-xl font-bold mb-2">
-                        Project Title {index + 1}
-                      </h3>
-                      <p className="text-gray-600 mb-4">
-                        Description of the amazing project and its impact on the
-                        community.
-                      </p>
-                      <a
-                        href="#"
-                        className="inline-block bg-[#1D192C] text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors"
-                      >
-                        Learn More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-white">See more posts: </p>
-          </article>
+                ))}
+              </div>
+              <p className="text-white">See more posts: </p>
+            </article>
+          )}
         </section>
       )}
     </>
