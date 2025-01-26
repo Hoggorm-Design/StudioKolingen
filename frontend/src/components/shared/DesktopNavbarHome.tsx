@@ -88,6 +88,7 @@ const DesktopNavbarHome: React.FC = () => {
         >
           {/* Logo Section */}
           <motion.div
+            key={isFixed ? "fixed-logo" : "initial-logo"}
             className="flex items-center h-14 md:translate-x-[20%]"
             initial="hidden"
             animate={isFixed ? "visible" : "hidden"}
