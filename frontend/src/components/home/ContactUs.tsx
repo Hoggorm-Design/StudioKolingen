@@ -16,8 +16,8 @@ const ContactUs: React.FC = () => {
   return (
     <>
       {!isLoading && contact && (
-        <section className="flex justify-center items-center min-h-screen bg-[#1D192C] py-5 xs:py-10 md:py-20 px-8 md:px-36 xl:px-64">
-          <div className="bg-white flex flex-col px-4 py-28  md:p-16 w-full h-full gap-10">
+        <section className="flex justify-center items-center lg:min-h-screen bg-[#1D192C] py-10 md:py-20 px-8 md:px-36 xl:px-64">
+          <div className="bg-white flex flex-col px-4 py-28 md:p-16 w-full h-full gap-10">
             {/* Left Section */}
             <section className="lg:w-1/2 flex flex-col gap-12 md:gap-6">
               <h2>{contact.header}</h2>

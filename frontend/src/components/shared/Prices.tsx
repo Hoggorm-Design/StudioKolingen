@@ -8,7 +8,7 @@ const Prices = () => {
   return (
     <>
       {!isLoading && prices && (
-        <section className="flex justify-center items-center min-h-screen bg-[#1D192C] py-5 xs:py-10 md:py-20 px-8 md:px-36 xl:px-64">
+        <section className="flex justify-center items-center  bg-[#1D192C] py-10 md:py-20 px-8 md:px-36 xl:px-64">
           <div className="bg-white flex flex-col p-4 xs:p-8 md:p-16 w-full h-full gap-10">
             <h2>{prices.header}</h2>
             <p>{prices.text}</p>
