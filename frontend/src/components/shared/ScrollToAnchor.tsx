@@ -24,7 +24,7 @@ const ScrollToAnchor = () => {
     if (location.hash) {
       lastHash.current = location.hash.slice(1); // Save the hash
       const isSamePage = lastPathname.current === location.pathname; // Check if staying on the same page
-      scrollToHash(isSamePage ? 0 : 200); // No delay for same page, delay for cross-page navigation
+      scrollToHash(isSamePage ? 0 : 400); // No delay for same page, delay for cross-page navigation
     } else {
       // If there's no hash, scroll to the top of the page
       window.scrollTo({ top: 0, behavior: "smooth" });

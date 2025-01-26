@@ -37,7 +37,7 @@ const ArtistCard = () => {
                   {/* Link */}
                   <Link
                     to={artist.link}
-                    className="text-sm text-[#B22C2B] hover:text-[#7c1e1d] transition"
+                    className="text-md mt-3 text-[#B22C2B] hover:text-[#7c1e1d] transition"
                   >
                     Visit artist's page
                   </Link>

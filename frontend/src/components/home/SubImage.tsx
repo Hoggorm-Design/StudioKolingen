@@ -15,37 +15,47 @@ const SubImage: React.FC = () => {
 
           <section className="w-screen py-24">
             {/* Container to display images in a row */}
-            <div className="flex justify-center space-x-20">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-28 sm:gap-8 xl:gap-14 p-10">
               {/* Image 1 */}
-              <div className="flex flex-col items-start">
-                <img
-                  className="w-[425px] h-[425px] object-cover object-center min-h-[150px]"
-                  src={subImage.image.asset.url}
-                  alt={subImage.alt}
-                />
-                <h3 className="text-white mt-4">{subImage.header}</h3>
+              <div>
+                <div className="w-full aspect-square overflow-hidden">
+                  <img
+                    src={subImage.image.asset.url}
+                    alt={subImage.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="text-white mt-4 font-semibold">
+                  {subImage.header}
+                </h4>
                 <p className="text-white mt-4">Her skal det komme en link</p>
               </div>
-
               {/* Image 2 */}
-              <div className="flex flex-col items-start">
-                <img
-                  className="w-[425px] h-[425px] object-cover object-center min-h-[150px]"
-                  src={subImage.image2.asset.url}
-                  alt={subImage.alt2}
-                />
-                <h3 className="text-white mt-4">{subImage.header2}</h3>
+              <div>
+                <div className="w-full aspect-square overflow-hidden">
+                  <img
+                    src={subImage.image2.asset.url}
+                    alt={subImage.alt2}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="text-white mt-4 font-semibold">
+                  {subImage.header2}
+                </h4>
                 <p className="text-white mt-4">Her skal det komme en link</p>
               </div>
-
               {/* Image 3 */}
-              <div className="flex flex-col items-start">
-                <img
-                  className="w-[425px] h-[425px] object-cover object-center min-h-[150px]"
-                  src={subImage.image3.asset.url}
-                  alt={subImage.alt3}
-                />
-                <h3 className="text-white mt-4">{subImage.header3}</h3>
+              <div>
+                <div className="w-full aspect-square overflow-hidden">
+                  <img
+                    src={subImage.image3.asset.url}
+                    alt={subImage.alt3}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="text-white mt-4 font-semibold">
+                  {subImage.header3}
+                </h4>
                 <p className="text-white mt-4">Her skal det komme en link</p>
               </div>
             </div>

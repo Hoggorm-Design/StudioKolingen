@@ -70,7 +70,7 @@ const MyCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="w-full flex flex-col items-center px-6 sm:px-14 py-12">
+      <section className="w-full flex flex-col items-center sm:px-14 py-12">
         <div className="relative w-[90%] max-w-screen-xl pb-16">
           <Carousel
             responsive={responsive}
