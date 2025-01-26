@@ -1,11 +1,12 @@
 import useArtistInfo from "../../hooks/useArtistHeader.ts";
-import React from "react";
+import { useLoading } from "../../context/LoadingContext.tsx";
 
-const ArtistHeader: React.FC = () => {
-  const { artistInfo, loading } = useArtistInfo();
+const ArtistHeader = () => {
+  const { artistInfo } = useArtistInfo();
+  const { isLoading } = useLoading();
 
-  if (loading || !artistInfo) {
-    return <div>Loading...</div>;
+  if (isLoading || !artistInfo) {
+    return null;
   }
 
   return (

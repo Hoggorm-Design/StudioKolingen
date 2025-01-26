@@ -1,27 +1,33 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
-import {Localy} from "../interfaces/location.ts";
+import { Localy } from "../interfaces/location.ts";
+import { useLoading } from "../context/LoadingContext";
 
 const useLocation = () => {
-    const [location, setLocation] = useState<Localy | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+  const [location, setLocation] = useState<Localy | null>(null);
+  const { setIsLoading } = useLoading();
 
-    useEffect(() => {
-        const fetchLocation = async () => {
-            const query = `*[_type == "location"][0]{
-        header,
-        text
-      }`;
+  useEffect(() => {
+    const fetchLocation = async () => {
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "location"][0]{
+                   header,
+                   text
+               }`;
+        const data = await sanityClient.fetch(query);
+        setLocation(data);
+      } catch (error) {
+        console.error("Error fetching location:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-            const data = await sanityClient.fetch(query);
-            setLocation(data);
-            setLoading(false);
-        };
+    fetchLocation();
+  }, [setIsLoading]);
 
-        fetchLocation();
-    }, []);
-
-    return { location, loading };
+  return { location };
 };
 
 export default useLocation;

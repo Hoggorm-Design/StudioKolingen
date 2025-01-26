@@ -1,14 +1,16 @@
-import {useEffect, useState} from "react";
-import {MainImage} from "../interfaces/mainImage.ts";
+import { useEffect, useState } from "react";
+import { MainImage } from "../interfaces/mainImage.ts";
 import sanityClient from "../client.ts";
+import { useLoading } from "../context/LoadingContext.tsx";
 
 const useMainImage = () => {
-    const [mainImage, setMainImage] = useState<MainImage | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const fetchMainImage = async () => {
-            const query = `*[_type == "mainImage"][0]{
+  const [mainImage, setMainImage] = useState<MainImage | null>(null);
+  const { setIsLoading } = useLoading();
+  useEffect(() => {
+    const fetchMainImage = async () => {
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "mainImage"][0]{
         image {
           asset->{
             _ref,
@@ -20,15 +22,18 @@ const useMainImage = () => {
         text
       }`;
 
-            const data = await sanityClient.fetch(query);
-            setMainImage(data);
-            setLoading(false);
-        };
+        const data = await sanityClient.fetch(query);
+        setMainImage(data);
+      } catch (error) {
+        console.error("Error fetching main image", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchMainImage();
+  }, []);
 
-        fetchMainImage();
-    }, []);
-
-    return { mainImage, loading };
+  return { mainImage };
 };
 
 export default useMainImage;

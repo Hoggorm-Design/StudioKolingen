@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Artists from "./pages/Artists";
@@ -11,7 +10,7 @@ import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import Blog from "./pages/Blog.tsx";
 import ApartmentPage from "./pages/ApartmentPage.tsx";
 
-const App: React.FC = () => {
+const App = () => {
   const location = useLocation();
   return (
     <div>
