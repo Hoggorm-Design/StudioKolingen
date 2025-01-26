@@ -29,18 +29,18 @@ const MakersSpaceContent = () => {
             <div className="flex flex-row justify-center items-center space-x-4 gap-10 m-50">
               <img
                 className="w-[400px] h-[400px] object-cover "
-                src={selectedPost.image1.asset.url}
-                alt={selectedPost.image1.asset.altText}
+                src={selectedPost.image1?.asset?.url}
+                alt={selectedPost.image1?.asset?.altText}
               />
               <img
                 className="w-[400px] h-[400px] object-cover "
-                src={selectedPost.image2.asset.url}
-                alt={selectedPost.image2.asset.altText}
+                src={selectedPost.image2?.asset?.url}
+                alt={selectedPost.image2?.asset?.altText}
               />
               <img
                 className="w-[400px] h-[400px] object-cover "
-                src={selectedPost.image3.asset.url}
-                alt={selectedPost.image3.asset.altText}
+                src={selectedPost.image3?.asset?.url}
+                alt={selectedPost.image3?.asset?.altText}
               />
             </div>
 
@@ -73,18 +73,18 @@ const MakersSpaceContent = () => {
           <div className="flex flex-row justify-center items-center space-x-4 gap-10 mt-20">
             <img
               className="w-[400px] h-[400px] object-cover "
-              src={selectedPost.image4.asset.url}
-              alt={selectedPost.image4.asset.altText}
+              src={selectedPost.image4?.asset?.url}
+              alt={selectedPost.image4?.asset?.altText}
             />
             <img
               className="w-[400px] h-[400px] object-cover "
-              src={selectedPost.image5.asset.url}
-              alt={selectedPost.image5.asset.altText}
+              src={selectedPost.image5?.asset?.url}
+              alt={selectedPost.image5?.asset?.altText}
             />
             <img
               className="w-[400px] h-[400px] object-cover "
-              src={selectedPost.image6.asset.url}
-              alt={selectedPost.image6.asset.altText}
+              src={selectedPost.image6?.asset?.url}
+              alt={selectedPost.image6?.asset?.altText}
             />
           </div>
           <h3 className="text-white ">More posts</h3>
