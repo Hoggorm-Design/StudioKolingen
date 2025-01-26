@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useArtDisplay from "../hooks/useArtDisplay.ts";
 import { useLoading } from "../context/LoadingContext.tsx";
+import Footer from "../components/shared/Footer.tsx";
 
 const ApartmentPage: React.FC = () => {
   const { header } = useParams<{ header: string }>();
@@ -43,6 +44,7 @@ const ApartmentPage: React.FC = () => {
           </section>
         </>
       )}
+      <Footer />
     </>
   );
 };
