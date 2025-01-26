@@ -9,6 +9,7 @@ import ScrollToAnchor from "./components/shared/ScrollToAnchor.tsx";
 import MakersSpace from "./pages/MakersSpace.tsx";
 import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import Blog from "./pages/Blog.tsx";
+import ApartmentPage from "./pages/ApartmentPage.tsx";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/artists" element={<Artists />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/makersspace" element={<MakersSpace />} />
+        <Route path="/apartment/:header" element={<ApartmentPage />} />
       </Routes>
       <Footer />
     </div>
