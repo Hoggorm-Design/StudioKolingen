@@ -1,29 +1,35 @@
-import {useEffect, useState} from "react";
-import {Contact} from "../interfaces/contactUs.ts";
+import { useEffect, useState } from "react";
+import { Contact } from "../interfaces/contactUs.ts";
 import sanityClient from "../client.ts";
+import { useLoading } from "../context/LoadingContext";
 
 const useContact = () => {
-    const [contact, setContact] = useState<Contact | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+  const [contact, setContact] = useState<Contact | null>(null);
+  const { setIsLoading } = useLoading();
 
-    useEffect(() => {
-        const fetchContact = async () => {
-            const query = `*[_type == "contact"][0]{ 
-        header,
-        mail,
-        phonenumber,
-        address
-      }`;
+  useEffect(() => {
+    const fetchContact = async () => {
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "contact"][0]{ 
+                   header,
+                   mail,
+                   phonenumber,
+                   address
+               }`;
+        const data = await sanityClient.fetch(query);
+        setContact(data);
+      } catch (error) {
+        console.error("Error fetching contact:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-            const data = await sanityClient.fetch(query);
-            setContact(data);
-            setLoading(false);
-        };
+    fetchContact();
+  }, [setIsLoading]);
 
-        fetchContact();
-    }, []);
-
-    return { contact, loading };
+  return { contact };
 };
 
 export default useContact;

@@ -10,7 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const BlogPosts = () => {
-  const { blogPosts, loading } = useBlogPosts();
+  const { blogPosts } = useBlogPosts();
+
   const [showMore, setShowMore] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
@@ -21,13 +22,11 @@ const BlogPosts = () => {
 
   useEffect(() => {
     if (blogPosts.length > 0) {
+      // Set the initial selected post to the first post if available
       setSelectedPost(blogPosts[0]);
     }
   }, [blogPosts]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const handleShowMoreClick = () => {
     if (showMore) {

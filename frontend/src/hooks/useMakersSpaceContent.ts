@@ -1,98 +1,106 @@
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { MakersSpaceContent } from "../interfaces/makersSpaceContent.ts";
+import { useLoading } from "../context/LoadingContext";
 
 const useMakersSpaceContent = () => {
-  const [makersSpaceContent, setMakersSpaceContent] =
-    useState<MakersSpaceContent | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [makersSpaceContent, setMakersSpaceContent] = useState<
+    MakersSpaceContent[]
+  >([]);
+  const { setIsLoading } = useLoading();
 
   useEffect(() => {
     const fetchMakersSpaceContent = async () => {
-      const query = `*[_type == "makersSpaceContent"][0]{
-        text1,
-        text2,
-        text3,
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "makersSpaceContent"]{
+          text1,
+          text2,
+          text3,
           image1{
-          asset->{
-            _ref,
-            url
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image2{
-          asset->{
-            _ref,
-            url
+          image2{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image3{
-          asset->{
-            _ref,
-            url
+          image3{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image4{
-          asset->{
-            _ref,
-            url
+          image4{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image5{
-          asset->{
-            _ref,
-            url
+          image5{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image6{
-          asset->{
-            _ref,
-            url
+          image6{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image7{
-          asset->{
-            _ref,
-            url
+          image7{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image8{
-          asset->{
-            _ref,
-            url
+          image8{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image9{
-          asset->{
-            _ref,
-            url
+          image9{
+            asset->{
+              _ref,
+              url
+            },
+            altText
           },
-          altText
-        },
-        image10{
-          asset->{
-            _ref,
-            url
-          },
-          altText
-        }
-      }`;
-      const data: MakersSpaceContent = await sanityClient.fetch(query);
-      setMakersSpaceContent(data);
-      setLoading(false);
+          image10{
+            asset->{
+              _ref,
+              url
+            },
+            altText
+          }
+        }`;
+        const data: MakersSpaceContent[] = await sanityClient.fetch(query);
+        setMakersSpaceContent(data);
+      } catch (error) {
+        console.error("Error fetching makers space content:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchMakersSpaceContent();
-  }, []);
+  }, [setIsLoading]); // Add setIsLoading to dependencies
 
-  return { makersSpaceContent, loading };
+  return { makersSpaceContent };
 };
 
 export default useMakersSpaceContent;

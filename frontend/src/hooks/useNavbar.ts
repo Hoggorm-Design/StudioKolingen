@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../interfaces/navbar.ts";
 import sanityClient from "../client.ts";
+import { useLoading } from "../context/LoadingContext.tsx";
 
 const useNavbar = () => {
   const [navbar, setNavbar] = useState<Navbar | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { setIsLoading } = useLoading();
 
   useEffect(() => {
     const fetchNavbar = async () => {
-      const query = `*[_type == "navbar"][0]{
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "navbar"][0]{
         image {
           asset->{
             _ref,
@@ -23,16 +26,19 @@ const useNavbar = () => {
         contact2,
         phonenumber2
       }`;
-
-      const data = await sanityClient.fetch(query);
-      setNavbar(data);
-      setLoading(false);
+        const data = await sanityClient.fetch(query);
+        setNavbar(data);
+      } catch (error) {
+        console.error("Error fetching navbar data", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchNavbar();
   }, []);
 
-  return { navbar, loading };
+  return { navbar };
 };
 
 export default useNavbar;

@@ -46,15 +46,7 @@ const CustomDot: React.FC<{
 );
 
 const MyCarousel: React.FC = () => {
-  const { carousels, loading } = useCarousel();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!carousels || carousels.length === 0) {
-    return <div>No carousel images available.</div>;
-  }
+  const { carousels } = useCarousel();
 
   const responsive = {
     desktop: {
@@ -74,48 +66,48 @@ const MyCarousel: React.FC = () => {
       items: 1,
     },
   };
+  if (!carousels?.length) return null;
 
   return (
-    <section className="w-full flex flex-col items-center px-6 sm:px-14 py-12">
-      <div
-        className="relative w-[90%] max-w-screen-xl pb-16"
-        style={{ paddingBottom: "80px" }}
-      >
-        <Carousel
-          responsive={responsive}
-          ssr={true}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={5000}
-          keyBoardControl={true}
-          customTransition="transform 0.5s ease-in-out"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          itemClass="px-4"
-          renderButtonGroupOutside={true}
-          customButtonGroup={
-            <ButtonGroup next={() => {}} previous={() => {}} />
-          }
-          arrows={false} // Hide default arrows
-          showDots={true}
-          renderDotsOutside={true} // Dots will appear outside the carousel
-          customDot={<CustomDot onClick={() => {}} active={false} />} // Custom dots
-        >
-          {carousels.map((image, index) => (
-            <div
-              key={index}
-              className="w-full h-[300px] flex-shrink-0 overflow-hidden "
-            >
-              <img
-                src={image.image.asset.url}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </Carousel>
-      </div>
-    </section>
+    <>
+      <section className="w-full flex flex-col items-center px-6 sm:px-14 py-12">
+        <div className="relative w-[90%] max-w-screen-xl pb-16">
+          <Carousel
+            responsive={responsive}
+            ssr={true}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={5000}
+            keyBoardControl={true}
+            customTransition="transform 0.5s ease-in-out"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            itemClass="px-4"
+            renderButtonGroupOutside={true}
+            customButtonGroup={
+              <ButtonGroup next={() => {}} previous={() => {}} />
+            }
+            arrows={false}
+            showDots={true}
+            renderDotsOutside={true}
+            customDot={<CustomDot onClick={() => {}} active={false} />}
+          >
+            {carousels.map((image, index) => (
+              <div
+                key={index}
+                className="w-full h-[300px] flex-shrink-0 overflow-hidden"
+              >
+                <img
+                  src={image.image.asset.url}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      </section>
+    </>
   );
 };
 

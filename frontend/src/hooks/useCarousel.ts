@@ -1,39 +1,24 @@
-import {useEffect, useState} from "react";
-import {CarouselImage} from "../interfaces/carousel.ts";
+import { useEffect, useState } from "react";
+import { CarouselImage } from "../interfaces/carousel.ts";
 import sanityClient from "../client.ts";
 
 const useCarousel = () => {
-    const [carousels, setCarousels] = useState<CarouselImage[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+  const [carousels, setCarousels] = useState<CarouselImage[]>([]);
 
-    useEffect(() => {
-        const fetchCarousels = async () => {
-            const query = `*[_type == "carousel"]{  
-                _id,
-                image {
-                    asset->{
-                        _ref,
-                        url
-                    }
-                },
-                alt
-            }`;
+  useEffect(() => {
+    const fetchCarousels = async () => {
+      try {
+        const query = `*[_type == "carousel"]{ id, image { asset->{ ref, url } }, alt }`;
+        const data = await sanityClient.fetch(query);
+        setCarousels(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
-            const data = await sanityClient.fetch(query);
+    fetchCarousels();
+  }, []); // Remove setIsLoading completely
 
-            const mappedCarousels = data.map((item: any) => ({
-                image: item.image,
-                alt: item.alt
-            }));
-
-            setCarousels(mappedCarousels);
-            setLoading(false);
-        };
-
-        fetchCarousels();
-    }, []);
-
-    return { carousels, loading };
+  return { carousels };
 };
-
 export default useCarousel;
