@@ -14,7 +14,7 @@ const ArtistCard: React.FC = () => {
   }
 
   return (
-    <div className="bg-white sm:bg-[#1D192C] p-10 sm:py-20 xl:p-16">
+    <div className="bg-white sm:bg-[#1D192C] p-10 sm:py-20 ">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
         {artists.map((artist, index) => (
           <div
