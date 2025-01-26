@@ -35,19 +35,21 @@ const BlogPosts = () => {
 
   const handleShowMoreClick = () => {
     if (showMore) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      if (!("scrollBehavior" in document.documentElement.style)) {
-        // Fallback for unsupported browsers
-        window.scrollTo(0, 0);
-      }
+      // Scroll kun til toppen når du lukker posten
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 50);
     }
-    setShowMore((prev) => !prev);
+    setShowMore((prev) => !prev); // Bytt visningstilstanden
   };
 
   const handleCardClick = (post: any) => {
     if (selectedPost !== post) {
-      setSelectedPost(post); // Update the selected post
-      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
+      setSelectedPost(post); // Oppdater det valgte innlegget
+      setShowMore(false); // Lukk det gamle innlegget
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll til toppen
+      }, 50);
     }
   };
 
