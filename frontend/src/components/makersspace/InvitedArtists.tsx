@@ -13,7 +13,7 @@ const InvitedArtists = () => {
 
   return (
     <article className="flex flex-col">
-      <p className="font-extrabold">Invited Artists 2024</p>
+      <p className="font-extrabold pb-2">Invited Artists 2024</p>
       <ul>
         {invitedArtists.map((artist, index) => (
           <li key={index} className="flex flex-col">
@@ -22,12 +22,12 @@ const InvitedArtists = () => {
                 href={artist.artistLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
+                className="text-blue-500 hover:underline pb-5 pt-5"
               >
                 {artist.artistName}
               </a>
             ) : (
-              <p className="text-lg">{artist.artistName}</p>
+              <p className="text-lg pb-2 ">{artist.artistName}</p>
             )}
           </li>
         ))}
