@@ -3,17 +3,18 @@ import sanityClient from "../client.ts";
 import { MakersSpaceContent } from "../interfaces/makersSpaceContent.ts";
 
 const useMakersSpaceContent = () => {
-  const [makersSpaceContent, setMakersSpaceContent] =
-    useState<MakersSpaceContent | null>(null);
+  const [makersSpaceContent, setMakersSpaceContent] = useState<
+    MakersSpaceContent[]
+  >([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchMakersSpaceContent = async () => {
-      const query = `*[_type == "makersSpaceContent"][0]{
+      const query = `*[_type == "makersSpaceContent"]{
         text1,
         text2,
         text3,
-          image1{
+        image1{
           asset->{
             _ref,
             url
@@ -84,7 +85,7 @@ const useMakersSpaceContent = () => {
           altText
         }
       }`;
-      const data: MakersSpaceContent = await sanityClient.fetch(query);
+      const data: MakersSpaceContent[] = await sanityClient.fetch(query);
       setMakersSpaceContent(data);
       setLoading(false);
     };

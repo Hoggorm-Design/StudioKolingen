@@ -1,99 +1,80 @@
 import useMakersSpaceContent from "../../hooks/useMakersSpaceContent.ts";
+import MakersSpaceCard from "./CompressedMakersSpaceCard.tsx";
+import { useEffect, useState } from "react";
+import MyCarousel from "../blog/BlogCarousel.tsx";
 
 const MakersSpaceContent = () => {
   const { makersSpaceContent, loading } = useMakersSpaceContent();
+  const [selectedPost, setSelectedPost] = useState<any | null>(null);
+
+  useEffect(() => {
+    if (makersSpaceContent.length > 0) {
+      setSelectedPost(makersSpaceContent[0]);
+    }
+  }, [makersSpaceContent]);
+
+  const handleCardClick = (post: any) => {
+    setSelectedPost(post);
+  };
 
   if (loading) return <div>Loading...</div>;
-  if (!makersSpaceContent) return <div>No Makers Space content!</div>;
 
   return (
     <section className="w-full">
-      <article className="flex flex-col space-y-8 bg-[#1D192C] p-6">
-        <div className="flex flex-row space-x-4">
-          {[
-            makersSpaceContent.image1,
-            makersSpaceContent.image2,
-            makersSpaceContent.image3,
-          ].map((image, index) => (
-            <div key={index} className="flex-1">
+      {/* Selected Post Section */}
+      {selectedPost && (
+        <article className="flex flex-col space-y-8 bg-[#FFFFFF] p-6">
+          {/* Carousel Section */}
+          <article className="flex flex-col space-y-8 bg-[#1D192C] p-6">
+            <div className="flex flex-row items-start">
               <img
-                src={image?.asset?.url}
-                alt={image?.altText || `Makers Space Image ${index + 1}`}
-                className="w-full h-96 object-cover rounded-lg"
+                className=" max-h-[300px] max-w-[300px]"
+                src={selectedPost.image1.asset.url}
+                alt={selectedPost.image1.asset.altText}
+              />
+              <img
+                className=" max-h-[300px] max-w-[300px]"
+                src={selectedPost.image2.asset.url}
+                alt={selectedPost.image2.asset.altText}
+              />
+              <img
+                className=" max-h-[300px] max-w-[300px]"
+                src={selectedPost.image3.asset.url}
+                alt={selectedPost.image3.asset.altText}
               />
             </div>
-          ))}
-        </div>
-        <div className="flex flex-row space-x-4">
-          {[
-            makersSpaceContent.image4,
-            makersSpaceContent.image5,
-            makersSpaceContent.image6,
-            makersSpaceContent.image7,
-          ].map((image, index) => (
-            <div key={index} className="flex-1">
-              <img
-                src={image?.asset?.url}
-                alt={image?.altText || `Makers Space Image ${index + 4}`}
-                className="w-full h-96 object-cover rounded-lg"
-              />
-            </div>
-          ))}
-        </div>
-      </article>
+            <MyCarousel
+              images={[
+                selectedPost.image1,
+                selectedPost.image2,
+                selectedPost.image3,
+                selectedPost.image4,
+                selectedPost.image5,
+                selectedPost.image6,
+                selectedPost.image7,
+                selectedPost.image8,
+                selectedPost.image9,
+                selectedPost.image10,
+              ].filter((image) => image && image.asset)}
+            />
+          </article>
+          <div className="text-black space-y-3">
+            <p>{selectedPost.text1}</p>
+            <p>{selectedPost.text2}</p>
+            <p>{selectedPost.text3}</p>
+          </div>
+        </article>
+      )}
 
-      <article className="bg-white flex flex-col gap-y-3 p-5 items-center justify-center">
-        <p>{makersSpaceContent.text1}</p>
-        <p>{makersSpaceContent.text2}</p>
-        <p>{makersSpaceContent.text3}</p>
-      </article>
-
+      {/* Makers Space Cards Section */}
       <article className="flex flex-col space-y-8 bg-[#1D192C] p-6">
-        <div className="flex flex-row space-x-4">
-          {[
-            makersSpaceContent.image8,
-            makersSpaceContent.image9,
-            makersSpaceContent.image10,
-          ].map((image, index) => (
-            <div key={index} className="flex-1">
-              <img
-                src={image?.asset?.url}
-                alt={image?.altText || `Makers Space Image ${index + 1}`}
-                className="w-full h-96 object-cover rounded-lg"
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-row space-x-4">
-          {[
-            makersSpaceContent.image4,
-            makersSpaceContent.image5,
-            makersSpaceContent.image6,
-          ].map((image, index) => (
-            <div key={index} className="flex-1">
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-                <img
-                  src={image?.asset?.url}
-                  alt={image?.altText || `Makers Space Image ${index + 4}`}
-                  className="w-full h-96 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-xl font-bold mb-2">
-                    Project Title {index + 1}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Description of the amazing project and its impact on the
-                    community.
-                  </p>
-                  <a
-                    href="#"
-                    className="inline-block bg-[#1D192C] text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors"
-                  >
-                    Learn More
-                  </a>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+          {makersSpaceContent.map((post) => (
+            <MakersSpaceCard
+              key={post._id}
+              post={post}
+              onClick={() => handleCardClick(post)}
+            />
           ))}
         </div>
         <p className="text-white">See more posts: </p>
