@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import Spinner from "../components/shared/Loader/Spinner";
 
 type LoadingContextType = {
@@ -22,13 +22,32 @@ export const LoadingProvider = ({
   children: React.ReactNode;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  useEffect(() => {
+    let timeout: number | undefined;
+
+    if (isLoading) {
+      // Start spinner immediately when loading starts
+      setShowSpinner(true);
+    } else {
+      // Add delay before hiding spinner
+      timeout = window.setTimeout(() => setShowSpinner(false), 0);
+    }
+
+    return () => {
+      if (timeout !== undefined) {
+        window.clearTimeout(timeout); // Cleanup timeout
+      }
+    };
+  }, [isLoading]);
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
       {children}
-      {isLoading && (
-        <div className="fixed inset-0 flex items-center justify-center z-[9999]">
-          <div className=" rounded-lg p-4">
+      {showSpinner && (
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] bg-white">
+          <div className="rounded-lg p-4">
             <Spinner size="large" />
           </div>
         </div>

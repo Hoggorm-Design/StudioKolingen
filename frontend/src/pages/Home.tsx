@@ -7,6 +7,7 @@ import DesktopNavbarHome from "../components/shared/DesktopNavbarHome.tsx";
 import Header from "../components/home/Header.tsx";
 import { useEffect } from "react";
 import { useLoading } from "../context/LoadingContext.tsx";
+import Footer from "../components/shared/Footer.tsx";
 
 const Home = () => {
   const { setIsLoading } = useLoading();
@@ -38,6 +39,7 @@ const Home = () => {
       <section id="contact">
         <ContactUs />
       </section>
+      <Footer />
     </>
   );
 };

@@ -7,9 +7,32 @@ import { useLoading } from "../../context/LoadingContext.tsx";
 const DesktopNavbarHome: React.FC = () => {
   const { navbar } = useNavbar();
   const { isLoading } = useLoading();
-
+  const [xOffset, setXOffset] = useState("20%");
   const [isFixed, setIsFixed] = useState(false);
   const navbarRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const updateXOffset = () => {
+      const width = window.innerWidth;
+      if (width >= 1440) {
+        setXOffset("22%");
+      } else if (width >= 1335) {
+        setXOffset("18%");
+      } else if (width >= 1250) {
+        setXOffset("16%");
+      } else if (width >= 1158) {
+        setXOffset("14%");
+      } else if (width >= 1100) {
+        setXOffset("12%");
+      } else {
+        setXOffset("10%");
+      }
+    };
+
+    updateXOffset();
+    window.addEventListener("resize", updateXOffset);
+    return () => window.removeEventListener("resize", updateXOffset);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +71,7 @@ const DesktopNavbarHome: React.FC = () => {
       transition: { duration: 0.5, ease: "easeInOut" },
     },
     end: {
-      x: "10%",
+      x: xOffset,
       opacity: 1,
       transition: { duration: 0.5, ease: "easeInOut" },
     },
@@ -65,7 +88,7 @@ const DesktopNavbarHome: React.FC = () => {
         >
           {/* Logo Section */}
           <motion.div
-            className="flex items-center h-14"
+            className="flex items-center h-14 md:translate-x-[20%]"
             initial="hidden"
             animate={isFixed ? "visible" : "hidden"}
             exit="exit"
