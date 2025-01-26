@@ -9,34 +9,31 @@ const AboutMakersSpace = () => {
   return (
     <>
       {!isLoading && aboutMakersSpace && invitedArtists && (
-        <section className="">
-          <section
-            style={{ backgroundColor: "#1D192C" }}
-            className="flex flex-row items-center justify-center h-screen gap-y-10"
-          >
-            <div className="w-1/2 h-1/2 flex flex-col gap-3 bg-white items-center p-10">
-              <h1 className="text-5xl">{aboutMakersSpace.aboutHeader}</h1>
+        <>
+          <section className="flex justify-center items-center  bg-[#1D192C] pt-[138px] pb-[50px] lg:py-20 px-8 md:px-36 xl:px-64">
+            <div className="bg-white flex flex-col p-4 xs:p-8 md:p-16 w-full h-full gap-10">
+              <h1>{aboutMakersSpace.aboutHeader}</h1>
               <p>{aboutMakersSpace.aboutText}</p>
             </div>
           </section>
-          <section className="flex flex-row gap-5 p-10">
-            <article className="flex flex-col">
-              <h2 className="text-3xl font-extrabold">
-                {aboutMakersSpace.subHeader}
-              </h2>
-              <p className="pb-10 pt-10">{aboutMakersSpace.subTitleText}</p>
+
+          <section className="flex flex-col xl:flex-row w-full min-h-screen gap-20 p-10 md:py-32 justify-center items-center">
+            <article className="flex flex-col xl:w-1/2 space-y-8">
+              <h2 className="text-nowrap">{aboutMakersSpace.subHeader}</h2>
+              <p>{aboutMakersSpace.subTitleText}</p>
               <InvitedArtists invitedArtists={invitedArtists} />
-              <p className="pb-10 pt-10">{aboutMakersSpace.subTitleText2}</p>
+              <p>{aboutMakersSpace.subTitleText2}</p>
             </article>
-            <div className="w-full">
-              <img
-                src={aboutMakersSpace.image.asset.url}
-                alt={aboutMakersSpace.image.altText}
-                className="w-full h-auto"
-              />
-            </div>
+            <section className="xl:w-1/2">
+              {aboutMakersSpace.image && (
+                <img
+                  src={aboutMakersSpace.image.asset.url}
+                  alt={aboutMakersSpace.image.altText}
+                />
+              )}
+            </section>
           </section>
-        </section>
+        </>
       )}
     </>
   );

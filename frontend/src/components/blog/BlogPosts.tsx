@@ -4,6 +4,7 @@ import MyCarousel from "./BlogCarousel.tsx";
 import BlogCard from "./CompressedBlogCard.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoading } from "../../context/LoadingContext";
+import { useLocation } from "react-router-dom";
 import {
   faChevronDown,
   faChevronRight,
@@ -11,10 +12,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const BlogPosts = () => {
+  const location = useLocation();
   const { blogPosts } = useBlogPosts();
   const { isLoading } = useLoading();
   const [showMore, setShowMore] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<any | null>(null);
+  const [selectedPost, setSelectedPost] = useState<any | null>(
+    location.state?.selectedPost || null,
+  );
   const [visiblePosts, setVisiblePosts] = useState(3);
 
   const handleSeeMore = () => {
@@ -22,24 +26,28 @@ const BlogPosts = () => {
   };
 
   useEffect(() => {
-    if (blogPosts.length > 0) {
-      // Set the initial selected post to the first post if available
-      setSelectedPost(blogPosts[0]);
+    if (location.state?.selectedPost) {
+      setSelectedPost(location.state.selectedPost); // Always set the post from location.state
+    } else if (!selectedPost && blogPosts.length > 0) {
+      setSelectedPost(blogPosts[0]); // Default to the first post
     }
-  }, [blogPosts]);
+  }, [location.state, blogPosts]);
 
   const handleShowMoreClick = () => {
     if (showMore) {
       window.scrollTo({ top: 0, behavior: "smooth" });
+      if (!("scrollBehavior" in document.documentElement.style)) {
+        // Fallback for unsupported browsers
+        window.scrollTo(0, 0);
+      }
     }
     setShowMore((prev) => !prev);
   };
 
   const handleCardClick = (post: any) => {
-    setSelectedPost(post);
-    setShowMore(false); // Reset "showMore" when selecting a new post
     if (selectedPost !== post) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      setSelectedPost(post); // Update the selected post
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
     }
   };
 
@@ -48,7 +56,7 @@ const BlogPosts = () => {
   }
 
   return (
-    <div className="pt-[88px] lg:p-0">
+    <div id="blog-posts-container" className="pt-[88px] lg:p-0">
       {/* BlogPost Details (only show if a post is selected) */}
       {selectedPost && (
         <div>
@@ -184,9 +192,9 @@ const BlogPosts = () => {
       <section className="bg-[#1D192C] p-10 sm:py-20 space-y-6">
         <h3 className="text-white">More Posts</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-28 md:gap-12 xl:gap-14">
-          {blogPosts.slice(0, visiblePosts).map((post) => (
+          {blogPosts.slice(0, visiblePosts).map((post, index) => (
             <BlogCard
-              key={post._id}
+              key={post._id || index}
               post={post}
               onClick={() => handleCardClick(post)}
             />

@@ -4,12 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    background-color: white;
+}
+
 body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+}
+
+h4 {
+    @apply text-lg md:text-xl lg:text-2xl font-semibold;
 }
 
 h3 {
