@@ -4,7 +4,8 @@ import MyCarousel from "./BlogCarousel.tsx";
 import BlogCard from "./CompressedBlogCard.tsx";
 
 const BlogPosts = () => {
-  const { blogPosts, loading } = useBlogPosts();
+  const { blogPosts } = useBlogPosts();
+
   const [showMore, setShowMore] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
 
@@ -13,10 +14,6 @@ const BlogPosts = () => {
       setSelectedPost(blogPosts[0]);
     }
   }, [blogPosts]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const handleShowMoreClick = () => {
     setShowMore((prev) => !prev);

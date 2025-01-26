@@ -1,24 +1,30 @@
 import { useState, useEffect } from "react";
-import {ArtistInfo} from "../interfaces/artistinfo.ts";
+import { ArtistInfo } from "../interfaces/artistinfo.ts";
 import sanityClient from "../client.ts";
-
+import { useLoading } from "../context/LoadingContext";
 
 const useArtistInfo = () => {
-    const [artistInfo, setArtistInfo] = useState<ArtistInfo | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+  const [artistInfo, setArtistInfo] = useState<ArtistInfo | null>(null);
+  const { setIsLoading } = useLoading();
 
-    useEffect(() => {
-        const fetchArtistInfo = async () => {
-            const query = `*[_type == "artistInfo"][0]{header, text}`;
-            const data = await sanityClient.fetch<ArtistInfo>(query);
-            setArtistInfo(data);
-            setLoading(false);
-        };
+  useEffect(() => {
+    const fetchArtistInfo = async () => {
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "artistInfo"][0]{header, text}`;
+        const data = await sanityClient.fetch<ArtistInfo>(query);
+        setArtistInfo(data);
+      } catch (error) {
+        console.error("Error fetching artist info:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-        fetchArtistInfo();
-    }, []);
+    fetchArtistInfo();
+  }, [setIsLoading]);
 
-    return { artistInfo, loading };
+  return { artistInfo };
 };
 
 export default useArtistInfo;

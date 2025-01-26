@@ -1,3 +1,5 @@
+import React from "react";
+
 const BlogCard: React.FC<{ post: any; onClick: () => void }> = ({
   post,
   onClick,

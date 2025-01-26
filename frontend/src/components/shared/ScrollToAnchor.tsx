@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-const ScrollToAnchor: React.FC = () => {
+const ScrollToAnchor = () => {
   const location = useLocation();
   const lastHash = useRef("");
   const lastPathname = useRef(location.pathname); // Track the last pathname

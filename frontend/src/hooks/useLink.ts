@@ -1,32 +1,33 @@
-import {LinkData} from "../interfaces/linkData.ts";
-import {useEffect, useState} from "react";
+import { LinkData } from "../interfaces/linkData.ts";
+import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
+import { useLoading } from "../context/LoadingContext.tsx";
 
 const useLinks = () => {
-    const [links, setLinks] = useState<LinkData[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+  const [links, setLinks] = useState<LinkData[]>([]);
+  const { setIsLoading } = useLoading();
 
-    useEffect(() => {
-        const fetchLinksData = async () => {
-            const query = `*[_type == "link"]{
-        url,
-        alt
-      }`;
+  useEffect(() => {
+    const fetchLinksData = async () => {
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "link"]{
+                   url,
+                   alt
+               }`;
+        const linksData = await sanityClient.fetch(query);
+        setLinks(linksData);
+      } catch (error) {
+        console.error("Error fetching links data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-            try {
-                const linksData = await sanityClient.fetch(query);
-                setLinks(linksData);
-            } catch (error) {
-                console.error("Error fetching links data:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    fetchLinksData();
+  }, [setIsLoading]);
 
-        fetchLinksData();
-    }, []);
-
-    return { links, loading };
+  return { links };
 };
 
 export default useLinks;

@@ -1,41 +1,47 @@
 import { useEffect, useState } from "react";
 import { ArtDisplay } from "../interfaces/artDisplay.ts";
 import sanityClient from "../client.ts";
+import { useLoading } from "../context/LoadingContext";
 
 const useArtDisplay = () => {
   const [artDisplay, setArtDisplay] = useState<ArtDisplay[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { setIsLoading } = useLoading();
 
   useEffect(() => {
     const fetchArtDisplay = async () => {
-      const query = `*[_type == "facilities"]{
-  header,
-  text,
-  image{
-    asset->{
-      _ref,
-      url
-    }
-  },
-  alt,
-  image2{
-    asset->{
-      _ref,
-      url
-    }
-  },
-  alt2
-}`;
-
-      const data: ArtDisplay[] = await sanityClient.fetch(query);
-      setArtDisplay(data);
-      setLoading(false);
+      setIsLoading(true);
+      try {
+        const query = `*[_type == "facilities"]{
+         header,
+         text,
+         image{
+           asset->{
+             ref,
+             url
+           }
+         },
+         alt,
+         image2{
+           asset->{
+             ref,
+             url
+           }
+         },
+         alt2
+       }`;
+        const data: ArtDisplay[] = await sanityClient.fetch(query);
+        setArtDisplay(data);
+      } catch (error) {
+        console.error("Error fetching art display:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchArtDisplay();
-  }, []);
+  }, [setIsLoading]);
 
-  return { artDisplay, loading };
+  return { artDisplay };
 };
 
 export default useArtDisplay;

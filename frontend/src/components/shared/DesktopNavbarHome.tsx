@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import useNavbar from "../../hooks/useNavbar.ts";
+import { useLoading } from "../../context/LoadingContext.tsx";
 
 const DesktopNavbarHome: React.FC = () => {
-  const { navbar, loading } = useNavbar();
+  const { navbar } = useNavbar();
+  const { isLoading } = useLoading();
+
   const [isFixed, setIsFixed] = useState(false);
   const navbarRef = useRef<HTMLDivElement | null>(null);
 
@@ -19,14 +22,6 @@ const DesktopNavbarHome: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!navbar) {
-    return <div>No navbar content available.</div>;
-  }
 
   const logoVariants = {
     hidden: {
@@ -60,77 +55,85 @@ const DesktopNavbarHome: React.FC = () => {
   };
 
   return (
-    <nav
-      ref={navbarRef}
-      className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
-        isFixed ? "shadow-md" : ""
-      } h-20`}
-    >
-      {/* Logo Section */}
-      <motion.div
-        className="flex items-center h-14"
-        initial="hidden"
-        animate={isFixed ? "visible" : "hidden"}
-        exit="exit"
-        variants={logoVariants}
-        transition={{ duration: 0.5 }}
-      >
-        <Link to="/">
-          <img src={navbar.image.asset.url} alt={navbar.alt} className="h-14" />
-        </Link>
-      </motion.div>
+    <>
+      {!isLoading && navbar && (
+        <nav
+          ref={navbarRef}
+          className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
+            isFixed ? "shadow-md" : ""
+          } h-20`}
+        >
+          {/* Logo Section */}
+          <motion.div
+            className="flex items-center h-14"
+            initial="hidden"
+            animate={isFixed ? "visible" : "hidden"}
+            exit="exit"
+            variants={logoVariants}
+            transition={{ duration: 0.5 }}
+          >
+            <Link to="/">
+              <img
+                src={navbar.image.asset.url}
+                alt={navbar.alt}
+                className="h-14"
+              />
+            </Link>
+          </motion.div>
 
-      {/* Links Section */}
-      <motion.div
-        className="flex items-center justify-center gap-x-10 w-full"
-        initial="center"
-        animate={isFixed ? "end" : "center"}
-        variants={linksVariants}
-      >
-        <Link
-          to="/blog"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          Blog
-        </Link>
-        <Link
-          to="/facilities"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          Facilities
-        </Link>
-        <Link
-          to="/#prices"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          Prices
-        </Link>
-        <Link
-          to="/#about"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          About Us
-        </Link>
-        <Link
-          to="/#contact"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          Contact
-        </Link>
-        <Link
-          to="/artists"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          Artists
-        </Link>
-        <Link
-          to="#"
-          className="hover:text-[#B22C2B] transition-colors menuItem text-center"
-        >
-          Makers Space
-        </Link>
-      </motion.div>
-    </nav>
+          {/* Links Section */}
+          <motion.div
+            className="flex items-center justify-center gap-x-10 w-full"
+            initial="center"
+            animate={isFixed ? "end" : "center"}
+            variants={linksVariants}
+          >
+            <Link
+              to="/blog"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              Blog
+            </Link>
+            <Link
+              to="/facilities"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              Facilities
+            </Link>
+            <Link
+              to="/#prices"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              Prices
+            </Link>
+            <Link
+              to="/#about"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              About Us
+            </Link>
+            <Link
+              to="/#contact"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              Contact
+            </Link>
+            <Link
+              to="/artists"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              Artists
+            </Link>
+            <Link
+              to="makersspace"
+              className="hover:text-[#B22C2B] transition-colors menuItem text-center"
+            >
+              Makers Space
+            </Link>
+          </motion.div>
+        </nav>
+      )}
+    </>
   );
 };
 
