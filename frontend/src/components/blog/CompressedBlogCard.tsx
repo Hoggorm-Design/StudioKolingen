@@ -5,12 +5,9 @@ const BlogCard: React.FC<{ post: any; onClick: () => void }> = ({
   onClick,
 }) => {
   return (
-    <div
-      onClick={onClick}
-      className="group block bg-white overflow-hidden transform transition duration-300 hover:scale-105"
-    >
+    <div onClick={onClick} className="group block bg-white overflow-hidden">
       {/* Kvadratisk bildecontainer */}
-      <div className="w-full aspect-square overflow-hidden">
+      <div className="w-full aspect-video overflow-hidden">
         <img
           src={post.image1.asset.url}
           alt={post.imageText1 || "Image 1"}
@@ -19,11 +16,9 @@ const BlogCard: React.FC<{ post: any; onClick: () => void }> = ({
       </div>
 
       {/* Header og tekst */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2 group-hover:text-[#B22C2B]">
-          {post.header}
-        </h3>
-        {post.text1 && <p>{post.text1}</p>}
+      <div className="p-8">
+        <h3 className="text-xl font-semibold mb-2 ">{post.header}</h3>
+        {post.text1 && <p className="text-lg">{post.text1}</p>}
       </div>
     </div>
   );
