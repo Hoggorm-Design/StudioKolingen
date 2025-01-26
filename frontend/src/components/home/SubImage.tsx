@@ -10,10 +10,10 @@ const SubImage: React.FC = () => {
   return (
     <>
       {!isLoading && subImage && (
-        <section className="bg-[#1a1a2e] py-20 w-screen overflow-x-hidden">
+        <section className="bg-[#1a1a2e] py-10 md:py-20 w-screen overflow-x-hidden">
           <MyCarousel />
 
-          <section className="w-screen py-24">
+          <section className="w-screen">
             {/* Container to display images in a row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-28 sm:gap-8 xl:gap-14 p-10">
               {/* Image 1 */}
