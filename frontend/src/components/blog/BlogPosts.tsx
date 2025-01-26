@@ -3,6 +3,7 @@ import useBlogPosts from "../../hooks/useBlogPost.ts";
 import MyCarousel from "./BlogCarousel.tsx";
 import BlogCard from "./CompressedBlogCard.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLoading } from "../../context/LoadingContext";
 import {
   faChevronDown,
   faChevronRight,
@@ -11,7 +12,7 @@ import {
 
 const BlogPosts = () => {
   const { blogPosts } = useBlogPosts();
-
+  const { isLoading } = useLoading();
   const [showMore, setShowMore] = useState(false);
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
@@ -27,7 +28,6 @@ const BlogPosts = () => {
     }
   }, [blogPosts]);
 
-
   const handleShowMoreClick = () => {
     if (showMore) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -42,6 +42,10 @@ const BlogPosts = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
+  if (isLoading) {
+    return null; // The spinner is shown by LoadingContext
+  }
 
   return (
     <div className="pt-[88px] lg:p-0">
