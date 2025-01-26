@@ -97,8 +97,32 @@ const BlogPosts = () => {
                   {selectedPost.text6 && <p>{selectedPost.text6}</p>}
                 </div>
               </section>
-              <section className="bg-[#1D192C] px-10 py-32">
-                <div className="grid grid-cols-1 xs:grid-cols-2 gap-16 xs:gap-8 xl:gap-14"></div>
+              <section className="bg-[#1D192C] px-10 py-32 space-y-20">
+                <div className="grid grid-cols-1 xs:grid-cols-2 gap-16 xs:gap-8 xl:gap-32">
+                  {[5, 6].map((i) => {
+                    const imageKey = `image${i}`;
+                    const textKey = `imageText${i}`;
+                    if (
+                      selectedPost[imageKey] &&
+                      selectedPost[imageKey].asset
+                    ) {
+                      return (
+                        <div
+                          key={i}
+                          className="w-full aspect-square overflow-hidden"
+                        >
+                          <img
+                            className="w-full h-full object-cover"
+                            src={selectedPost[imageKey].asset.url}
+                            alt={selectedPost[textKey] || `Image ${i}`}
+                          />
+                          <p className="text-white">{selectedPost[textKey]}</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
                 {/* Carousel - Passing all images to MyCarousel */}
                 <MyCarousel
                   images={[
@@ -131,7 +155,8 @@ const BlogPosts = () => {
       )}
 
       {/* Blog Cards */}
-      <section className="bg-[#1D192C] p-10 sm:py-20">
+      <section className="bg-[#1D192C] p-10 sm:py-20 space-y-6">
+        <h3 className="text-white">More Posts</h3>
         <div className="grid grid-cols-1 xs:grid-cols-2 md:sm:grid-cols-3 gap-16 xs:gap-8 xl:gap-14">
           {blogPosts.map((post) => (
             <BlogCard

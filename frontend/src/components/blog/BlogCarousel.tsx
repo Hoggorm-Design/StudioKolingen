@@ -66,7 +66,7 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
 
   return (
     <section className="w-full flex flex-col items-center px-6 sm:px-14 py-12">
-      <div className="relative w-[90%] max-w-screen-xl pb-16">
+      <div className="relative w-full max-w-screen-xl pb-16">
         <Carousel
           responsive={responsive}
           ssr={true}
