@@ -20,10 +20,21 @@ const BlogPosts = () => {
     location.state?.selectedPost || null,
   );
   const [visiblePosts, setVisiblePosts] = useState(3);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleSeeMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
   };
+
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
 
   useEffect(() => {
     if (location.state?.selectedPost) {
@@ -202,6 +213,7 @@ const BlogPosts = () => {
                 key={index}
                 post={post}
                 onClick={() => handleCardClick(post)}
+                isMobile={isMobile}
               />
             ))}
         </div>
