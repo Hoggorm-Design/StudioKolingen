@@ -13,11 +13,17 @@ const ButtonGroup: React.FC<{
   previous: () => void;
 }> = ({ next, previous }) => {
   return (
-    <div className="absolute top-[40%] w-full flex justify-between items-center">
+    <div
+      className="absolute top-[40%] w-full flex justify-between items-center"
+      role="group"
+      aria-label="Carousel Navigation"
+    >
       {/* Left Arrow */}
       <button
         onClick={previous}
         className="hidden sm:block text-white focus:outline-none -left-16 absolute"
+        aria-label="Previous Slide"
+        type="button"
       >
         <FontAwesomeIcon icon={faArrowAltCircleLeft} size="2x" />
       </button>
@@ -26,6 +32,8 @@ const ButtonGroup: React.FC<{
       <button
         onClick={next}
         className="hidden sm:block text-white focus:outline-none -right-16 absolute"
+        aria-label="Next slide"
+        type="button"
       >
         <FontAwesomeIcon icon={faArrowAltCircleRight} size="2x" />
       </button>
@@ -36,12 +44,16 @@ const ButtonGroup: React.FC<{
 const CustomDot: React.FC<{
   onClick: () => void;
   active: boolean;
-}> = ({ onClick, active }) => (
+  index: number;
+  totalSlides: number;
+}> = ({ onClick, active, index, totalSlides }) => (
   <button
     onClick={onClick}
     className={`w-3 h-3 rounded-full mx-1 border-2 transition-all focus:outline-none ${
       active ? "bg-white border-white" : "border-white bg-transparent"
     }`}
+    aria-label={`Go to slide ${index + 1} of ${totalSlides}`}
+    aria-current={active ? "true" : "false"}
   ></button>
 );
 
@@ -70,7 +82,10 @@ const MyCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="w-full flex flex-col items-center sm:px-14 py-12">
+      <section
+        className="w-full flex flex-col items-center sm:px-14 py-12"
+        aria-label="Image Carousel"
+      >
         <div className="relative w-[90%] max-w-screen-xl pb-16">
           <Carousel
             responsive={responsive}
@@ -90,16 +105,26 @@ const MyCarousel: React.FC = () => {
             arrows={false}
             showDots={true}
             renderDotsOutside={true}
-            customDot={<CustomDot onClick={() => {}} active={false} />}
+            customDot={
+              <CustomDot
+                onClick={() => {}}
+                active={false}
+                index={0}
+                totalSlides={carousels.length}
+              />
+            }
           >
             {carousels.map((image, index) => (
               <div
                 key={index}
                 className="w-full h-[300px] flex-shrink-0 overflow-hidden"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Slide ${index + 1} of ${carousels.length}`}
               >
                 <img
                   src={image.image.asset.url}
-                  alt={image.alt}
+                  alt={image.alt || `Carousel image ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
