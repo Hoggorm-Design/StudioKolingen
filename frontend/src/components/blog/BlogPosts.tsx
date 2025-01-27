@@ -73,7 +73,7 @@ const BlogPosts = () => {
       {/* BlogPost Details (only show if a post is selected) */}
       {selectedPost && (
         <div>
-          <section className="flex flex-col lg:flex-row w-full min-h-screen gap-20 pt-16 p-10 justify-center">
+          <section className="flex flex-col lg:flex-row w-full gap-16 px-5 sm:px-10 py-14 justify-center">
             <section className="flex flex-col lg:w-1/2 space-y-4">
               <h1>{selectedPost.header}</h1>
               {selectedPost.text1 && <p>{selectedPost.text1}</p>}
@@ -101,8 +101,8 @@ const BlogPosts = () => {
           >
             {showMore && (
               <div>
-                <section className="bg-[#1D192C] px-10 py-32">
-                  <div className="grid grid-cols-1 xs:grid-cols-2 md:sm:grid-cols-3 gap-16 xs:gap-8 xl:gap-14">
+                <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 xs:gap-8 xl:gap-14">
                     {[2, 3, 4].map((i) => {
                       const imageKey = `image${i}`;
                       const textKey = `imageText${i}`;
@@ -130,15 +130,15 @@ const BlogPosts = () => {
                     })}
                   </div>
                 </section>
-                <section className="flex justify-center items-center py-5 xs:py-10 md:py-32 px-3 xs:px-8 md:px-36 xl:px-64">
+                <section className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
                   <div className="bg-white flex flex-col gap-10">
                     {selectedPost.text4 && <p>{selectedPost.text4}</p>}
                     {selectedPost.text5 && <p>{selectedPost.text5}</p>}
                     {selectedPost.text6 && <p>{selectedPost.text6}</p>}
                   </div>
                 </section>
-                <section className="bg-[#1D192C] px-10 py-32 space-y-20">
-                  <div className="grid grid-cols-1 xs:grid-cols-2 gap-16 xs:gap-8 xl:gap-32">
+                <section className="bg-[#1D192C] sm:px-10 py-14 space-y-10">
+                  <div className="grid grid-cols-1 xs:grid-cols-2 gap-16 xs:gap-8 xl:gap-32 px-5 sm:px-0">
                     {[5, 6].map((i) => {
                       const imageKey = `image${i}`;
                       const textKey = `imageText${i}`;
@@ -188,7 +188,7 @@ const BlogPosts = () => {
           {/* Button to toggle 'show more' */}
           <div className="flex justify-center">
             <button
-              className="w-screen text-left px-10 py-5 text-white font-light bg-[#B22C2B]"
+              className="w-screen text-left px-10 py-4 text-white font-light bg-[#B22C2B]"
               onClick={handleShowMoreClick}
             >
               {showMore ? "Close post" : "See entire post"}
@@ -202,9 +202,9 @@ const BlogPosts = () => {
       )}
 
       {/* Blog Cards */}
-      <section className="bg-[#1D192C] p-10 sm:py-20 space-y-6">
+      <section className="bg-[#1D192C] px-5 sm:px-10 py-14 space-y-4">
         <h3 className="text-white">More Posts</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-28 md:gap-12 xl:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
           {blogPosts
             .filter((post) => post !== selectedPost)
             .slice(0, visiblePosts)
@@ -218,7 +218,7 @@ const BlogPosts = () => {
             ))}
         </div>
         {visiblePosts < blogPosts.length && ( // Kun vis knappen hvis det er flere innlegg å laste
-          <div className="flex mt-10">
+          <div className="flex pt-4">
             <button
               onClick={handleSeeMore}
               className="flex items-center text-white text-lg font-light gap-6 "
