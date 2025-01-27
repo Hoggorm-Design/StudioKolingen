@@ -203,7 +203,7 @@ const BlogPosts = () => {
 
       {/* Blog Cards */}
       <section className="bg-[#1D192C] px-5 sm:px-10 py-14 space-y-4">
-        <h3 className="text-white">More Posts</h3>
+        <h3 className="pb-4 text-white">More Posts</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
           {blogPosts
             .filter((post) => post !== selectedPost)

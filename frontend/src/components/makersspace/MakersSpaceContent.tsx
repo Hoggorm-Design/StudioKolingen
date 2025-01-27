@@ -137,7 +137,7 @@ const MakersSpaceContent = () => {
               </article>
 
               <section className="bg-[#1D192C] pt-14 space-y-4">
-                <h3 className="text-[#fffdf8]">More Posts</h3>
+                <h3 className="pb-4 text-[#fffdf8]">More Posts</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
                   {makersSpaceContent
                     .filter((post) => post !== selectedPost)
