@@ -16,8 +16,8 @@ const ApartmentPage: React.FC = () => {
     <>
       {!isLoading && apartment && (
         <>
-          <section className="flex justify-center items-center h-[75vh] bg-[#1D192C] pt-[168px] pb-[88px] lg:py-20 px-8 md:px-36 xl:px-64">
-            <div className="h-full w-auto aspect-video overflow-hidden">
+          <section className="flex justify-center items-center bg-[#1D192C] pt-[138px] pb-[64px] lg:py-16 px-5 md:px-36 xl:px-64">
+            <div className="max-h-[50vh] w-auto aspect-square md:aspect-video overflow-hidden">
               <img
                 src={apartment.image.asset.url}
                 alt={apartment.alt}
@@ -25,12 +25,12 @@ const ApartmentPage: React.FC = () => {
               />
             </div>
           </section>
-          <section className="flex flex-col xl:flex-row w-full min-h-screen gap-20 p-10 pt-16 justify-center">
-            <section className="flex flex-col xl:w-1/2 space-y-4">
+          <section className="flex flex-col md:flex-row w-full gap-16 lg:gap-44 px-5 sm:px-10 pt-14">
+            <section className="flex flex-col md:w-1/2 space-y-4">
               <h2>{apartment.header}</h2>
               <p>{apartment.text}</p>
             </section>
-            <section className="xl:w-1/2">
+            <section className="md:w-1/2">
               {apartment.image2 && (
                 <div className="w-full aspect-square overflow-hidden">
                   <img
