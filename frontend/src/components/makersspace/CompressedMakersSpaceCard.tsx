@@ -1,30 +1,50 @@
 import React from "react";
 
-const MakersSpaceCard: React.FC<{ post: any; onClick: () => void }> = ({
-  post,
-  onClick,
-}) => {
+const MakersSpaceCard: React.FC<{
+  post: any;
+  onClick: () => void;
+  isMobile: boolean;
+}> = ({ post, onClick, isMobile }) => {
   return (
     <div
-      className="group block bg-white overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
-      onClick={onClick}
+      onClick={() => {
+        if (!isMobile) onClick(); // Bare tillat klikk på kort hvis ikke mobil
+      }}
+      className={`group bg-white overflow-hidden flex flex-col ${
+        !isMobile
+          ? "sm:transform sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:hover:shadow-lg sm:cursor-pointer"
+          : ""
+      }`}
     >
-      {/* Header */}
-      <h2 className="text-xl font-semibold p-4">{post.header}</h2>
+      {/* Kvadratisk bildecontainer */}
+      <div className="w-full aspect-video overflow-hidden">
+        <img
+          src={post.image1.asset.url}
+          alt={post.imageText1 || "Image 1"}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-      {/* Image */}
-      {post.image1 && post.image1.asset && (
-        <div>
-          <img
-            className="w-full h-48 object-cover"
-            src={post.image1.asset.url}
-            alt={post.imageText1 || "Image 1"}
-          />
+      {/* Header og tekst */}
+      <div className="p-8 flex-1">
+        <h3 className="text-xl font-semibold mb-2">{post.header}</h3>
+        {post.text1 && <p className="text-lg">{post.text1}</p>}
+      </div>
+
+      {/* "Read More" Button */}
+      {isMobile && (
+        <div className="block p-8 pt-0">
+          <button
+            className="text-lg text-[#B22C2B] hover:text-[#7c1e1d] transition w-full text-left"
+            onClick={(e) => {
+              e.stopPropagation(); // Forhindrer kortklikk
+              onClick();
+            }}
+          >
+            Read more
+          </button>
         </div>
       )}
-
-      {/* First text */}
-      {post.text1 && <p className="p-4">{post.text1}</p>}
     </div>
   );
 };

@@ -11,6 +11,7 @@ const MakersSpaceContent = () => {
   const { isLoading } = useLoading();
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleSeeMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 6, makersSpaceContent.length));
@@ -24,11 +25,29 @@ const MakersSpaceContent = () => {
     }
   }, [makersSpaceContent]);
 
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
+
   const handleCardClick = (post: any) => {
     if (selectedPost !== post) {
-      setSelectedPost(post);
+      setSelectedPost(post); // Oppdater det valgte innlegget
+
       setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll til toppen
+        const element = document.getElementById("makerSpaceContent");
+        if (element) {
+          const yOffset = -50; // Juster offset etter behov
+          const yPosition =
+            element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+          window.scrollTo({ top: yPosition, behavior: "smooth" });
+        }
       }, 50);
     }
   };
@@ -36,7 +55,7 @@ const MakersSpaceContent = () => {
   return (
     <>
       {!isLoading && makersSpaceContent && (
-        <section>
+        <section id="makerSpaceContent">
           {/* Selected Post Section */}
           {selectedPost && (
             <section>
@@ -81,7 +100,7 @@ const MakersSpaceContent = () => {
                 />
               </article>
               <article className="flex justify-center items-center py-10 md:py-32 px-10 md:px-36 xl:px-64">
-                <div className="bg-white flex flex-col gap-10">
+                <div className="bg-[#fffdf8] flex flex-col gap-10">
                   <p>{selectedPost.text1}</p>
                   <p>{selectedPost.text2}</p>
                   <p>{selectedPost.text3}</p>
@@ -118,15 +137,17 @@ const MakersSpaceContent = () => {
               </article>
 
               <section className="bg-[#1D192C] p-10 md:py-32 space-y-6">
-                <h3 className="text-white">More Posts</h3>
+                <h3 className="text-[#fffdf8]">More Posts</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-28 md:gap-12 xl:gap-14">
                   {makersSpaceContent
+                    .filter((post) => post !== selectedPost)
                     .slice(0, visiblePosts)
                     .map((post, index) => (
                       <MakersSpaceCard
                         key={post._id || index}
                         post={post}
                         onClick={() => handleCardClick(post)}
+                        isMobile={isMobile}
                       />
                     ))}
                 </div>
@@ -134,7 +155,7 @@ const MakersSpaceContent = () => {
                   <div className="flex mt-10">
                     <button
                       onClick={handleSeeMore}
-                      className="flex items-center text-white text-lg font-light gap-6 "
+                      className="flex items-center text-[#fffdf8] text-lg font-light gap-6 "
                     >
                       See more posts
                       <FontAwesomeIcon icon={faChevronRight} />

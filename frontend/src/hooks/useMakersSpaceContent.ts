@@ -14,6 +14,7 @@ const useMakersSpaceContent = () => {
       setIsLoading(true);
       try {
         const query = `*[_type == "makersSpaceContent"]{
+          header,
           text1,
           text2,
           text3,

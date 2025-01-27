@@ -5,6 +5,12 @@ export default defineType({
   title: 'Makers Space Content',
   type: 'document',
   fields: [
+    defineField({
+      name: 'header',
+      title: 'Header',
+      type: 'string',
+      description: 'Header for the content',
+    }),
     ...Array.from({length: 3}, (_, index) =>
       defineField({
         name: `text${index + 1}`,
