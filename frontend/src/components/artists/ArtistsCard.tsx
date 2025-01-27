@@ -9,7 +9,7 @@ const ArtistCard = () => {
   return (
     <>
       {!isLoading && artists && (
-        <div className="bg-white sm:bg-[#1D192C] p-10 sm:py-20 ">
+        <div className="bg-white sm:bg-[#1D192C] px-5 sm:px-10 py-0 sm:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {artists.map((artist, index) => (
               <div

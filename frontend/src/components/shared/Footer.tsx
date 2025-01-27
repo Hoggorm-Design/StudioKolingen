@@ -12,8 +12,8 @@ const Footer = () => {
   return (
     <>
       {!isLoading && footer && (
-        <footer className="p-10">
-          <div className="max-w-screen  border border-black px-2 py-10 lg:p-12 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-0">
+        <footer className="px-5 sm:px-10 py-16">
+          <div className="max-w-screen  border border-black py-14 px-4 xs:px-8 md:px-16 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-0">
             {/* Left Section */}
             <div className="flex flex-col gap-y-10">
               <img src={navbar?.image.asset.url} alt={navbar?.alt}></img>
@@ -67,12 +67,14 @@ const Footer = () => {
             </div>
 
             {/* Right Section */}
-            <div>
-              <img
-                src={footer.image.asset.url}
-                alt={footer.alt}
-                className="h-fit w-auto"
-              />
+            <div className="flex justify-start sm:justify-center lg:justify-end w-full">
+              <div className="w-[300px] h-auto overflow-hidden">
+                <img
+                  src={footer.image.asset.url}
+                  alt={footer.alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
 

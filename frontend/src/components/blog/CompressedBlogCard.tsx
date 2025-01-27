@@ -28,7 +28,13 @@ const BlogCard: React.FC<{
       {/* Header og tekst */}
       <div className="p-8 flex-1">
         <h3 className="text-xl font-semibold mb-2">{post.header}</h3>
-        {post.text1 && <p className="text-lg">{post.text1}</p>}
+        {post.text1 && (
+          <p className="text-lg">
+            {post.text1.length > 200
+              ? `${post.text1.slice(0, 250)}...`
+              : post.text1}
+          </p>
+        )}
       </div>
 
       {/* "Read More" Button */}

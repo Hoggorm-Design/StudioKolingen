@@ -89,10 +89,10 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
 
   return (
     <section
-      className="w-full flex flex-col items-center sm:px-14 py-12"
+      className="w-full flex flex-col items-center px-5 py-10 sm:p-10"
       aria-label="Blog Image Carousel"
     >
-      <div className="relative w-full max-w-screen-xl pb-16">
+      <div className="relative pb-16 w-full sm:w-[85%] xl:w-[90%]">
         <Carousel
           responsive={responsive}
           ssr={true}

@@ -83,10 +83,10 @@ const MyCarousel: React.FC = () => {
   return (
     <>
       <section
-        className="w-full flex flex-col items-center sm:px-14 py-12"
+        className="w-full flex flex-col items-center px-5 py-10 sm:p-10"
         aria-label="Image Carousel"
       >
-        <div className="relative w-[90%] max-w-screen-xl pb-16">
+        <div className="relative pb-16 w-full sm:w-[85%] xl:w-[90%]">
           <Carousel
             responsive={responsive}
             ssr={true}
@@ -97,7 +97,7 @@ const MyCarousel: React.FC = () => {
             customTransition="transform 0.5s ease-in-out"
             transitionDuration={500}
             containerClass="carousel-container"
-            itemClass="px-4"
+            itemClass="sm:px-4"
             renderButtonGroupOutside={true}
             customButtonGroup={
               <ButtonGroup next={() => {}} previous={() => {}} />

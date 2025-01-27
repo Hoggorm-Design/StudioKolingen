@@ -41,18 +41,17 @@ h1 {
 }
 
 p, a {
-    @apply text-base md:text-lg lg:text-xl font-light;
+    @apply text-base md:text-lg  font-light;
 }
 
 strong {
-    @apply text-base md:text-lg lg:text-xl
+    @apply text-base md:text-lg
 }
 
 h1,h2,h3 {
-    line-height: 1.5;
     font-family: 'Sofia Sans Semi Condensed', sans-serif;
 }
 
 p {
-    line-height: 1.75;
+    line-height: 1.5;
 }

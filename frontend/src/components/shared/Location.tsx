@@ -17,10 +17,10 @@ const Location = () => {
   return (
     <>
       {!isLoading && location && (
-        <section className="flex flex-col-reverse md:flex-row w-full min-h-screen gap-20 p-10 justify-center items-center">
+        <section className="flex flex-col-reverse lg:flex-row w-full py-14 gap-4 sm:gap-16 px-5 sm:px-10 justify-center items-start">
           {/* Text Section */}
           <section className="flex flex-col xl:w-1/2 space-y-4">
-            <h2 className="hidden md:flex">{location.header}</h2>
+            <h2 className="hidden lg:flex">{location.header}</h2>
             <p>{location.text}</p>
             <p>Here is a list:</p>
             <ul>
@@ -42,7 +42,7 @@ const Location = () => {
           </section>
 
           {/* Map Display */}
-          <section className="xl:w-1/2 w-full">
+          <section className="xl:w-1/2 w-full h-full">
             {contact?.address && (
               <div
                 className={`relative ${
@@ -58,7 +58,7 @@ const Location = () => {
               </div>
             )}
           </section>
-          <h2 className="block md:hidden md:w-0 text-left w-full">
+          <h2 className="block lg:hidden lg:w-0 text-left w-full">
             {location.header}
           </h2>
         </section>
