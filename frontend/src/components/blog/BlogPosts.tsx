@@ -20,10 +20,21 @@ const BlogPosts = () => {
     location.state?.selectedPost || null,
   );
   const [visiblePosts, setVisiblePosts] = useState(3);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleSeeMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
   };
+
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
 
   useEffect(() => {
     if (location.state?.selectedPost) {
@@ -194,13 +205,17 @@ const BlogPosts = () => {
       <section className="bg-[#1D192C] p-10 sm:py-20 space-y-6">
         <h3 className="text-white">More Posts</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-28 md:gap-12 xl:gap-14">
-          {blogPosts.slice(0, visiblePosts).map((post, index) => (
-            <BlogCard
-              key={post._id || index}
-              post={post}
-              onClick={() => handleCardClick(post)}
-            />
-          ))}
+          {blogPosts
+            .filter((post) => post !== selectedPost)
+            .slice(0, visiblePosts)
+            .map((post, index) => (
+              <BlogCard
+                key={index}
+                post={post}
+                onClick={() => handleCardClick(post)}
+                isMobile={isMobile}
+              />
+            ))}
         </div>
         {visiblePosts < blogPosts.length && ( // Kun vis knappen hvis det er flere innlegg å laste
           <div className="flex mt-10">
