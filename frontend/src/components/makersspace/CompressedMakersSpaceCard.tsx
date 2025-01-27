@@ -5,7 +5,10 @@ const MakersSpaceCard: React.FC<{ post: any; onClick: () => void }> = ({
   onClick,
 }) => {
   return (
-    <div className="max-w-sm w-[400px] h-[400px] bg-white" onClick={onClick}>
+    <div
+      className="group block bg-white overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
+      onClick={onClick}
+    >
       {/* Header */}
       <h2 className="text-xl font-semibold p-4">{post.header}</h2>
 

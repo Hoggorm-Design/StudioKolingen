@@ -2,22 +2,20 @@ import useMakersSpaceContent from "../../hooks/useMakersSpaceContent.ts";
 import { useEffect, useState } from "react";
 import MyCarousel from "../blog/BlogCarousel.tsx";
 import { useLoading } from "../../context/LoadingContext.tsx";
-import useBlogPosts from "../../hooks/useBlogPost.ts";
-import BlogCard from "./../blog/CompressedBlogCard.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import MakersSpaceCard from "./CompressedMakersSpaceCard.tsx";
 
 const MakersSpaceContent = () => {
   const { makersSpaceContent } = useMakersSpaceContent();
   const { isLoading } = useLoading();
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
-  const { blogPosts } = useBlogPosts();
   const navigate = useNavigate();
 
   const handleSeeMore = () => {
-    setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
+    setVisiblePosts((prev) => Math.min(prev + 6, makersSpaceContent.length));
   };
 
   useEffect(() => {
@@ -29,7 +27,7 @@ const MakersSpaceContent = () => {
   }, [makersSpaceContent]);
 
   const handleCardClick = (post: any) => {
-    navigate("/blog", { state: { selectedPost: post } }); // Pass the selected post as state
+    navigate("/makersspace", { state: { selectedPost: post } }); // Pass the selected post as state
   };
 
   return (
@@ -119,15 +117,17 @@ const MakersSpaceContent = () => {
               <section className="bg-[#1D192C] p-10 md:py-32 space-y-6">
                 <h3 className="text-white">More Posts</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-28 md:gap-12 xl:gap-14">
-                  {blogPosts.slice(0, visiblePosts).map((post, index) => (
-                    <BlogCard
-                      key={post._id || index}
-                      post={post}
-                      onClick={() => handleCardClick(post)}
-                    />
-                  ))}
+                  {makersSpaceContent
+                    .slice(0, visiblePosts)
+                    .map((post, index) => (
+                      <MakersSpaceCard
+                        key={post._id || index}
+                        post={post}
+                        onClick={() => handleCardClick(post)}
+                      />
+                    ))}
                 </div>
-                {visiblePosts < blogPosts.length && ( // Kun vis knappen hvis det er flere innlegg å laste
+                {visiblePosts < makersSpaceContent.length && ( // Kun vis knappen hvis det er flere innlegg å laste
                   <div className="flex mt-10">
                     <button
                       onClick={handleSeeMore}
