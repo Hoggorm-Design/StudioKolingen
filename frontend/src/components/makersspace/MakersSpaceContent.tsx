@@ -4,7 +4,6 @@ import MyCarousel from "../blog/BlogCarousel.tsx";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import MakersSpaceCard from "./CompressedMakersSpaceCard.tsx";
 
 const MakersSpaceContent = () => {
@@ -12,7 +11,6 @@ const MakersSpaceContent = () => {
   const { isLoading } = useLoading();
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
-  const navigate = useNavigate();
 
   const handleSeeMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 6, makersSpaceContent.length));
@@ -27,7 +25,12 @@ const MakersSpaceContent = () => {
   }, [makersSpaceContent]);
 
   const handleCardClick = (post: any) => {
-    navigate("/makersspace", { state: { selectedPost: post } }); // Pass the selected post as state
+    if (selectedPost !== post) {
+      setSelectedPost(post);
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll til toppen
+      }, 50);
+    }
   };
 
   return (
