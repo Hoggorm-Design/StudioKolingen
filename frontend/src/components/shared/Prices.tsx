@@ -8,8 +8,8 @@ const Prices = () => {
   return (
     <>
       {!isLoading && prices && (
-        <section className="flex justify-center items-center  bg-[#1D192C] py-10 md:py-20 px-8 md:px-36 xl:px-64">
-          <div className="bg-white flex flex-col p-4 xs:p-8 md:p-16 w-full h-full gap-10">
+        <section className="flex justify-center items-center  bg-[#1D192C] py-16 px-5 sm:px-36 xl:px-64">
+          <div className="bg-white flex flex-col py-14 px-4 xs:px-8 md:px-16 w-full h-full gap-4">
             <h2>{prices.header}</h2>
             <p>{prices.text}</p>
             <div>

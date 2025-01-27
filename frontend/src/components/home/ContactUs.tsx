@@ -16,10 +16,10 @@ const ContactUs: React.FC = () => {
   return (
     <>
       {!isLoading && contact && (
-        <section className="flex justify-center items-center lg:min-h-screen bg-[#1D192C] py-10 md:py-20 px-8 md:px-36 xl:px-64">
-          <div className="bg-white flex flex-col px-4 py-28 md:p-16 w-full h-full gap-10">
+        <section className="flex justify-center items-center  bg-[#1D192C] py-16 px-5 md:px-36 xl:px-64">
+          <div className="bg-white flex flex-col py-14 px-4 xs:px-8 md:px-16 w-full h-full sm:w-auto sm:h-auto gap-10">
             {/* Left Section */}
-            <section className="lg:w-1/2 flex flex-col gap-12 md:gap-6">
+            <section className="flex flex-col gap-4 md:gap-6">
               <h2>{contact.header}</h2>
 
               {/* Email */}
@@ -63,7 +63,7 @@ const ContactUs: React.FC = () => {
               </div>
 
               {/* Icons Section */}
-              <div className="hidden lg:flex items-center gap-12 mt-4">
+              <div className="flex items-center gap-12 mt-4">
                 <a
                   href="https://www.facebook.com/p/Studio-Kolingen-100064515109973/"
                   target="_blank"
