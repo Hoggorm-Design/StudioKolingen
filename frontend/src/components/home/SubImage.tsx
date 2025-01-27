@@ -2,6 +2,7 @@ import React from "react";
 import useSubImage from "../../hooks/useSubImage.ts";
 import MyCarousel from "./Carousel.tsx";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import { Link } from "react-router-dom";
 
 const SubImage: React.FC = () => {
   const { subImage } = useSubImage();
@@ -17,46 +18,51 @@ const SubImage: React.FC = () => {
             {/* Container to display images in a row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-28 sm:gap-8 xl:gap-14 p-10">
               {/* Image 1 */}
+
               <div>
                 <div className="w-full aspect-square overflow-hidden">
-                  <img
-                    src={subImage.image.asset.url}
-                    alt={subImage.alt}
-                    className="w-full h-full object-cover"
-                  />
+                  <Link to="/#">
+                    <img
+                      src={subImage.image.asset.url}
+                      alt={subImage.alt}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
                 </div>
+
                 <h4 className="text-white mt-4 font-semibold">
                   {subImage.header}
                 </h4>
-                <p className="text-white mt-4">Her skal det komme en link</p>
               </div>
               {/* Image 2 */}
               <div>
                 <div className="w-full aspect-square overflow-hidden">
-                  <img
-                    src={subImage.image2.asset.url}
-                    alt={subImage.alt2}
-                    className="w-full h-full object-cover"
-                  />
+                  <Link to="/makersspace">
+                    <img
+                      src={subImage.image2.asset.url}
+                      alt={subImage.alt2}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
                 </div>
                 <h4 className="text-white mt-4 font-semibold">
                   {subImage.header2}
                 </h4>
-                <p className="text-white mt-4">Her skal det komme en link</p>
               </div>
               {/* Image 3 */}
               <div>
                 <div className="w-full aspect-square overflow-hidden">
-                  <img
-                    src={subImage.image3.asset.url}
-                    alt={subImage.alt3}
-                    className="w-full h-full object-cover"
-                  />
+                  <Link to="/blog">
+                    <img
+                      src={subImage.image3.asset.url}
+                      alt={subImage.alt3}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
                 </div>
                 <h4 className="text-white mt-4 font-semibold">
                   {subImage.header3}
                 </h4>
-                <p className="text-white mt-4">Her skal det komme en link</p>
               </div>
             </div>
           </section>
