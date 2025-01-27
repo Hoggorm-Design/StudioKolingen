@@ -194,13 +194,16 @@ const BlogPosts = () => {
       <section className="bg-[#1D192C] p-10 sm:py-20 space-y-6">
         <h3 className="text-white">More Posts</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-28 md:gap-12 xl:gap-14">
-          {blogPosts.slice(0, visiblePosts).map((post, index) => (
-            <BlogCard
-              key={post._id || index}
-              post={post}
-              onClick={() => handleCardClick(post)}
-            />
-          ))}
+          {blogPosts
+            .filter((post) => post !== selectedPost)
+            .slice(0, visiblePosts)
+            .map((post, index) => (
+              <BlogCard
+                key={index}
+                post={post}
+                onClick={() => handleCardClick(post)}
+              />
+            ))}
         </div>
         {visiblePosts < blogPosts.length && ( // Kun vis knappen hvis det er flere innlegg å laste
           <div className="flex mt-10">
