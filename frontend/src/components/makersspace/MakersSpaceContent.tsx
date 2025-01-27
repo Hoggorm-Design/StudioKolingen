@@ -46,21 +46,21 @@ const MakersSpaceContent = () => {
                     <img
                       className="w-full h-full object-cover"
                       src={selectedPost.image1?.asset?.url}
-                      alt={selectedPost.image1?.asset?.altText}
+                      alt={selectedPost.image1?.asset?.altText || "Image 1"}
                     />
                   </div>
                   <div className="w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
                       src={selectedPost.image2?.asset?.url}
-                      alt={selectedPost.image2?.asset?.altText}
+                      alt={selectedPost.image2?.asset?.altText || "Image 2"}
                     />
                   </div>
                   <div className="w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
                       src={selectedPost.image3?.asset?.url}
-                      alt={selectedPost.image3?.asset?.altText}
+                      alt={selectedPost.image3?.asset?.altText || "Image 3"}
                     />
                   </div>
                 </article>
@@ -97,21 +97,21 @@ const MakersSpaceContent = () => {
                   <img
                     className="w-full h-full object-cover"
                     src={selectedPost.image4?.asset?.url}
-                    alt={selectedPost.image4?.asset?.altText}
+                    alt={selectedPost.image4?.asset?.altText || "Image 4"}
                   />
                 </div>
                 <div className="w-full aspect-square overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
                     src={selectedPost.image5?.asset?.url}
-                    alt={selectedPost.image5?.asset?.altText}
+                    alt={selectedPost.image5?.asset?.altText || "Image 5"}
                   />
                 </div>
                 <div className="w-full aspect-square overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
                     src={selectedPost.image6?.asset?.url}
-                    alt={selectedPost.image6?.asset?.altText}
+                    alt={selectedPost.image6?.asset?.altText || "Image 6"}
                   />
                 </div>
               </article>

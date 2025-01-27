@@ -48,16 +48,20 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className=" hover:text-[#7c1e1d] transition"
+                  aria-label="Visit our Facebook page"
                 >
                   <FontAwesomeIcon icon={faFacebook} size="2x" />
+                  <span className="sr-only">Facebook</span>
                 </a>
                 <a
                   href="https://www.instagram.com/studiokolingen_air/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className=" hover:text-[#7c1e1d] transition"
+                  aria-label="Visit our Instagram page"
                 >
                   <FontAwesomeIcon icon={faInstagram} size="2x" />
+                  <span className="sr-only">Instagram</span>
                 </a>
               </div>
             </div>

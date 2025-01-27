@@ -28,7 +28,10 @@ const AboutMakersSpace = () => {
               {aboutMakersSpace.image && (
                 <img
                   src={aboutMakersSpace.image.asset.url}
-                  alt={aboutMakersSpace.image.altText}
+                  alt={
+                    aboutMakersSpace.image.altText ||
+                    "Image of Makers space 2024"
+                  }
                 />
               )}
             </section>
