@@ -19,22 +19,25 @@ import invitedArtists from './invitedArtists'
 import makersSpaceContent from './makersSpaceContent'
 
 export const schemaTypes = [
+  navbar,
+  mainImage,
   subImage,
-  blogPost,
+  carousel,
+  about,
+  prices,
+  location,
+  link,
+  contact,
   apartmentInfo,
   artDisplay,
   artistInfo,
   artists,
-  navbar,
-  carousel,
-  mainImage,
-  contact,
-  footer,
-  link,
-  location,
-  prices,
-  about,
+
+  blogPost,
+
   aboutMakersSpace,
   invitedArtists,
   makersSpaceContent,
+
+  footer,
 ]
