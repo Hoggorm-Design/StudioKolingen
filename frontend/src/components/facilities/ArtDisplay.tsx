@@ -9,7 +9,7 @@ const ArtDisplay = () => {
   return (
     <>
       {!isLoading && artDisplay && (
-        <section className="bg-[#1D192C] p-10 sm:py-20">
+        <section className="bg-[#1D192C] px-5 sm:px-10 py-16">
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-16 xs:gap-8 xl:gap-14">
             {artDisplay.map((image, index) => (
               <Link
