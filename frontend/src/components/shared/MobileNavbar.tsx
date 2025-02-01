@@ -13,12 +13,12 @@ const MobileNavbar: React.FC = () => {
     <>
       {!isLoading && navbar && (
         <nav className="block lg:hidden fixed w-full z-50 bg-white shadow-md">
-          <div className="flex justify-between items-center px-6 py-4">
+          <div className="flex justify-between items-center px-4 py-1">
             <Link to="/" className="flex items-center space-x-4">
               <img
                 src={navbar.image.asset.url}
                 alt={navbar.alt}
-                className="h-14"
+                className="h-9"
               />
             </Link>
 
