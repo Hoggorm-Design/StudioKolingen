@@ -84,7 +84,7 @@ const DesktopNavbarHome: React.FC = () => {
           ref={navbarRef}
           className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
             isFixed ? "shadow-md" : ""
-          } h-20`}
+          } h-14`}
         >
           {/* Logo Section */}
           <motion.div
@@ -100,7 +100,7 @@ const DesktopNavbarHome: React.FC = () => {
               <img
                 src={navbar.image.asset.url}
                 alt={navbar.alt}
-                className="h-14"
+                className="h-9"
               />
             </Link>
           </motion.div>

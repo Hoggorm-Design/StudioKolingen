@@ -27,7 +27,7 @@ const DesktopNavbar = () => {
       {!isLoading && navbar && (
         <nav
           ref={navbarRef}
-          className={`hidden lg:flex overflow-hidden items-center px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
+          className={`hidden lg:flex overflow-hidden items-center px-10  w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
             isFixed ? "shadow-md" : ""
           } h-20`}
         >
