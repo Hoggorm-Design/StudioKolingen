@@ -1,15 +1,17 @@
-import useMakersSpaceContent from "../../hooks/useMakersSpaceContent.ts";
-import { useEffect, useState } from "react";
-import MyCarousel from "../blog/BlogCarousel.tsx";
-import { useLoading } from "../../context/LoadingContext.tsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { useLoading } from "../../context/LoadingContext.tsx";
+import useMakersSpaceContent from "../../hooks/useMakersSpaceContent.ts";
+import { MakersSpaceContentProps } from "../../interfaces/makersSpaceContent.ts";
+import MyCarousel from "../blog/BlogCarousel.tsx";
 import MakersSpaceCard from "./CompressedMakersSpaceCard.tsx";
 
 const MakersSpaceContent = () => {
   const { makersSpaceContent } = useMakersSpaceContent();
   const { isLoading } = useLoading();
-  const [selectedPost, setSelectedPost] = useState<any | null>(null);
+  const [selectedPost, setSelectedPost] =
+    useState<MakersSpaceContentProps | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -35,7 +37,7 @@ const MakersSpaceContent = () => {
     return () => window.removeEventListener("resize", updateIsMobile);
   }, []);
 
-  const handleCardClick = (post: any) => {
+  const handleCardClick = (post: MakersSpaceContentProps) => {
     if (selectedPost !== post) {
       setSelectedPost(post); // Oppdater det valgte innlegget
 
@@ -66,21 +68,21 @@ const MakersSpaceContent = () => {
                     <img
                       className="w-full h-full object-cover"
                       src={selectedPost.image1?.asset?.url}
-                      alt={selectedPost.image1?.asset?.altText || "Image 1"}
+                      alt={selectedPost.image1?.altText || "Image 1"}
                     />
                   </div>
                   <div className="w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
                       src={selectedPost.image2?.asset?.url}
-                      alt={selectedPost.image2?.asset?.altText || "Image 2"}
+                      alt={selectedPost.image2?.altText || "Image 2"}
                     />
                   </div>
                   <div className="w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
                       src={selectedPost.image3?.asset?.url}
-                      alt={selectedPost.image3?.asset?.altText || "Image 3"}
+                      alt={selectedPost.image3?.altText || "Image 3"}
                     />
                   </div>
                 </article>
@@ -117,21 +119,21 @@ const MakersSpaceContent = () => {
                   <img
                     className="w-full h-full object-cover"
                     src={selectedPost.image4?.asset?.url}
-                    alt={selectedPost.image4?.asset?.altText || "Image 4"}
+                    alt={selectedPost.image4?.altText || "Image 4"}
                   />
                 </div>
                 <div className="w-full aspect-square overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
                     src={selectedPost.image5?.asset?.url}
-                    alt={selectedPost.image5?.asset?.altText || "Image 5"}
+                    alt={selectedPost.image5?.altText || "Image 5"}
                   />
                 </div>
                 <div className="w-full aspect-square overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
                     src={selectedPost.image6?.asset?.url}
-                    alt={selectedPost.image6?.asset?.altText || "Image 6"}
+                    alt={selectedPost.image6?.altText || "Image 6"}
                   />
                 </div>
               </article>
@@ -140,7 +142,7 @@ const MakersSpaceContent = () => {
                 <h3 className="pb-4 text-[#fffdf8]">More Posts</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
                   {makersSpaceContent
-                    .filter((post) => post !== selectedPost)
+                    .filter((post) => post._id !== selectedPost._id)
                     .slice(0, visiblePosts)
                     .map((post, index) => (
                       <MakersSpaceCard

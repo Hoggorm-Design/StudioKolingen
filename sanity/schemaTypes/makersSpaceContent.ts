@@ -32,5 +32,11 @@ export default defineType({
         }),
       ],
     })),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published At',
+      type: 'datetime',
+      description: 'The date and time of your makerspacecontent post',
+    }),
   ],
 })

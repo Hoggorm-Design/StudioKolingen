@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { ArtistInfo } from "../interfaces/artistinfo.ts";
+import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
+import { ArtistInfo } from "../interfaces/artistinfo.ts";
 
 const useArtistInfo = () => {
   const [artistInfo, setArtistInfo] = useState<ArtistInfo | null>(null);

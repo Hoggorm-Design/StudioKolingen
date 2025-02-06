@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Artist } from "../interfaces/artists.ts";
+import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
+import { Artist } from "../interfaces/artists.ts";
 
 const useArtists = () => {
   const [artists, setArtists] = useState<Artist[] | null>(null);
@@ -11,7 +11,7 @@ const useArtists = () => {
     const fetchArtists = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "artists"]{
+        const query = `*[_type == "artists"] | order(publishedAt desc){
                    image{
                        asset->{
                            _id,
@@ -21,7 +21,8 @@ const useArtists = () => {
                    header,
                    alt,
                    text,
-                   link
+                   link,
+                   publishedAt
                }`;
         const data: Artist[] = await sanityClient.fetch(query);
         setArtists(data);

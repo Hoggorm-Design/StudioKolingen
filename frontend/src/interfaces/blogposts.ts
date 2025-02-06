@@ -12,6 +12,7 @@ export interface BlogPost {
       _ref: string;
       url: string;
     };
+    altText: string;
   };
   imageText1?: string;
   image2?: {
@@ -19,6 +20,7 @@ export interface BlogPost {
       _ref: string;
       url: string;
     };
+    altText: string;
   };
   imageText2?: string;
   image3?: {
@@ -78,4 +80,29 @@ export interface BlogPost {
   };
   imageText10?: string;
   link?: string;
+  publishedAt: string;
 }
+
+export type BlogImageKey =
+  | "image1"
+  | "image2"
+  | "image3"
+  | "image4"
+  | "image5"
+  | "image6"
+  | "image7"
+  | "image8"
+  | "image9"
+  | "image10";
+
+export type BlogImageTextKey =
+  | "imageText1"
+  | "imageText2"
+  | "imageText3"
+  | "imageText4"
+  | "imageText5"
+  | "imageText6"
+  | "imageText7"
+  | "imageText8"
+  | "imageText9"
+  | "imageText10";
