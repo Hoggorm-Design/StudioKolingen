@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useLoading } from "../../context/LoadingContext.tsx";
 import useSubImage from "../../hooks/useSubImage.ts";
 import MyCarousel from "./Carousel.tsx";
-import { useLoading } from "../../context/LoadingContext.tsx";
-import { Link } from "react-router-dom";
 
 const SubImage: React.FC = () => {
   const { subImage } = useSubImage();

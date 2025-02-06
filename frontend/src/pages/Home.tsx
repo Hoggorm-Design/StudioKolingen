@@ -1,13 +1,13 @@
-import About from "../components/home/About.tsx";
-import SubImage from "../components/home/SubImage.tsx";
-import Prices from "../components/shared/Prices.tsx";
-import Location from "../components/shared/Location.tsx";
-import ContactUs from "../components/home/ContactUs.tsx";
-import DesktopNavbarHome from "../components/shared/DesktopNavbarHome.tsx";
-import Header from "../components/home/Header.tsx";
 import { useEffect } from "react";
-import { useLoading } from "../context/LoadingContext.tsx";
+import About from "../components/home/About.tsx";
+import ContactUs from "../components/home/ContactUs.tsx";
+import Header from "../components/home/Header.tsx";
+import SubImage from "../components/home/SubImage.tsx";
+import DesktopNavbarHome from "../components/shared/DesktopNavbarHome.tsx";
 import Footer from "../components/shared/Footer.tsx";
+import Location from "../components/shared/Location.tsx";
+import Prices from "../components/shared/Prices.tsx";
+import { useLoading } from "../context/LoadingContext.tsx";
 
 const Home = () => {
   const { setIsLoading } = useLoading();

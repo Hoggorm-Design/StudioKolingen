@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import useArtists from "../../hooks/useArtists.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import useArtists from "../../hooks/useArtists.ts";
 
 const ArtistCard = () => {
   const { artists } = useArtists();
@@ -14,7 +14,7 @@ const ArtistCard = () => {
             {artists.map((artist, index) => (
               <div
                 key={index}
-                className="bg-white flex flex-col sm:flex-row sm:h-80 w-full sm:p-5 gap-4"
+                className="bg-white flex flex-col sm:flex-row sm:h-auto min-h-80 w-full sm:p-5 gap-4"
               >
                 {/* Image */}
                 <div className="w-full max-h-[350px] sm:w-1/2 aspect-w-4 aspect-h-3 flex-shrink-0">
@@ -31,7 +31,7 @@ const ArtistCard = () => {
                     <h3 className="text-xl font-semibold mb-2">
                       {artist.header}
                     </h3>
-                    <p className="text-sm">{artist.text}</p>
+                    <p className="text-sm ">{artist.text}</p>
                   </div>
 
                   {/* Link */}
