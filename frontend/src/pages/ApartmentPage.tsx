@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useArtDisplay from "../hooks/useArtDisplay.ts";
-import { useLoading } from "../context/LoadingContext.tsx";
 import Footer from "../components/shared/Footer.tsx";
+import { useLoading } from "../context/LoadingContext.tsx";
+import useFacilities from "../hooks/useFacilities.ts";
 
 const ApartmentPage: React.FC = () => {
   const { header } = useParams<{ header: string }>();
-  const { artDisplay } = useArtDisplay();
+  const { artDisplay } = useFacilities();
   const { isLoading } = useLoading();
 
   // Finn apartment som samsvarer med header

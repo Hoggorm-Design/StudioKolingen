@@ -1,11 +1,10 @@
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import useNavbar from "../../hooks/useNavbar.ts";
+import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const DesktopNavbarHome: React.FC = () => {
-  const { navbar } = useNavbar();
   const { isLoading } = useLoading();
   const [xOffset, setXOffset] = useState("20%");
   const [isFixed, setIsFixed] = useState(false);
@@ -50,12 +49,12 @@ const DesktopNavbarHome: React.FC = () => {
     hidden: {
       x: "-100%",
       opacity: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" },
     },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" },
     },
     exit: {
       x: "-100%",
@@ -66,7 +65,7 @@ const DesktopNavbarHome: React.FC = () => {
 
   const linksVariants = {
     center: {
-      x: "-7%",
+      x: "-5%",
       opacity: 1,
       transition: { duration: 0.5, ease: "easeInOut" },
     },
@@ -79,31 +78,37 @@ const DesktopNavbarHome: React.FC = () => {
 
   return (
     <>
-      {!isLoading && navbar && (
+      {!isLoading && (
         <nav
           ref={navbarRef}
           className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
             isFixed ? "shadow-md" : ""
-          } h-20`}
+          } h-16`}
         >
           {/* Logo Section */}
-          <motion.div
-            key={isFixed ? "fixed-logo" : "initial-logo"}
-            className="flex items-center h-14 md:translate-x-[20%]"
-            initial="hidden"
-            animate={isFixed ? "visible" : "hidden"}
-            exit="exit"
-            variants={logoVariants}
-            transition={{ duration: 0.5 }}
-          >
-            <Link to="/">
-              <img
-                src={navbar.image.asset.url}
-                alt={navbar.alt}
-                className="h-14"
-              />
-            </Link>
-          </motion.div>
+          <div className="w-40">
+            <AnimatePresence>
+              {isFixed && (
+                <motion.div
+                  key="logo"
+                  className="flex items-center h-full md:translate-x-[20%]"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={logoVariants}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Link to="/">
+                    <img
+                      src={navbarLogo}
+                      alt="Studio kolingen logo"
+                      className="w-full h-auto"
+                    />
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* Links Section */}
           <motion.div

@@ -9,6 +9,7 @@ import Location from "../components/shared/Location.tsx";
 import Prices from "../components/shared/Prices.tsx";
 import { useLoading } from "../context/LoadingContext.tsx";
 import SubNavbarMobile from "../components/shared/SubNavbarMobile.tsx";
+import MobileNavbarHome from "../components/shared/MobileNavbarHome.tsx";
 
 const Home = () => {
   const { setIsLoading } = useLoading();
@@ -24,10 +25,11 @@ const Home = () => {
     };
 
     loadData();
-  }, []);
+  }, [setIsLoading]);
   return (
     <>
       <Header />
+      <MobileNavbarHome />
       <SubNavbarMobile />
       <DesktopNavbarHome />
       <SubImage />

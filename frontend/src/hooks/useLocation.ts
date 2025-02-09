@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
-import { Localy } from "../interfaces/location.ts";
 import { useLoading } from "../context/LoadingContext";
+import { Localy } from "../interfaces/location.ts";
 
 const useLocation = () => {
   const [location, setLocation] = useState<Localy | null>(null);
@@ -11,7 +11,7 @@ const useLocation = () => {
     const fetchLocation = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "location"][0]{
+        const query = `*[_type == "ourLocation"][0]{
                    header,
                    text
                }`;

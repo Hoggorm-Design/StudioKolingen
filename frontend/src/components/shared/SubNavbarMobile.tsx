@@ -1,16 +1,14 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import useNavbar from "../../hooks/useNavbar.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const SubNavbarMobile: React.FC = () => {
-  const { navbar } = useNavbar();
   const { isLoading } = useLoading();
   const navbarRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <>
-      {!isLoading && navbar && (
+      {!isLoading && (
         <nav
           ref={navbarRef}
           className="border-t border-[#B22C2B] flex lg:hidden overflow-hidden items-center justify-center w-full bg-transparent px-6 py-4 z-40 sticky top-0 transition-all duration-500"

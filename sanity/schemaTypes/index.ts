@@ -1,43 +1,33 @@
-import blogPost from './blogPost'
-import navbar from './navbar'
-import carousel from './carousel'
-import mainImage from './mainImage'
-import contact from './contact'
-import footer from './footer'
-import link from './link'
-import location from './location'
-import prices from './prices'
-import about from './about'
-import apartmentInfo from './apartmentInfo'
-//import apartments from './apartments'; //No fields yet
-import artDisplay from './artDisplay'
-import artistInfo from './artistInfo'
+import aboutStudioKolingenAir from './aboutStudioKolingenAir'
+import artistPageInfo from './artistInfo'
 import artists from './artists'
-import subImage from './subImage'
-import aboutMakersSpace from './aboutMakersSpace'
-import invitedArtists from './invitedArtists'
-import makersSpaceContent from './makersSpaceContent'
+import blogPost from './blogPost'
+import contactUs from './contactUs'
+import facilities from './facilities'
+import facilitiesPageInfo from './facilitiesPageInfo'
+import footer from './footer'
+import frontPageImageCarousel from './frontPageImageCarousel'
+import frontPageTop3Images from './frontPageTop3Images'
+import link from './link'
+import makersSpaceYears from './makersSpaceContent'
+import makersSpacePageInfo from './makersSpacePageInfo'
+import ourLocation from './ourLocation'
+import prices from './prices'
 
 export const schemaTypes = [
-  navbar,
-  mainImage,
-  subImage,
-  carousel,
-  about,
+  frontPageImageCarousel,
+  frontPageTop3Images,
+  aboutStudioKolingenAir,
   prices,
-  location,
+  ourLocation,
   link,
-  contact,
-  apartmentInfo,
-  artDisplay,
-  artistInfo,
+  contactUs,
+  facilitiesPageInfo,
+  facilities,
+  artistPageInfo,
   artists,
-
   blogPost,
-
-  aboutMakersSpace,
-  invitedArtists,
-  makersSpaceContent,
-
+  makersSpacePageInfo,
+  makersSpaceYears,
   footer,
 ]

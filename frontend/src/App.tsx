@@ -2,18 +2,18 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Artists from "./pages/Artists";
 import Facilities from "./pages/Facilities";
-import MobileNavbar from "./components/shared/MobileNavbar.tsx";
 import ScrollToAnchor from "./components/shared/ScrollToAnchor.tsx";
 import MakersSpace from "./pages/MakersSpace.tsx";
 import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import Blog from "./pages/Blog.tsx";
 import ApartmentPage from "./pages/ApartmentPage.tsx";
+import MobileNavbar from "./components/shared/MobileNavbar.tsx";
 
 const App = () => {
   const location = useLocation();
   return (
     <div>
-      <MobileNavbar />
+      {location.pathname !== "/" && <MobileNavbar />}
       {location.pathname !== "/" && <DesktopNavbar />}
       <ScrollToAnchor />
       <Routes>

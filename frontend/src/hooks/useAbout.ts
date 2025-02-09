@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { About } from "../interfaces/about.ts";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
+import { About } from "../interfaces/about.ts";
 
 const useAbout = () => {
   const [about, setAbout] = useState<About | null>(null);
@@ -11,7 +11,7 @@ const useAbout = () => {
     const fetchAbout = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "about"][0]{
+        const query = `*[_type == "aboutStudioKolingenAir"][0]{
                    header,
                    text1,
                    text2, 
