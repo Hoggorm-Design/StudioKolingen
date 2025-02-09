@@ -62,58 +62,55 @@ const MakersSpaceContent = () => {
           {selectedPost && (
             <section>
               <article className="bg-[#1a1a2e] sm:px-10 py-14">
-               
-                {/*Artists info*/}
+                {/* Artists info */}
                 <div className="bg-white flex flex-col gap-10">
-                  <div className="flex justify-center h-[60vh] ml-20 mr-20 mt-20">
-                    <div>
-                    <h2 className="text-black">{selectedPost.header}</h2>
-                  <div className="bg-white flex flex-col gap-10">
-                    {/* Displaying Only the First Text Block */}
-                    {selectedPost.firstTextfield
-                      ?.slice(0, 2)
-                      .map((block, index) => <p key={index}>{block}</p>)}
-                  </div>
-                  {/* Displaying Text Blocks with Links */}
-                  {selectedPost.links?.map((block, index) => (
-                    <p key={index}>
-                      <a
-                        href={block.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className=""
-                      >
-                        {block.name}
-                      </a>
-                    </p>
-                  ))}
-                  </div>
-                  {selectedPost.regularImages
-                    ?.slice(0, 1)
-                    .map((image, index) => (
-                      <div
-                        key={index}
-                        className="w-full aspect-square overflow-hidden"
-                      >
-                        <img
-                          className="w-[100%] object-cover"
-                          src={image?.asset?.url}
-                          alt={image?.altText || `Image ${index + 1}`}
-
-                        />
+                  <div className="lg:flex justify-center lg:h-[60vh] mx-4 lg:mx-20 mt-20">
+                    <div className="lg:w-1/2">
+                      <h2 className="text-black">{selectedPost.header}</h2>
+                      <div className="bg-white flex flex-col gap-10">
+                        {/* Displaying Only the First Text Block */}
+                        {selectedPost.firstTextfield
+                          ?.slice(0, 2)
+                          .map((block, index) => <p key={index}>{block}</p>)}
                       </div>
-                    ))}
+                      {/* Displaying Text Blocks with Links */}
+                      {selectedPost.links?.map((block, index) => (
+                        <p key={index}>
+                          <a
+                            href={block.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className=""
+                          >
+                            {block.name}
+                          </a>
+                        </p>
+                      ))}
+                    </div>
+                    {selectedPost.regularImages
+                      ?.slice(0, 1)
+                      .map((image, index) => (
+                        <div
+                          key={index}
+                          className="lg:w-1/2 w-full aspect-square overflow-hidden"
+                        >
+                          <img
+                            className="w-full h-full object-cover"
+                            src={image?.asset?.url}
+                            alt={image?.altText || `Image ${index + 1}`}
+                          />
+                        </div>
+                      ))}
                   </div>
-                  <div className="ml-20 -mt-20 mb-20">
+                  <div className="mx-4 lg:mx-20 -mt-20 mb-20">
                     {/* Displaying All Text Blocks Except the First One */}
                     {selectedPost.firstTextfield
                       ?.slice(2)
                       .map((block, index) => <p key={index}>{block}</p>)}
                   </div>
                 </div>
-               
 
-                <article className="grid grid-cols-1 sm:grid-cols-3 gap-16 px-5 sm:px-0 m-20">
+                <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 px-5 sm:px-0 m-20">
                   {selectedPost.regularImages
                     ?.slice(1, 4)
                     .map((image, index) => (
@@ -156,7 +153,7 @@ const MakersSpaceContent = () => {
               {/* More Posts Section */}
               <section className="bg-[#1D192C] pt-14 space-y-4">
                 <h3 className="pb-4 text-[#fffdf8]">More Posts</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
                   {makersSpaceContent
                     .filter((post) => post._id !== selectedPost._id)
                     .slice(0, visiblePosts)
