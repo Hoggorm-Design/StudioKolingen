@@ -112,22 +112,36 @@ const MakersSpaceContent = () => {
                   </div>
                 </div>
 
-                <article className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-16 px-5 sm:px-10 pt-16">
-                  {selectedPost.regularImages
-                    ?.slice(1, 4)
-                    .map((image, index) => (
-                      <div
-                        key={index}
-                        className="w-full aspect-square overflow-hidden"
+                {selectedPost &&
+                  (() => {
+                    const filteredImages = selectedPost.regularImages
+                      ?.slice(1, 4)
+                      .filter((image) => image?.asset); // Fjern tomme bilder
+
+                    const imageCount = filteredImages.length; // Tell antall bilder
+
+                    return (
+                      <article
+                        className={`grid gap-16 px-5 sm:px-10 pt-16
+          ${imageCount === 1 ? "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]" : ""}
+          ${imageCount === 2 ? "grid-cols-2 place-content-center gap-8 lg:px-[10vw]" : ""}
+          ${imageCount >= 3 ? "grid-cols-1 md:grid-cols-3" : ""}`}
                       >
-                        <img
-                          className="w-full h-full object-cover"
-                          src={image?.asset?.url}
-                          alt={image?.altText || `Image ${index + 1}`}
-                        />
-                      </div>
-                    ))}
-                </article>
+                        {filteredImages.map((image, index) => (
+                          <div
+                            key={index}
+                            className="w-full aspect-square overflow-hidden"
+                          >
+                            <img
+                              className="w-full h-full object-cover"
+                              src={image?.asset?.url}
+                              alt={image?.altText || `Image ${index + 1}`}
+                            />
+                          </div>
+                        ))}
+                      </article>
+                    );
+                  })()}
               </article>
 
               {/* Text Blocks Section */}
@@ -144,7 +158,7 @@ const MakersSpaceContent = () => {
 
           {/* Makers Space Cards Section */}
           {selectedPost && (
-            <article className="bg-[#1a1a2e] px-5 sm:px-10 pb-14 pt-8">
+            <article className="bg-[#1a1a2e] px-5 sm:px-10 pb-14 pt-12 lg:pt-8">
               {/* Carousel Component */}
               <MyCarousel
                 images={selectedPost.carouselImages?.filter(
