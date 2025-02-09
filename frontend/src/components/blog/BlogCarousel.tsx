@@ -1,11 +1,11 @@
-import React from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
   faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const ButtonGroup: React.FC<{
   next: () => void;
@@ -121,19 +121,23 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
           }
         >
           {images.map((image, index) => (
-            <div
-              key={index}
-              className="w-full h-[300px] flex-shrink-0 overflow-hidden"
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`Slide ${index + 1} of ${images.length}`}
-            >
-              <img
-                src={image.asset.url}
-                alt={image.alt || `Blog image ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <React.Fragment key={index}>
+              <div
+                className="w-full h-[300px] flex-shrink-0 overflow-hidden"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Slide ${index + 1} of ${images.length}`}
+              >
+                <img
+                  src={image.asset.url}
+                  alt={image.alt || `Blog image ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-center text-white">
+                {image.imageText ? image.imageText : ""}
+              </p>
+            </React.Fragment>
           ))}
         </Carousel>
       </div>
