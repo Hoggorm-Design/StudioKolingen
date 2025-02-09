@@ -1,30 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Squash } from "hamburger-react";
+import { motion } from "framer-motion";
 import useNavbar from "../../hooks/useNavbar.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const MobileNavbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const { navbar } = useNavbar();
   const { isLoading } = useLoading();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const subNavbar = document.getElementById("sub-navbar");
+      if (subNavbar) {
+        const rect = subNavbar.getBoundingClientRect();
+        setShowLogo(rect.top <= 0 || isOpen);
+      }
+      setHasScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isOpen]);
+
+  const logoVariants = {
+    hidden: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
 
   return (
     <>
       {!isLoading && navbar && (
-        <nav className="block lg:hidden fixed w-full z-50 bg-white shadow-md">
+        <nav
+          className={`block lg:hidden fixed w-full z-50 bg-white top-0 left-0 transition-shadow duration-300 ${hasScrolled ? "shadow-md" : "shadow-none"}`}
+        >
           <div className="flex justify-between items-center px-6 py-2">
-            <Link to="/" className="flex items-center space-x-4">
-              <img
-                src={navbar.image.asset.url}
-                alt={navbar.alt}
-                className="h-10"
-              />
-            </Link>
+            <motion.div
+              key={showLogo ? "fixed-logo" : "initial-logo"}
+              className="flex items-center"
+              initial="hidden"
+              animate={showLogo ? "visible" : "hidden"}
+              exit="hidden"
+              variants={logoVariants}
+            >
+              <Link to="/" className="flex items-center space-x-4">
+                <img
+                  src={navbar.image.asset.url}
+                  alt={navbar.alt}
+                  className="h-10"
+                />
+              </Link>
+            </motion.div>
 
             {/* Hamburger Icon */}
             <div>
-              <Squash size={25} toggled={isOpen} toggle={setIsOpen} />
+              <Squash
+                size={25}
+                toggled={isOpen}
+                toggle={() => setIsOpen(!isOpen)}
+              />
             </div>
           </div>
 
@@ -35,62 +79,24 @@ const MobileNavbar: React.FC = () => {
             }`}
           >
             <div className="bg-white px-6 py-4">
-              <Link
-                to="/"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                to="/blog"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link
-                to="/facilities"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Facilities
-              </Link>
-              <Link
-                to="/#prices"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Prices
-              </Link>
-              <Link
-                to="/#about"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                About Us
-              </Link>
-              <Link
-                to="/#contact"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-              <Link
-                to="/artists"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Artists
-              </Link>
-              <Link
-                to="makersspace"
-                className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
-                onClick={() => setIsOpen(false)}
-              >
-                Makers Space
-              </Link>
+              {[
+                "Blog",
+                "Facilities",
+                "Prices",
+                "About Us",
+                "Contact",
+                "Artists",
+                "Makers Space",
+              ].map((item, index) => (
+                <Link
+                  key={index}
+                  to={`/${item.toLowerCase().replace(/ /g, "")}`}
+                  className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item}
+                </Link>
+              ))}
             </div>
           </div>
         </nav>

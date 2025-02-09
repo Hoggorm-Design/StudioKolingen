@@ -8,6 +8,7 @@ import Footer from "../components/shared/Footer.tsx";
 import Location from "../components/shared/Location.tsx";
 import Prices from "../components/shared/Prices.tsx";
 import { useLoading } from "../context/LoadingContext.tsx";
+import SubNavbarMobile from "../components/shared/SubNavbarMobile.tsx";
 
 const Home = () => {
   const { setIsLoading } = useLoading();
@@ -27,6 +28,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      <SubNavbarMobile />
       <DesktopNavbarHome />
       <SubImage />
       <section id="about">
