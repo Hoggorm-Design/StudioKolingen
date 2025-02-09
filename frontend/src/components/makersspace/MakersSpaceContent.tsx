@@ -65,6 +65,12 @@ const MakersSpaceContent = () => {
                 <h2 className="text-[#FFFFFF]">{selectedPost.header}</h2>
                 {/* Carousel Section */}
                 <div className="bg-white flex flex-col gap-10">
+                  <div className="bg-white flex flex-col gap-10">
+                    {/* Displaying Only the First Text Block */}
+                    {selectedPost.firstTextfield
+                      ?.slice(0, 2)
+                      .map((block, index) => <p key={index}>{block}</p>)}
+                  </div>
                   {/* Displaying Text Blocks with Links */}
                   {selectedPost.links?.map((block, index) => (
                     <p key={index}>
@@ -92,6 +98,12 @@ const MakersSpaceContent = () => {
                         />
                       </div>
                     ))}
+                  <div className="bg-white flex flex-col gap-10">
+                    {/* Displaying All Text Blocks Except the First One */}
+                    {selectedPost.firstTextfield
+                      ?.slice(2)
+                      .map((block, index) => <p key={index}>{block}</p>)}
+                  </div>
                 </div>
                 <article className="grid grid-cols-1 sm:grid-cols-3 gap-16 px-5 sm:px-0">
                   {selectedPost.regularImages

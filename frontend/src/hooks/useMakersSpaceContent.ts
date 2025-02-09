@@ -16,6 +16,7 @@ const useMakersSpaceContent = () => {
         const query = `*[_type == "makersSpaceYears"] | order(publishedAt desc){
           _id,
           header,
+          firstTextfield[],  
           textBlocks[],  
           links[] {  
             name,  

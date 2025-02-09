@@ -12,6 +12,12 @@ export default defineType({
       description: 'Header for the content',
     }),
     defineField({
+      name: 'firstTextfield',
+      title: 'Text Blocks',
+      type: 'array',
+      of: [{type: 'text'}],
+    }),
+    defineField({
       name: 'textBlocks',
       title: 'Text Blocks',
       type: 'array',
