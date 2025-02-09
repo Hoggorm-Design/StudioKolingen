@@ -116,7 +116,7 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
               onClick={() => {}}
               active={false}
               index={0}
-              totalSlides={images.length}
+              totalSlides={images?.length || 0}
             />
           }
         >
@@ -129,13 +129,13 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
                 aria-label={`Slide ${index + 1} of ${images.length}`}
               >
                 <img
-                  src={image.asset.url}
-                  alt={image.alt || `Blog image ${index + 1}`}
+                  src={image?.asset.url}
+                  alt={image?.alt || `Blog image ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
               <p className="text-center text-white">
-                {image.imageText ? image.imageText : ""}
+                {image?.imageText ? image?.imageText : ""}
               </p>
             </React.Fragment>
           ))}

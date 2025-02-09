@@ -1,5 +1,5 @@
-import useAboutMakersSpace from "../../hooks/useAboutMakersSpace.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import useAboutMakersSpace from "../../hooks/useAboutMakersSpace.ts";
 
 const AboutMakersSpace = () => {
   const { aboutMakersSpace } = useAboutMakersSpace();
