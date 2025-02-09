@@ -146,7 +146,7 @@ const MakersSpaceContent = () => {
               {/* Carousel Component */}
               <MyCarousel
                 images={selectedPost.carouselImages?.filter(
-                  (image) => image?.asset,
+                  (image) => image?.asset
                 )}
               />
 
