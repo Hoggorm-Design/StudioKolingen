@@ -22,14 +22,12 @@ const ApartmentInfo: React.FC = () => {
     facility &&
     additionalImages && (
       <div className="pt-[88px] lg:p-0">
-        <section className="flex flex-col lg:pt-14">
-          <section className="flex flex-col md:flex-row gap-16px-5 sm:px-10">
-            <div className="flex flex-col space-y-4 md:w-1/2">
-              <h2>{facility.header}</h2>
+        <section className="flex flex-col">
+          <section className="flex flex-col md:flex-row w-full gap-12 px-5 sm:px-10 md:gap-44 py-14 items-start">
+            <div className="flex flex-col md:w-1/2 space-y-8">
+              <h2 className="text-nowrap">{facility.header}</h2>
               {facility.textBlocks.map((text, index) => (
-                <p key={index} className="text-lg">
-                  {text}
-                </p>
+                <p key={index}>{text}</p>
               ))}
             </div>
 
@@ -43,7 +41,7 @@ const ApartmentInfo: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-center">
+              <p className="text-left pt-2">
                 {facility.carouselImages[0]?.altText || ""}
               </p>
             </div>
@@ -54,7 +52,7 @@ const ApartmentInfo: React.FC = () => {
               {/* Mobile Layout */}
               <section className=" bg-[#1D192C] block sm:hidden px-5 sm:px-10 py-16">
                 {additionalImages[0] && (
-                  <div className="mb-6">
+                  <div className="mb-6 space-y-2">
                     <div className="w-full aspect-square overflow-hidden">
                       <img
                         src={additionalImages[0]?.asset?.url || ""}
@@ -62,7 +60,7 @@ const ApartmentInfo: React.FC = () => {
                         className=" w-full h-full object-cover"
                       />
                     </div>
-                    <p className="text-center text-white">
+                    <p className="text-left text-white">
                       {additionalImages[0]?.altText ||
                         "No description available"}
                     </p>
@@ -72,10 +70,7 @@ const ApartmentInfo: React.FC = () => {
                 {additionalImages.length > 1 && (
                   <div className="flex flex-row justify-center gap-6">
                     {additionalImages.slice(1).map((image, index) => (
-                      <div
-                        key={index}
-                        className="flex flex-col gap-y-2 w-[150px]"
-                      >
+                      <div key={index} className="flex flex-col gap-y-2 w-1/2">
                         <div className="relative w-full aspect-square overflow-hidden">
                           <img
                             src={image?.asset?.url || ""}
@@ -83,7 +78,7 @@ const ApartmentInfo: React.FC = () => {
                             className="sw-full h-full object-cover"
                           />
                         </div>
-                        <p className="text-center text-white">
+                        <p className="text-left text-white">
                           {image?.altText || "No description available"}
                         </p>
                       </div>
@@ -104,7 +99,7 @@ const ApartmentInfo: React.FC = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <p className="text-center text-white">
+                      <p className="text-left text-white">
                         {image?.altText || "No description available"}
                       </p>
                     </div>
