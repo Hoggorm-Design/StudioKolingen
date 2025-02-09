@@ -61,13 +61,13 @@ const MakersSpaceContent = () => {
           {/* Selected Post Section */}
           {selectedPost && (
             <section>
-              <article className="bg-[#1a1a2e] sm:px-10 py-14">
+              <article className="bg-[#1a1a2e] py-14 w-full">
                 {/* Artists info */}
-                <div className="bg-white flex flex-col gap-10">
+                <div className="bg-white flex flex-col gap-10 w-screen sm:px-10">
                   <div className="lg:flex justify-center lg:gap-10 lg:h-[70vh] mx-4 lg:mx-20 mt-20">
                     <div className="lg:w-1/2 order-2 lg:order-1">
                       <h2 className="text-black">{selectedPost.header}</h2>
-                      <div className="bg-white flex flex-col gap-10">
+                      <div className="bg-white flex flex-col gap-10 w-full">
                         {/* Displaying Only the First Text Block */}
                         {selectedPost.firstTextfield
                           ?.slice(0, 2)
