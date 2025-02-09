@@ -13,7 +13,7 @@ const ApartmentPage: React.FC = () => {
   // Find facility that corresponds to header
   const facility = facilities?.find(
     (item) =>
-      header && item.header.toLowerCase().trim().replace(/ /g, "-") === header
+      header && item.header.toLowerCase().trim().replace(/ /g, "-") === header,
   );
 
   const additionalImages = facility?.carouselImages.slice(1);
@@ -22,8 +22,8 @@ const ApartmentPage: React.FC = () => {
     !isLoading &&
     facility &&
     additionalImages && (
-      <>
-        <section className="flex flex-col gap-16 px-5 sm:px-10 pt-14">
+      <div className="pt-[88px] lg:p-0">
+        <section className="flex flex-col gap-16 px-5 sm:px-10 lg:pt-14">
           <section className="flex flex-col md:flex-row gap-16">
             <div className="flex flex-col space-y-4 md:w-1/2">
               <h2 className="text-3xl font-bold">{facility.header}</h2>
@@ -120,7 +120,7 @@ const ApartmentPage: React.FC = () => {
           )}
         </section>
         <Footer />
-      </>
+      </div>
     )
   );
 };
