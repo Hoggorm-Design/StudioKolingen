@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
-import { MakersSpaceContent } from "../interfaces/makersSpaceContent.ts";
 import { useLoading } from "../context/LoadingContext";
+import { MakersSpaceContentProps } from "../interfaces/makersSpaceContent.ts";
 
 const useMakersSpaceContent = () => {
   const [makersSpaceContent, setMakersSpaceContent] = useState<
-    MakersSpaceContent[]
+    MakersSpaceContentProps[]
   >([]);
   const { setIsLoading } = useLoading();
 
@@ -13,8 +13,9 @@ const useMakersSpaceContent = () => {
     const fetchMakersSpaceContent = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "makersSpaceContent"]{
-          header,
+        const query = `*[_type == "makersSpaceContent"] | order(publishedAt desc){
+        _id,
+        header,
           text1,
           text2,
           text3,
@@ -87,9 +88,11 @@ const useMakersSpaceContent = () => {
               url
             },
             altText
-          }
+          },
+          publishedAt
         }`;
-        const data: MakersSpaceContent[] = await sanityClient.fetch(query);
+        const data: MakersSpaceContentProps[] = await sanityClient.fetch(query);
+
         setMakersSpaceContent(data);
       } catch (error) {
         console.error("Error fetching makers space content:", error);

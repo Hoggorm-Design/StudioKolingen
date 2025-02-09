@@ -1,23 +1,28 @@
-import { useState, useEffect } from "react";
-import useBlogPosts from "../../hooks/useBlogPost.ts";
-import MyCarousel from "./BlogCarousel.tsx";
-import BlogCard from "./CompressedBlogCard.tsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLoading } from "../../context/LoadingContext";
-import { useLocation } from "react-router-dom";
 import {
   faChevronDown,
   faChevronRight,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useLoading } from "../../context/LoadingContext";
+import useBlogPosts from "../../hooks/useBlogPost.ts";
+import {
+  BlogImageKey,
+  BlogImageTextKey,
+  BlogPost,
+} from "../../interfaces/blogposts.ts";
+import MyCarousel from "./BlogCarousel.tsx";
+import BlogCard from "./CompressedBlogCard.tsx";
 
 const BlogPosts = () => {
   const location = useLocation();
   const { blogPosts } = useBlogPosts();
   const { isLoading } = useLoading();
   const [showMore, setShowMore] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<any | null>(
-    location.state?.selectedPost || null,
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(
+    location.state?.selectedPost || null
   );
   const [visiblePosts, setVisiblePosts] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
@@ -42,7 +47,7 @@ const BlogPosts = () => {
     } else if (!selectedPost && blogPosts.length > 0) {
       setSelectedPost(blogPosts[0]); // Default to the first post
     }
-  }, [location.state, blogPosts]);
+  }, [location.state, blogPosts, selectedPost]);
 
   const handleShowMoreClick = () => {
     if (showMore) {
@@ -54,7 +59,7 @@ const BlogPosts = () => {
     setShowMore((prev) => !prev); // Bytt visningstilstanden
   };
 
-  const handleCardClick = (post: any) => {
+  const handleCardClick = (post: BlogPost) => {
     if (selectedPost !== post) {
       setSelectedPost(post); // Oppdater det valgte innlegget
       setShowMore(false); // Lukk det gamle innlegget
@@ -104,8 +109,8 @@ const BlogPosts = () => {
                 <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 xs:gap-8 xl:gap-14">
                     {[2, 3, 4].map((i) => {
-                      const imageKey = `image${i}`;
-                      const textKey = `imageText${i}`;
+                      const imageKey = `image${i}` as BlogImageKey;
+                      const textKey = `imageText${i}` as BlogImageTextKey;
                       if (
                         selectedPost[imageKey] &&
                         selectedPost[imageKey].asset
@@ -140,8 +145,8 @@ const BlogPosts = () => {
                 <section className="bg-[#1D192C] sm:px-10 py-14 space-y-10">
                   <div className="grid grid-cols-1 xs:grid-cols-2 gap-16 xs:gap-8 xl:gap-32 px-5 sm:px-0">
                     {[5, 6].map((i) => {
-                      const imageKey = `image${i}`;
-                      const textKey = `imageText${i}`;
+                      const imageKey = `image${i}` as BlogImageKey;
+                      const textKey = `imageText${i}` as BlogImageTextKey;
                       if (
                         selectedPost[imageKey] &&
                         selectedPost[imageKey].asset
@@ -210,7 +215,7 @@ const BlogPosts = () => {
             .slice(0, visiblePosts)
             .map((post, index) => (
               <BlogCard
-                key={index}
+                key={post._id || index}
                 post={post}
                 onClick={() => handleCardClick(post)}
                 isMobile={isMobile}

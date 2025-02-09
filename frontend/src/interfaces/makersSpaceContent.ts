@@ -1,5 +1,6 @@
-export interface MakersSpaceContent {
+export interface MakersSpaceContentProps {
   _id: string;
+  header: string;
   _type: "makersSpaceContent";
   text1: string;
   text2: string;
@@ -75,4 +76,6 @@ export interface MakersSpaceContent {
     };
     altText: string;
   };
+  publishedAt: string;
 }
+

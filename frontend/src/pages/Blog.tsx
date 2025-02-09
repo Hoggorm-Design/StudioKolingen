@@ -4,7 +4,7 @@ import Footer from "../components/shared/Footer.tsx";
 const Blog = () => {
   return (
     <>
-      <BlogPosts></BlogPosts>
+      <BlogPosts />
       <Footer />
     </>
   );
