@@ -9,49 +9,43 @@ export default defineType({
       name: 'header',
       title: 'Header',
       type: 'string',
-      description: 'Here you can write the title of the facility page.',
+      description: 'Header for the facilities page',
     }),
     defineField({
-      name: 'text',
-      title: 'Text',
-      type: 'text',
-      description: 'Here you can write the first textual content of the facilities page.',
+      name: 'textBlocks',
+      title: 'Text Blocks',
+      type: 'array',
+      of: [{type: 'text'}],
+      description: 'Two text blocks for the facilities page',
+      validation: (Rule) =>
+        Rule.required().min(1).max(2).error('Please provide at least 1 text block'),
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      description: 'Provide the main image for the Page.',
-    }),
-    defineField({
-      name: 'alt',
-      title: 'Alt Text',
-      type: 'string',
-      description: 'Provide a short description of the image for accessibility.',
-    }),
-    defineField({
-      name: 'text2',
-      title: 'Text 2',
-      type: 'text',
-      description: 'Here you can write the first textual content of the facilities page.',
-    }),
-    defineField({
-      name: 'image2',
-      title: 'Image 2',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      description: 'Provide the main image for the Page.',
-    }),
-    defineField({
-      name: 'alt2',
-      title: 'Alt Text',
-      type: 'string',
-      description: 'Provide a short description of the image for accessibility.',
+      name: 'carouselImages',
+      title: 'Carousel Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          fields: [
+            defineField({
+              name: 'imageText',
+              title: 'Text for image',
+              type: 'string',
+              description: 'Text under each image',
+            }),
+            defineField({
+              name: 'altText',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Alternative text for this image',
+            }),
+          ],
+        },
+      ],
+      description: 'Add images to be used in the carousel',
+      validation: (Rule) =>
+        Rule.required().min(2).max(10).error('Please provide at least 2 images'),
     }),
   ],
 })

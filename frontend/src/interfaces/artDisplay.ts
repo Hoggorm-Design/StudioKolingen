@@ -1,19 +1,14 @@
-export interface ArtDisplay {
+export interface FacilityImage {
+  asset: {
+    _ref: string;
+    url: string;
+  };
+  imageText: string;
+  altText: string;
+}
+
+export interface Facilities {
   header: string;
-  image: {
-    asset: {
-      _ref: string;
-      url: string;
-    };
-  };
-  alt: string;
-  image2: {
-    asset: {
-      _ref: string;
-      url: string;
-    };
-  };
-  alt2: string;
-  text: string;
-  text2: string;
+  textBlocks: string[];
+  carouselImages: FacilityImage[];
 }

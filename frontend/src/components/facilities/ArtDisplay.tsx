@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useFacilities from "../../hooks/useFacilities.ts";
+import { Facilities } from "../../interfaces/artDisplay.ts";
 
 const ArtDisplay = () => {
-  const { artDisplay } = useFacilities();
+  const { facilities } = useFacilities();
   const { isLoading } = useLoading();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -21,10 +22,10 @@ const ArtDisplay = () => {
 
   return (
     <>
-      {!isLoading && artDisplay && (
+      {!isLoading && facilities && (
         <section className="bg-[#1D192C] px-5 sm:px-10 py-16">
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-16 xs:gap-8 xl:gap-14">
-            {artDisplay.map((image, index) => (
+            {facilities.map((facility: Facilities, index) => (
               <div
                 key={index}
                 className={`group block bg-white overflow-hidden ${
@@ -36,8 +37,8 @@ const ArtDisplay = () => {
                 {/* Kvadratisk bildecontainer */}
                 <div className="w-full aspect-square overflow-hidden">
                   <img
-                    src={image.image.asset.url}
-                    alt={image.alt}
+                    src={facility.carouselImages[0].asset.url}
+                    alt={facility.carouselImages[0].altText}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -45,7 +46,7 @@ const ArtDisplay = () => {
                 {/* Header og tekst */}
                 <div className="pt-4 pl-4">
                   <h3 className="text-lg font-semibold mb-2 sm:group-hover:text-[#B22C2B]">
-                    {image.header}
+                    {facility.header}
                   </h3>
                 </div>
 
@@ -53,7 +54,7 @@ const ArtDisplay = () => {
                 {isMobile && (
                   <div className="p-4">
                     <Link
-                      to={`/facilities/${image.header}`}
+                      to={`/facilities/${facility.header.toLowerCase().trim().replace(/ /g, "-")}`}
                       className="text-lg text-[#B22C2B] hover:text-[#7c1e1d] transition"
                     >
                       Read More
@@ -64,7 +65,7 @@ const ArtDisplay = () => {
                 {/* Link for desktop */}
                 {!isMobile && (
                   <Link
-                    to={`/facilities/${image.header}`}
+                    to={`/facilities/${facility.header.toLowerCase().trim().replace(/ /g, "-")}`}
                     className="absolute inset-0"
                   ></Link>
                 )}

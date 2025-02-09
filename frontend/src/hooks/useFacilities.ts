@@ -1,47 +1,44 @@
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext.tsx";
-import { ArtDisplay } from "../interfaces/artDisplay.ts";
+import { Facilities } from "../interfaces/artDisplay";
 
 const useFacilities = () => {
-  const [artDisplay, setArtDisplay] = useState<ArtDisplay[] | null>(null);
+  const [facilities, setFacilities] = useState<Facilities[] | null>(null);
   const { setIsLoading } = useLoading();
 
   useEffect(() => {
-    const fetchArtDisplay = async () => {
+    const fetchFacilities = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "facilities"]{
-         header,
-         text,
-         image{
-           asset->{
-             ref,
-             url
-           }
-         },
-         alt,
-         image2{
-           asset->{
-             ref,
-             url
-           }
-         },
-         alt2
-       }`;
-        const data: ArtDisplay[] = await sanityClient.fetch(query);
-        setArtDisplay(data);
+        const query = `
+          *[_type == "facilities"]{
+            header,
+            textBlocks,
+            carouselImages[]{
+              asset->{
+                _ref,
+                url
+              },
+              imageText,
+              altText
+            }
+          }
+        `;
+
+        const data: Facilities[] = await sanityClient.fetch(query);
+        setFacilities(data);
       } catch (error) {
-        console.error("Error fetching art display:", error);
+        console.error("Error fetching facilities:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchArtDisplay();
+    fetchFacilities();
   }, [setIsLoading]);
 
-  return { artDisplay };
+  return { facilities };
 };
 
 export default useFacilities;
