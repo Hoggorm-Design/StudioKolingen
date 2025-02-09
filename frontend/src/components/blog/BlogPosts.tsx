@@ -22,7 +22,7 @@ const BlogPosts = () => {
   const { isLoading } = useLoading();
   const [showMore, setShowMore] = useState(false);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(
-    location.state?.selectedPost || null
+    location.state?.selectedPost || null,
   );
   const [visiblePosts, setVisiblePosts] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
@@ -74,7 +74,7 @@ const BlogPosts = () => {
   }
 
   return (
-    <div id="blog-posts-container" className="pt-[88px] lg:p-0">
+    <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {/* BlogPost Details (only show if a post is selected) */}
       {selectedPost && (
         <div>
@@ -107,33 +107,43 @@ const BlogPosts = () => {
             {showMore && (
               <div>
                 <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 xs:gap-8 xl:gap-14">
-                    {[2, 3, 4].map((i) => {
-                      const imageKey = `image${i}` as BlogImageKey;
-                      const textKey = `imageText${i}` as BlogImageTextKey;
-                      if (
-                        selectedPost[imageKey] &&
-                        selectedPost[imageKey].asset
-                      ) {
-                        return (
-                          <div
-                            key={i}
-                            className="w-full aspect-square overflow-hidden"
-                          >
-                            <img
-                              className="w-full h-full object-cover"
-                              src={selectedPost[imageKey].asset.url}
-                              alt={selectedPost[textKey] || `Image ${i}`}
-                            />
-                            <p className="text-white">
-                              {selectedPost[textKey]}
-                            </p>
-                          </div>
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
+                  {/* Filter images and count them */}
+                  {selectedPost &&
+                    (() => {
+                      const filteredImages = [2, 3, 4]
+                        .map((i) => ({
+                          image: selectedPost[`image${i}` as BlogImageKey],
+                          text: selectedPost[
+                            `imageText${i}` as BlogImageTextKey
+                          ],
+                        }))
+                        .filter(({ image }) => image?.asset); // Remove empty images
+
+                      const imageCount = filteredImages.length; // Count available images
+
+                      return (
+                        <div
+                          className={`grid gap-16 xs:gap-8 xl:gap-14
+              ${imageCount === 1 ? "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]" : ""}
+              ${imageCount === 2 ? "grid-cols-2 place-content-center gap-8 lg:px-[10vw]" : ""}
+              ${imageCount >= 3 ? "grid-cols-1 sm:grid-cols-3" : ""}`}
+                        >
+                          {filteredImages.map(({ image, text }, i) => (
+                            <div
+                              key={i}
+                              className="w-full aspect-square overflow-hidden"
+                            >
+                              <img
+                                className="w-full h-full object-cover"
+                                src={image?.asset.url}
+                                alt={text || `Image ${i}`}
+                              />
+                              <p className="text-white">{text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()}
                 </section>
                 <section className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
                   <div className="bg-white flex flex-col gap-10">
@@ -142,7 +152,7 @@ const BlogPosts = () => {
                     {selectedPost.text6 && <p>{selectedPost.text6}</p>}
                   </div>
                 </section>
-                <section className="bg-[#1D192C] sm:px-10 py-14 space-y-10">
+                <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
                   <div className="grid grid-cols-1 xs:grid-cols-2 gap-16 xs:gap-8 xl:gap-32 px-5 sm:px-0">
                     {[5, 6].map((i) => {
                       const imageKey = `image${i}` as BlogImageKey;

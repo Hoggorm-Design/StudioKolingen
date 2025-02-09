@@ -21,7 +21,7 @@ const ApartmentInfo: React.FC = () => {
     !isLoading &&
     facility &&
     additionalImages && (
-      <div className="pt-[88px] lg:p-0">
+      <div className="pt-[64px] lg:p-0">
         <section className="flex flex-col">
           <section className="flex flex-col md:flex-row w-full gap-12 px-5 sm:px-10 md:gap-44 py-14 items-start">
             <div className="flex flex-col md:w-1/2 space-y-8">

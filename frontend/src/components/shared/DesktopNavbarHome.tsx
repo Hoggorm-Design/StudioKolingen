@@ -65,7 +65,7 @@ const DesktopNavbarHome: React.FC = () => {
 
   const linksVariants = {
     center: {
-      x: "-5%",
+      x: "-6%",
       opacity: 1,
       transition: { duration: 0.5, ease: "easeInOut" },
     },
