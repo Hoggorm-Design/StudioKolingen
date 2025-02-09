@@ -64,8 +64,8 @@ const MakersSpaceContent = () => {
               <article className="bg-[#1a1a2e] sm:px-10 py-14">
                 {/* Artists info */}
                 <div className="bg-white flex flex-col gap-10">
-                  <div className="lg:flex justify-center lg:gap-10 lg:h-[60vh] mx-4 lg:mx-20 mt-20">
-                    <div className="lg:w-1/2">
+                  <div className="lg:flex justify-center lg:gap-10 lg:h-[70vh] mx-4 lg:mx-20 mt-20">
+                    <div className="lg:w-1/2 order-2 lg:order-1">
                       <h2 className="text-black">{selectedPost.header}</h2>
                       <div className="bg-white flex flex-col gap-10">
                         {/* Displaying Only the First Text Block */}
@@ -86,13 +86,19 @@ const MakersSpaceContent = () => {
                           </a>
                         </p>
                       ))}
+                      <div className="mt-10 mb-20">
+                        {/* Displaying All Text Blocks Except the First One */}
+                        {selectedPost.firstTextfield
+                          ?.slice(2)
+                          .map((block, index) => <p key={index}>{block}</p>)}
+                      </div>
                     </div>
                     {selectedPost.regularImages
                       ?.slice(0, 1)
                       .map((image, index) => (
                         <div
                           key={index}
-                          className="lg:w-1/2 w-full aspect-square overflow-hidden"
+                          className="lg:w-1/2 w-full aspect-square overflow-hidden mb-4 lg:mb-10 order-1 lg:order-2 "
                         >
                           <img
                             className="w-full h-full object-cover"
@@ -101,12 +107,6 @@ const MakersSpaceContent = () => {
                           />
                         </div>
                       ))}
-                  </div>
-                  <div className="mx-4 lg:mx-20 mt-10 mb-20">
-                    {/* Displaying All Text Blocks Except the First One */}
-                    {selectedPost.firstTextfield
-                      ?.slice(2)
-                      .map((block, index) => <p key={index}>{block}</p>)}
                   </div>
                 </div>
 
