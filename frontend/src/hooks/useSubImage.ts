@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { SubImage } from "../interfaces/subImage.ts";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
+import { SubImage } from "../interfaces/subImage.ts";
 
 const useSubImage = () => {
   const [subImage, setSubImage] = useState<SubImage | null>(null);
@@ -11,7 +11,7 @@ const useSubImage = () => {
     const fetchSubImage = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "subImage"][0]{
+        const query = `*[_type == "frontPageTop3Images"][0]{
          header,
          image { asset->{ ref, url } },
          alt,

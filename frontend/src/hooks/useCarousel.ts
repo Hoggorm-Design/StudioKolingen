@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { CarouselImage } from "../interfaces/carousel.ts";
 import sanityClient from "../client.ts";
+import { CarouselImage } from "../interfaces/carousel.ts";
 
 const useCarousel = () => {
   const [carousels, setCarousels] = useState<CarouselImage[]>([]);
@@ -8,7 +8,7 @@ const useCarousel = () => {
   useEffect(() => {
     const fetchCarousels = async () => {
       try {
-        const query = `*[_type == "carousel"]{ id, image { asset->{ ref, url } }, alt }`;
+        const query = `*[_type == "frontPageImageCarousel"]{ id, image { asset->{ ref, url } }, alt }`;
         const data = await sanityClient.fetch(query);
         setCarousels(data);
       } catch (error) {
@@ -17,7 +17,7 @@ const useCarousel = () => {
     };
 
     fetchCarousels();
-  }, []); // Remove setIsLoading completely
+  }, []);
 
   return { carousels };
 };

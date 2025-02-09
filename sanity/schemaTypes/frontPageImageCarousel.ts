@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'navbar',
-  title: 'Navigation bar',
+  name: 'frontPageImageCarousel',
+  title: 'Front Page Image Carousel',
   type: 'document',
   fields: [
     defineField({
@@ -12,13 +12,13 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      description: 'Provide an image of the logo for the navigation bar',
+      description: 'Provide an image for the image carousel',
     }),
     defineField({
       name: 'alt',
-      title: 'Alternative text',
+      title: 'Alt Text',
       type: 'string',
-      description: 'Provide an alternative text for the image',
+      description: 'Provide a short description of the image for accessibility.',
     }),
   ],
 })

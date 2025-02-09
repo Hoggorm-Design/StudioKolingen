@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import useNavbar from "../../hooks/useNavbar.ts";
+import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const DesktopNavbar = () => {
-  const { navbar } = useNavbar();
   const { isLoading } = useLoading();
 
   const [isFixed, setIsFixed] = useState(false);
@@ -24,7 +23,7 @@ const DesktopNavbar = () => {
 
   return (
     <>
-      {!isLoading && navbar && (
+      {!isLoading && (
         <nav
           ref={navbarRef}
           className={`hidden lg:flex overflow-hidden items-center px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
@@ -35,8 +34,8 @@ const DesktopNavbar = () => {
           <div className="flex items-center h-14">
             <Link to="/">
               <img
-                src={navbar.image.asset.url}
-                alt={navbar.alt}
+                src={navbarLogo}
+                alt="Studio kolingen logo"
                 className="h-14"
               />
             </Link>

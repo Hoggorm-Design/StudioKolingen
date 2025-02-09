@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { ArtDisplay } from "../interfaces/artDisplay.ts";
 import sanityClient from "../client.ts";
-import { useLoading } from "../context/LoadingContext";
+import { useLoading } from "../context/LoadingContext.tsx";
+import { ArtDisplay } from "../interfaces/artDisplay.ts";
 
-const useArtDisplay = () => {
+const useFacilities = () => {
   const [artDisplay, setArtDisplay] = useState<ArtDisplay[] | null>(null);
   const { setIsLoading } = useLoading();
 
@@ -44,4 +44,4 @@ const useArtDisplay = () => {
   return { artDisplay };
 };
 
-export default useArtDisplay;
+export default useFacilities;

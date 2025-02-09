@@ -11,7 +11,7 @@ const useArtistInfo = () => {
     const fetchArtistInfo = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "artistInfo"][0]{header, text}`;
+        const query = `*[_type == "artistPageInfo"][0]{header, text}`;
         const data = await sanityClient.fetch<ArtistInfo>(query);
         setArtistInfo(data);
       } catch (error) {

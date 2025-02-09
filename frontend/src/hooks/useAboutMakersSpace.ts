@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import sanityClient from "../client.ts";
-import { AboutMakersSpace } from "../interfaces/aboutMakersSpace.ts";
-import { InvitedArtist } from "../interfaces/invitedArtist.ts";
+import sanityClient from "../client";
 import { useLoading } from "../context/LoadingContext";
+import { AboutMakersSpace } from "../interfaces/aboutMakersSpace";
 
 const useAboutMakersSpace = () => {
   const [aboutMakersSpace, setAboutMakersSpace] =
     useState<AboutMakersSpace | null>(null);
-  const [invitedArtists, setInvitedArtists] = useState<InvitedArtist[]>([]);
   const { setIsLoading } = useLoading();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Fetch both queries in parallel
-        const [aboutData, artistsData] = await Promise.all([
-          sanityClient.fetch(`*[_type == "aboutMakersSpace"][0]{
+        const aboutData = await sanityClient.fetch(`
+          *[_type == "makersSpacePageInfo"][0]{
             aboutHeader,
             aboutText,
             subHeader,
@@ -24,22 +21,16 @@ const useAboutMakersSpace = () => {
             subTitleText2,
             image{
               asset->{
-                _ref,
                 url
               },
-              alt
+              altText
             }
-          }`),
-          sanityClient.fetch(`*[_type == "invitedArtists"]{
-            artistName,
-            artistLink
-          }`),
-        ]);
+          }
+        `);
 
         setAboutMakersSpace(aboutData);
-        setInvitedArtists(artistsData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching Makers Space data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -48,7 +39,7 @@ const useAboutMakersSpace = () => {
     fetchData();
   }, [setIsLoading]);
 
-  return { aboutMakersSpace, invitedArtists };
+  return { aboutMakersSpace };
 };
 
 export default useAboutMakersSpace;

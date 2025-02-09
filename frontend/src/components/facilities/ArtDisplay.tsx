@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useArtDisplay from "../../hooks/useArtDisplay.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import useFacilities from "../../hooks/useFacilities.ts";
 
 const ArtDisplay = () => {
-  const { artDisplay } = useArtDisplay();
+  const { artDisplay } = useFacilities();
   const { isLoading } = useLoading();
   const [isMobile, setIsMobile] = useState(false);
 
