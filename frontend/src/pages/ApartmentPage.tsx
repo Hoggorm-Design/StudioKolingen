@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import MyCarousel from "../components/blog/BlogCarousel.tsx";
-import Footer from "../components/shared/Footer.tsx";
-import { useLoading } from "../context/LoadingContext.tsx";
-import useFacilities from "../hooks/useFacilities.ts";
+import MyCarousel from "../components/blog/BlogCarousel";
+import Footer from "../components/shared/Footer";
+import { useLoading } from "../context/LoadingContext";
+import useFacilities from "../hooks/useFacilities";
 
 const ApartmentPage: React.FC = () => {
   const { header } = useParams<{ header: string }>();
@@ -12,7 +12,8 @@ const ApartmentPage: React.FC = () => {
 
   // Find facility that corresponds to header
   const facility = facilities?.find(
-    (item) => item.header.toLowerCase().trim().replace(/ /g, "-") === header
+    (item) =>
+      header && item.header.toLowerCase().trim().replace(/ /g, "-") === header
   );
 
   return (
@@ -28,32 +29,42 @@ const ApartmentPage: React.FC = () => {
               />
             </div>
           </section>
-          <section className="flex flex-col md:flex-row w-full gap-16 lg:gap-44 px-5 sm:px-10 pt-14">
-            <section className="flex flex-col md:w-1/2 space-y-4">
-              <h2>{facility.header}</h2>
+
+          <section
+            className={`flex flex-col ${
+              facility.carouselImages.length < 3 ? "md:flex-row" : ""
+            } gap-16 px-5 sm:px-10 pt-14`}
+          >
+            <section className="flex flex-col space-y-4 md:w-1/2">
+              <h2 className="text-3xl font-bold">{facility.header}</h2>
               {facility.textBlocks.map((text, index) => (
-                <p key={index}>{text}</p>
+                <p key={index} className="text-lg">
+                  {text}
+                </p>
               ))}
             </section>
-            <section className="md:w-1/2">
-              {facility.carouselImages.length > 3 ? (
-                <MyCarousel images={facility.carouselImages} />
-              ) : (
-                <div className="w-1/2 aspect-square overflow-hidden">
-                  {facility.carouselImages.map((image) => (
-                    <>
-                      <img
-                        src={image.asset.url}
-                        alt={image.altText || "Additional image"}
-                        className="w-full h-full object-cover object-center"
-                      />
-                      <p>{image.imageText} || Lorem</p>
-                    </>
-                  ))}
-                </div>
-              )}
-            </section>
+
+            {facility.carouselImages.length < 3 && (
+              <section className="flex flex-col md:w-1/2">
+                {facility.carouselImages.map((image, index) => (
+                  <div key={index} className="flex flex-col gap-y-2">
+                    <img
+                      src={image.asset.url}
+                      alt={image.altText || "Additional image"}
+                      className="w-1/2 h-full object-cover"
+                    />
+                    <p className="text-center">{image.altText || ""}</p>
+                  </div>
+                ))}
+              </section>
+            )}
           </section>
+
+          {facility.carouselImages.length >= 3 && (
+            <section className="bg-[#1D192C] w-full py-10">
+              <MyCarousel images={facility.carouselImages} />
+            </section>
+          )}
         </>
       )}
       <Footer />

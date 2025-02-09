@@ -121,19 +121,24 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
           }
         >
           {images.map((image, index) => (
-            <div
-              key={index}
-              className="w-full h-[300px] flex-shrink-0 overflow-hidden"
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`Slide ${index + 1} of ${images.length}`}
-            >
-              <img
-                src={image.asset.url}
-                alt={image.alt || `Blog image ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <>
+              <div
+                key={index}
+                className="w-full h-[300px] flex-shrink-0 overflow-hidden"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Slide ${index + 1} of ${images.length}`}
+              >
+                <img
+                  src={image.asset.url}
+                  alt={image.alt || `Blog image ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-center">
+                {image.imageText ? image.imageText : ""}
+              </p>
+            </>
           ))}
         </Carousel>
       </div>

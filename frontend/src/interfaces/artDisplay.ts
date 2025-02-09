@@ -3,7 +3,6 @@ export interface FacilityImage {
     _ref: string;
     url: string;
   };
-  imageText: string;
   altText: string;
 }
 

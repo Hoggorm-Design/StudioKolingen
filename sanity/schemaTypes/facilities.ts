@@ -29,12 +29,6 @@ export default defineType({
           type: 'image',
           fields: [
             defineField({
-              name: 'imageText',
-              title: 'Text for image',
-              type: 'string',
-              description: 'Text under each image',
-            }),
-            defineField({
               name: 'altText',
               title: 'Alt Text',
               type: 'string',
