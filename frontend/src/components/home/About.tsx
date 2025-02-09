@@ -9,7 +9,7 @@ const About: React.FC = () => {
   return (
     <>
       {!isLoading && about && (
-        <section className="flex flex-col lg:flex-row w-screen gap-16 lg:gap-44 px-5 sm:px-10 py-14 items-start">
+        <section className="flex flex-col lg:flex-row w-screen gap-16 lg:gap-44 px-5 sm:px-10 py-14 items-start sm:flex-col">
           <section className="flex flex-col lg:w-1/2 space-y-4">
             <h2 className="text-nowrap">{about.header}</h2>
             <p>{about.text1}</p>

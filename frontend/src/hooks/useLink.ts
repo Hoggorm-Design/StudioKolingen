@@ -13,7 +13,13 @@ const useLinks = () => {
       try {
         const query = `*[_type == "link"]{
                    url,
-                   alt
+                   image{
+                     asset->{
+                       _ref,
+                       url
+                     }
+                   },
+                   imageAlt
                }`;
         const linksData = await sanityClient.fetch(query);
         setLinks(linksData);

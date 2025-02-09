@@ -77,7 +77,7 @@ const MyCarousel: React.FC = () => {
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 1.1,
+      items: 1.4,
     },
   };
   if (!carousels?.length) return null;
@@ -88,7 +88,7 @@ const MyCarousel: React.FC = () => {
         className="w-full flex flex-col items-center px-5 py-10 sm:p-10"
         aria-label="Image Carousel"
       >
-        <div className="relative pb-16 w-full sm:w-[85%] xl:w-[90%]">
+        <div className="relative w-full sm:w-[85%] xl:w-[90%]">
           <Carousel
             responsive={responsive}
             ssr={true}
@@ -105,7 +105,7 @@ const MyCarousel: React.FC = () => {
               <ButtonGroup next={() => {}} previous={() => {}} />
             }
             arrows={false}
-            showDots={true}
+            showDots={false}
             renderDotsOutside={true}
             customDot={
               <CustomDot
