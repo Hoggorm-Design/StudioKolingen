@@ -56,21 +56,21 @@ const MobileNavbarHome: React.FC = () => {
           >
             <div className="bg-white px-6 py-4">
               {[
-                "Blog",
-                "Facilities",
-                "Prices",
-                "About Us",
-                "Contact",
-                "Artists",
-                "Makers Space",
-              ].map((item, index) => (
+                { label: "Blog", path: "/blog" },
+                { label: "Facilities", path: "/facilities" },
+                { label: "Prices", path: "/#prices" }, // Fixed
+                { label: "About Us", path: "/#about" }, // Fixed
+                { label: "Contact", path: "/#contact" }, // Fixed
+                { label: "Artists", path: "/artists" },
+                { label: "Makers Space", path: "/makersspace" },
+              ].map(({ label, path }, index) => (
                 <Link
                   key={index}
-                  to={`/${item.toLowerCase().replace(/ /g, "")}`}
+                  to={path}
                   className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
                   onClick={() => setIsOpen(false)}
                 >
-                  {item}
+                  {label}
                 </Link>
               ))}
             </div>

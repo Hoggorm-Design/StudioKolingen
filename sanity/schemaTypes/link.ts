@@ -9,13 +9,22 @@ export default defineType({
       name: 'url',
       title: 'URL',
       type: 'url',
-      description: 'Here you can provide the url for the link',
+      description: 'Here you can provide the URL for the link',
     }),
     defineField({
-      name: 'alt',
-      title: 'Alt text',
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Provide an image associated with the link',
+    }),
+    defineField({
+      name: 'imageAlt',
+      title: 'Image Alt Text',
       type: 'string',
-      description: 'Add description of the link',
+      description: 'Alt text for the image to improve accessibility',
     }),
   ],
 })

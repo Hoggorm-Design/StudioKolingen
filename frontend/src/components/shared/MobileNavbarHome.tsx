@@ -12,29 +12,43 @@ const MobileNavbarHome: React.FC = () => {
   const { isLoading } = useLoading();
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      if (isOpen) return; // Keep logo visible when menu is open
+      if (isOpen) return; // Ensure the logo remains visible when the menu is open
+
       const subNavbar = document.getElementById("sub-navbar");
       if (subNavbar) {
         const rect = subNavbar.getBoundingClientRect();
-        setShowLogo(rect.top <= 0);
+        const shouldShowLogo = rect.top <= 0;
+
+        // Prevent unnecessary state updates to avoid flickering
+        setShowLogo((prev) =>
+          prev !== shouldShowLogo ? shouldShowLogo : prev,
+        );
       }
-      setHasScrolled(window.scrollY > 10);
+
+      // Throttle shadow update to prevent excessive re-renders
+      const currentScrollY = window.scrollY;
+      if (Math.abs(currentScrollY - lastScrollY) > 5) {
+        setHasScrolled(currentScrollY > 10);
+        lastScrollY = currentScrollY;
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
-      setShowLogo(true);
+      setShowLogo(true); // Ensure logo is always visible when menu is open
     } else {
+      // Restore scroll-based logo visibility when menu closes
       const subNavbar = document.getElementById("sub-navbar");
       if (subNavbar) {
         const rect = subNavbar.getBoundingClientRect();
         setShowLogo(rect.top <= 0);
-      } else {
-        setShowLogo(false);
       }
     }
   }, [isOpen]);
@@ -50,18 +64,15 @@ const MobileNavbarHome: React.FC = () => {
       opacity: 1,
       transition: { duration: 0.25, ease: "easeInOut" },
     },
-    exit: {
-      x: "-100%",
-      opacity: 0,
-      transition: { duration: 0.25, ease: "easeInOut" },
-    },
   };
 
   return (
     <>
       {!isLoading && (
         <nav
-          className={`block lg:hidden fixed w-full z-50 bg-white top-0 left-0 transition-shadow duration-300 ${hasScrolled ? "shadow-md" : "shadow-none"}`}
+          className={`block lg:hidden fixed w-full z-50 bg-white top-0 left-0 transition-shadow duration-300 ${
+            hasScrolled ? "shadow-md" : "shadow-none"
+          }`}
         >
           <div className="flex justify-between items-center px-6 py-2 w-full">
             {/* Logo Placeholder to Maintain Layout */}
@@ -73,13 +84,13 @@ const MobileNavbarHome: React.FC = () => {
                     className="flex items-center"
                     initial="hidden"
                     animate="visible"
-                    exit="exit"
+                    exit="hidden"
                     variants={logoVariants}
                   >
                     <Link to="/" className="flex items-center space-x-4">
                       <img
                         src={navbarLogo}
-                        alt="Studio kolingen logo"
+                        alt="Studio Kolingen Logo"
                         className="h-10"
                       />
                     </Link>
@@ -106,21 +117,21 @@ const MobileNavbarHome: React.FC = () => {
           >
             <div className="bg-white px-6 py-4">
               {[
-                "Blog",
-                "Facilities",
-                "Prices",
-                "About Us",
-                "Contact",
-                "Artists",
-                "Makers Space",
-              ].map((item, index) => (
+                { label: "Blog", path: "/blog" },
+                { label: "Facilities", path: "/facilities" },
+                { label: "Prices", path: "/#prices" }, // Fixed
+                { label: "About Us", path: "/#about" }, // Fixed
+                { label: "Contact", path: "/#contact" }, // Fixed
+                { label: "Artists", path: "/artists" },
+                { label: "Makers Space", path: "/makersspace" },
+              ].map(({ label, path }, index) => (
                 <Link
                   key={index}
-                  to={`/${item.toLowerCase().replace(/ /g, "")}`}
+                  to={path}
                   className="block text-black hover:text-[#B22C2B] text-lg transition-colors mb-5"
                   onClick={() => setIsOpen(false)}
                 >
-                  {item}
+                  {label}
                 </Link>
               ))}
             </div>
