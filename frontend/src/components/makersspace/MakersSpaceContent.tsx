@@ -104,7 +104,7 @@ const MakersSpaceContent = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="bg-white flex flex-col gap-10 items-center mb-20">
+                  <div className="ml-20 -mt-20 mb-20">
                     {/* Displaying All Text Blocks Except the First One */}
                     {selectedPost.firstTextfield
                       ?.slice(2)
