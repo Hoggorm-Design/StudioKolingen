@@ -17,7 +17,7 @@ body {
 }
 
 h4 {
-    @apply text-lg md:text-xl lg:text-2xl font-semibold;
+    @apply text-lg md:text-xl font-normal;
 }
 
 h3 {

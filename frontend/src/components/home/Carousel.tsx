@@ -77,7 +77,7 @@ const MyCarousel: React.FC = () => {
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 1.1,
+      items: 1.4,
     },
   };
   if (!carousels?.length) return null;
