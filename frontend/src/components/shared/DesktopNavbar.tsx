@@ -43,7 +43,7 @@ const DesktopNavbar = () => {
           </div>
 
           {/* Links Section */}
-          <div className="flex items-center justify-end gap-x-10 w-full">
+          <div className="flex items-center justify-end gap-x-10 w-full pr-5">
             <Link
               to="/blog"
               className="hover:text-[#B22C2B] transition-colors menuItem text-center"

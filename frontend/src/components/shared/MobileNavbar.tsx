@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Squash } from "hamburger-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import useNavbar from "../../hooks/useNavbar.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
@@ -14,10 +14,11 @@ const MobileNavbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isOpen) return; // Keep logo visible when menu is open
       const subNavbar = document.getElementById("sub-navbar");
       if (subNavbar) {
         const rect = subNavbar.getBoundingClientRect();
-        setShowLogo(rect.top <= 0 || isOpen);
+        setShowLogo(rect.top <= 0);
       }
       setHasScrolled(window.scrollY > 10);
     };
@@ -25,16 +26,35 @@ const MobileNavbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      setShowLogo(true);
+    } else {
+      const subNavbar = document.getElementById("sub-navbar");
+      if (subNavbar) {
+        const rect = subNavbar.getBoundingClientRect();
+        setShowLogo(rect.top <= 0);
+      } else {
+        setShowLogo(false);
+      }
+    }
+  }, [isOpen]);
+
   const logoVariants = {
     hidden: {
       x: "-100%",
       opacity: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 0.25, ease: "easeInOut" },
     },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 0.25, ease: "easeInOut" },
+    },
+    exit: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.25, ease: "easeInOut" },
     },
   };
 
@@ -44,26 +64,33 @@ const MobileNavbar: React.FC = () => {
         <nav
           className={`block lg:hidden fixed w-full z-50 bg-white top-0 left-0 transition-shadow duration-300 ${hasScrolled ? "shadow-md" : "shadow-none"}`}
         >
-          <div className="flex justify-between items-center px-6 py-2">
-            <motion.div
-              key={showLogo ? "fixed-logo" : "initial-logo"}
-              className="flex items-center"
-              initial="hidden"
-              animate={showLogo ? "visible" : "hidden"}
-              exit="hidden"
-              variants={logoVariants}
-            >
-              <Link to="/" className="flex items-center space-x-4">
-                <img
-                  src={navbar.image.asset.url}
-                  alt={navbar.alt}
-                  className="h-10"
-                />
-              </Link>
-            </motion.div>
+          <div className="flex justify-between items-center px-6 py-2 w-full">
+            {/* Logo Placeholder to Maintain Layout */}
+            <div className="w-32">
+              <AnimatePresence>
+                {showLogo && (
+                  <motion.div
+                    key="logo"
+                    className="flex items-center"
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={logoVariants}
+                  >
+                    <Link to="/" className="flex items-center space-x-4">
+                      <img
+                        src={navbar.image.asset.url}
+                        alt={navbar.alt}
+                        className="h-10"
+                      />
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
-            {/* Hamburger Icon */}
-            <div>
+            {/* Hamburger Icon Always on the Right */}
+            <div className="ml-auto">
               <Squash
                 size={25}
                 toggled={isOpen}

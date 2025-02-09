@@ -17,7 +17,7 @@ const SubNavbarMobile: React.FC = () => {
           id={"sub-navbar"}
         >
           {/* Links Section */}
-          <div className="flex items-center justify-center gap-x-10 w-full">
+          <div className="flex items-center justify-center gap-x-10 sm:gap-x-24 w-full">
             <Link
               to="/blog"
               className="hover:text-[#B22C2B] transition-colors menuItem text-center"
