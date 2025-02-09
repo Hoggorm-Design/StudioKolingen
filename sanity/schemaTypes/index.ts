@@ -15,7 +15,6 @@ import artistInfo from './artistInfo'
 import artists from './artists'
 import subImage from './subImage'
 import aboutMakersSpace from './aboutMakersSpace'
-import invitedArtists from './invitedArtists'
 import makersSpaceContent from './makersSpaceContent'
 
 export const schemaTypes = [
@@ -36,7 +35,6 @@ export const schemaTypes = [
   blogPost,
 
   aboutMakersSpace,
-  invitedArtists,
   makersSpaceContent,
 
   footer,

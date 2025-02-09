@@ -39,12 +39,12 @@ const MakersSpaceContent = () => {
 
   const handleCardClick = (post: MakersSpaceContentProps) => {
     if (selectedPost !== post) {
-      setSelectedPost(post); // Oppdater det valgte innlegget
+      setSelectedPost(post);
 
       setTimeout(() => {
         const element = document.getElementById("makerSpaceContent");
         if (element) {
-          const yOffset = -50; // Juster offset etter behov
+          const yOffset = -50;
           const yPosition =
             element.getBoundingClientRect().top + window.scrollY + yOffset;
 
@@ -62,50 +62,48 @@ const MakersSpaceContent = () => {
           {selectedPost && (
             <section>
               <article className="bg-[#1a1a2e] sm:px-10 py-14">
+                <h2 className="text-[#FFFFFF]">{selectedPost.header}</h2>
                 {/* Carousel Section */}
+                <div className="bg-white flex flex-col gap-10">
+                  {/* Displaying Text Blocks with Links */}
+                  {selectedPost.links?.map((block, index) => (
+                    <p key={index}>
+                      <a
+                        href={block.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline"
+                      >
+                        {block.name}
+                      </a>
+                    </p>
+                  ))}
+                </div>
                 <article className="grid grid-cols-1 sm:grid-cols-3 gap-16 px-5 sm:px-0">
-                  <div className="w-full aspect-square overflow-hidden">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={selectedPost.image1?.asset?.url}
-                      alt={selectedPost.image1?.altText || "Image 1"}
-                    />
-                  </div>
-                  <div className="w-full aspect-square overflow-hidden">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={selectedPost.image2?.asset?.url}
-                      alt={selectedPost.image2?.altText || "Image 2"}
-                    />
-                  </div>
-                  <div className="w-full aspect-square overflow-hidden">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={selectedPost.image3?.asset?.url}
-                      alt={selectedPost.image3?.altText || "Image 3"}
-                    />
-                  </div>
+                  {selectedPost.regularImages
+                    ?.slice(0, 3)
+                    .map((image, index) => (
+                      <div
+                        key={index}
+                        className="w-full aspect-square overflow-hidden"
+                      >
+                        <img
+                          className="w-full h-full object-cover"
+                          src={image?.asset?.url}
+                          alt={image?.altText || `Image ${index + 1}`}
+                        />
+                      </div>
+                    ))}
                 </article>
-                <MyCarousel
-                  images={[
-                    selectedPost.image1,
-                    selectedPost.image2,
-                    selectedPost.image3,
-                    selectedPost.image4,
-                    selectedPost.image5,
-                    selectedPost.image6,
-                    selectedPost.image7,
-                    selectedPost.image8,
-                    selectedPost.image9,
-                    selectedPost.image10,
-                  ].filter((image) => image && image.asset)}
-                />
               </article>
+
+              {/* Text Blocks Section */}
               <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
                 <div className="bg-white flex flex-col gap-10">
-                  <p>{selectedPost.text1}</p>
-                  <p>{selectedPost.text2}</p>
-                  <p>{selectedPost.text3}</p>
+                  {/* Displaying Plain Text Blocks */}
+                  {selectedPost.textBlocks?.map((block, index) => (
+                    <p key={index}>{block}</p>
+                  ))}
                 </div>
               </article>
             </section>
@@ -115,29 +113,27 @@ const MakersSpaceContent = () => {
           {selectedPost && (
             <article className="bg-[#1a1a2e] px-5 sm:px-10 py-16">
               <article className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 xl:gap-14">
-                <div className="w-full aspect-square overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={selectedPost.image4?.asset?.url}
-                    alt={selectedPost.image4?.altText || "Image 4"}
-                  />
-                </div>
-                <div className="w-full aspect-square overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={selectedPost.image5?.asset?.url}
-                    alt={selectedPost.image5?.altText || "Image 5"}
-                  />
-                </div>
-                <div className="w-full aspect-square overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={selectedPost.image6?.asset?.url}
-                    alt={selectedPost.image6?.altText || "Image 6"}
-                  />
-                </div>
+                {selectedPost.regularImages?.slice(3, 6).map((image, index) => (
+                  <div
+                    key={index}
+                    className="w-full aspect-square overflow-hidden"
+                  >
+                    <img
+                      className="w-full h-full object-cover"
+                      src={image?.asset?.url}
+                      alt={image?.altText || `Image ${index + 4}`}
+                    />
+                  </div>
+                ))}
               </article>
+              {/* Carousel Component */}
+              <MyCarousel
+                images={selectedPost.carouselImages?.filter(
+                  (image) => image?.asset,
+                )}
+              />
 
+              {/* More Posts Section */}
               <section className="bg-[#1D192C] pt-14 space-y-4">
                 <h3 className="pb-4 text-[#fffdf8]">More Posts</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
@@ -153,11 +149,11 @@ const MakersSpaceContent = () => {
                       />
                     ))}
                 </div>
-                {visiblePosts < makersSpaceContent.length && ( // Kun vis knappen hvis det er flere innlegg å laste
+                {visiblePosts < makersSpaceContent.length && (
                   <div className="flex mt-10">
                     <button
                       onClick={handleSeeMore}
-                      className="flex items-center text-[#fffdf8] text-lg font-light gap-6 "
+                      className="flex items-center text-[#fffdf8] text-lg font-light gap-6"
                     >
                       See more posts
                       <FontAwesomeIcon icon={faChevronRight} />

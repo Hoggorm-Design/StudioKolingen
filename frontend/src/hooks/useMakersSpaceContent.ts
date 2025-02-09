@@ -14,75 +14,21 @@ const useMakersSpaceContent = () => {
       setIsLoading(true);
       try {
         const query = `*[_type == "makersSpaceContent"] | order(publishedAt desc){
-        _id,
-        header,
-          text1,
-          text2,
-          text3,
-          image1{
+          _id,
+          header,
+          textBlocks[],  
+          links[] {  
+            name,  
+            url    
+          },
+          carouselImages[] {
             asset->{
               _ref,
               url
             },
             altText
           },
-          image2{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image3{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image4{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image5{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image6{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image7{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image8{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image9{
-            asset->{
-              _ref,
-              url
-            },
-            altText
-          },
-          image10{
+          regularImages[] {
             asset->{
               _ref,
               url
@@ -91,8 +37,8 @@ const useMakersSpaceContent = () => {
           },
           publishedAt
         }`;
-        const data: MakersSpaceContentProps[] = await sanityClient.fetch(query);
 
+        const data: MakersSpaceContentProps[] = await sanityClient.fetch(query);
         setMakersSpaceContent(data);
       } catch (error) {
         console.error("Error fetching makers space content:", error);
@@ -102,7 +48,7 @@ const useMakersSpaceContent = () => {
     };
 
     fetchMakersSpaceContent();
-  }, [setIsLoading]); // Add setIsLoading to dependencies
+  }, [setIsLoading]);
 
   return { makersSpaceContent };
 };
