@@ -35,9 +35,24 @@ export default defineType({
     defineField({
       name: 'link',
       title: 'Link',
-      type: 'url',
+      type: 'object',
       description: 'Provide an optional link for the blog post.',
+      fields: [
+        defineField({
+          name: 'name',
+          title: 'Link Name',
+          type: 'string',
+          description: 'The display name for the link.',
+        }),
+        defineField({
+          name: 'url',
+          title: 'URL',
+          type: 'url',
+          description: 'The actual link URL.',
+        }),
+      ],
     }),
+
     defineField({
       name: 'publishedAt',
       title: 'Published At',
