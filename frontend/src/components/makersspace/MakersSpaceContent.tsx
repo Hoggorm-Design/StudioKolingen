@@ -64,7 +64,7 @@ const MakersSpaceContent = () => {
               <article className="bg-[#1a1a2e] sm:px-10 py-14">
                 {/* Artists info */}
                 <div className="bg-white flex flex-col gap-10">
-                  <div className="lg:flex justify-center lg:h-[60vh] mx-4 lg:mx-20 mt-20">
+                  <div className="lg:flex justify-center lg:gap-10 lg:h-[60vh] mx-4 lg:mx-20 mt-20">
                     <div className="lg:w-1/2">
                       <h2 className="text-black">{selectedPost.header}</h2>
                       <div className="bg-white flex flex-col gap-10">
@@ -102,7 +102,7 @@ const MakersSpaceContent = () => {
                         </div>
                       ))}
                   </div>
-                  <div className="mx-4 lg:mx-20 -mt-20 mb-20">
+                  <div className="mx-4 lg:mx-20 mt-10 mb-20">
                     {/* Displaying All Text Blocks Except the First One */}
                     {selectedPost.firstTextfield
                       ?.slice(2)
