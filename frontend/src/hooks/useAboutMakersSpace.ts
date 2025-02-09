@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import sanityClient from "../client";
+import sanityClient from "../client.ts";
+import { AboutMakersSpace } from "../interfaces/aboutMakersSpace.ts";
 import { useLoading } from "../context/LoadingContext";
-import { AboutMakersSpace } from "../interfaces/aboutMakersSpace";
 
 const useAboutMakersSpace = () => {
   const [aboutMakersSpace, setAboutMakersSpace] =
@@ -12,25 +12,17 @@ const useAboutMakersSpace = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const aboutData = await sanityClient.fetch(`
-          *[_type == "makersSpacePageInfo"][0]{
+        // Fetch both queries in parallel
+        const [aboutData] = await Promise.all([
+          sanityClient.fetch(`*[_type == "makersSpacePageInfo"][0]{
             aboutHeader,
             aboutText,
-            subHeader,
-            subTitleText,
-            subTitleText2,
-            image{
-              asset->{
-                url
-              },
-              altText
-            }
-          }
-        `);
+          }`),
+        ]);
 
         setAboutMakersSpace(aboutData);
       } catch (error) {
-        console.error("Error fetching Makers Space data:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
       }
