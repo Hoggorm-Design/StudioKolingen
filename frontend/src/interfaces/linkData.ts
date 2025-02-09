@@ -1,4 +1,10 @@
 export interface LinkData {
-    url: string;
-    alt: string;
+  url: string;
+  image: {
+    asset: {
+      _ref: string;
+      url: string;
+    };
+  };
+  imageAlt: string;
 }
