@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <>
       {!isLoading && mainImage && (
-        <header className="pt-20 lg:p-0">
+        <header className="pt-10 sm:pt-20 lg:p-0">
           <section className="flex flex-col justify-center items-center p-16 sm:p-20 gap-8">
             <Link to="/">
               <img
