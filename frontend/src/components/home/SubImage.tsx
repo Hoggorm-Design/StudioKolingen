@@ -11,7 +11,7 @@ const SubImage: React.FC = () => {
 	return (
 		<>
 			{!isLoading && subImage && (
-				<section className="bg-[#1a1a2e] py-10 w-screen">
+				<section className="bg-[#1a1a2e] py-10 w-screen mx:overflow-x-hidden">
 					<MyCarousel />
 
 					<section className="w-screen">
