@@ -13,18 +13,18 @@ const MobileNavbar: React.FC = () => {
     <>
       {!isLoading && navbar && (
         <nav className="block lg:hidden fixed w-full z-50 bg-white shadow-md">
-          <div className="flex justify-between items-center px-6 py-4">
+          <div className="flex justify-between items-center px-6 py-2">
             <Link to="/" className="flex items-center space-x-4">
               <img
                 src={navbar.image.asset.url}
                 alt={navbar.alt}
-                className="h-14"
+                className="h-10"
               />
             </Link>
 
             {/* Hamburger Icon */}
             <div>
-              <Squash toggled={isOpen} toggle={setIsOpen} />
+              <Squash size={25} toggled={isOpen} toggle={setIsOpen} />
             </div>
           </div>
 
