@@ -14,7 +14,7 @@ const useAboutMakersSpace = () => {
       try {
         // Fetch both queries in parallel
         const [aboutData] = await Promise.all([
-          sanityClient.fetch(`*[_type == "aboutMakersSpace"][0]{
+          sanityClient.fetch(`*[_type == "makersSpacePageInfo"][0]{
             aboutHeader,
             aboutText,
           }`),

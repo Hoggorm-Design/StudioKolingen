@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'makersSpaceContent',
-  title: 'Makers Space Content',
+  name: 'makersSpaceYears',
+  title: 'Makers Space Years',
   type: 'document',
   fields: [
     defineField({

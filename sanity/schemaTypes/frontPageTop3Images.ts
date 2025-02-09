@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'subImage',
-  title: 'Sub Image',
+  name: 'frontPageTop3Images',
+  title: 'Front Page Top 3 Images',
   type: 'document',
   fields: [
     defineField({

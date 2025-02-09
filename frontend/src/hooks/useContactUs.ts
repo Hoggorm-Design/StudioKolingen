@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Contact } from "../interfaces/contactUs.ts";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
+import { Contact } from "../interfaces/contactUs.ts";
 
 const useContact = () => {
   const [contact, setContact] = useState<Contact | null>(null);
@@ -11,7 +11,7 @@ const useContact = () => {
     const fetchContact = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "contact"][0]{ 
+        const query = `*[_type == "contactUs"][0]{ 
                    header,
                    mail,
                    phonenumber,
