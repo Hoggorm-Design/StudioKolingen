@@ -121,9 +121,8 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
           }
         >
           {images.map((image, index) => (
-            <>
+            <React.Fragment key={index}>
               <div
-                key={index}
                 className="w-full h-[300px] flex-shrink-0 overflow-hidden"
                 role="group"
                 aria-roledescription="slide"
@@ -135,10 +134,10 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-center">
+              <p className="text-center text-white">
                 {image.imageText ? image.imageText : ""}
               </p>
-            </>
+            </React.Fragment>
           ))}
         </Carousel>
       </div>
