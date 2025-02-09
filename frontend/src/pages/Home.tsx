@@ -23,7 +23,7 @@ const Home = () => {
     };
 
     loadData();
-  }, []);
+  }, [setIsLoading]);
   return (
     <>
       <Header />

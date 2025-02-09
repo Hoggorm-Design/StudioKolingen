@@ -1,12 +1,11 @@
-import useFooter from "../../hooks/useFooter.ts";
-import useNavbar from "../../hooks/useNavbar.ts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import useFooter from "../../hooks/useFooter.ts";
 
 const Footer = () => {
   const { footer } = useFooter();
-  const { navbar } = useNavbar();
   const { isLoading } = useLoading();
 
   return (
@@ -16,7 +15,7 @@ const Footer = () => {
           <div className="max-w-screen  border border-black py-14 px-4 xs:px-8 md:px-16 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-0">
             {/* Left Section */}
             <div className="flex flex-col gap-y-10">
-              <img src={navbar?.image.asset.url} alt={navbar?.alt}></img>
+              <img src={navbarLogo} alt="Studio kolingen logo"></img>
               <div>
                 <p className="font-normal">{footer.header}</p>
                 <p className="footerText">{footer.address}</p>

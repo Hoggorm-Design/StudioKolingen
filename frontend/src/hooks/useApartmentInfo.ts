@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { ApartmentInfo } from "../interfaces/apartmentInfo.ts";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
+import { ApartmentInfo } from "../interfaces/apartmentInfo.ts";
 
 const useApartmentInfo = () => {
   const [apartmentInfo, setApartmentInfo] = useState<ApartmentInfo | null>(
-    null,
+    null
   );
   const { setIsLoading } = useLoading();
 
@@ -13,7 +13,7 @@ const useApartmentInfo = () => {
     const fetchApartmentInfo = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "apartmentinfo"][0]{header, text}`;
+        const query = `*[_type == "facilitiesPageInfo"][0]{header, text}`;
         const data: ApartmentInfo = await sanityClient.fetch(query);
         setApartmentInfo(data);
       } catch (error) {

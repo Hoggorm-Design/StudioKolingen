@@ -1,11 +1,10 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import useNavbar from "../../hooks/useNavbar.ts";
+import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const DesktopNavbarHome: React.FC = () => {
-  const { navbar } = useNavbar();
   const { isLoading } = useLoading();
   const [xOffset, setXOffset] = useState("20%");
   const [isFixed, setIsFixed] = useState(false);
@@ -79,7 +78,7 @@ const DesktopNavbarHome: React.FC = () => {
 
   return (
     <>
-      {!isLoading && navbar && (
+      {!isLoading && (
         <nav
           ref={navbarRef}
           className={`hidden lg:flex overflow-hidden items-center border-t border-[#B22C2B] px-10 py-4 w-full bg-white z-50 sticky top-0 transition-all duration-500 ${
@@ -98,8 +97,8 @@ const DesktopNavbarHome: React.FC = () => {
           >
             <Link to="/">
               <img
-                src={navbar.image.asset.url}
-                alt={navbar.alt}
+                src={navbarLogo}
+                alt="Studio kolingen logo"
                 className="h-14"
               />
             </Link>

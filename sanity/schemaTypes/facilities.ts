@@ -9,7 +9,7 @@ export default defineType({
       name: 'header',
       title: 'Header',
       type: 'string',
-      description: 'Here you can write the title of the blog post.',
+      description: 'Here you can write the title of the facility page.',
     }),
     defineField({
       name: 'text',

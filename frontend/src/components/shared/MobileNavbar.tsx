@@ -1,23 +1,21 @@
+import { Squash } from "hamburger-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Squash } from "hamburger-react";
-import useNavbar from "../../hooks/useNavbar.ts";
+import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
-
 const MobileNavbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { navbar } = useNavbar();
   const { isLoading } = useLoading();
 
   return (
     <>
-      {!isLoading && navbar && (
+      {!isLoading && (
         <nav className="block lg:hidden fixed w-full z-50 bg-white shadow-md">
           <div className="flex justify-between items-center px-6 py-4">
             <Link to="/" className="flex items-center space-x-4">
               <img
-                src={navbar.image.asset.url}
-                alt={navbar.alt}
+                src={navbarLogo}
+                alt="Studio kolingen logo"
                 className="h-14"
               />
             </Link>
