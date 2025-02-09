@@ -12,27 +12,31 @@ const MobileNavbarHome: React.FC = () => {
   const { isLoading } = useLoading();
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    let ticking = false;
 
     const handleScroll = () => {
-      if (isOpen) return; // Ensure the logo remains visible when the menu is open
+      if (isOpen) return; // Keep logo visible when menu is open
 
-      const subNavbar = document.getElementById("sub-navbar");
-      if (subNavbar) {
-        const rect = subNavbar.getBoundingClientRect();
-        const shouldShowLogo = rect.top <= 0;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const subNavbar = document.getElementById("sub-navbar");
+          if (subNavbar) {
+            const rect = subNavbar.getBoundingClientRect();
+            const shouldShowLogo = rect.top <= 0;
 
-        // Prevent unnecessary state updates to avoid flickering
-        setShowLogo((prev) =>
-          prev !== shouldShowLogo ? shouldShowLogo : prev,
-        );
-      }
+            // Only update state if value actually changes (prevents flickering)
+            setShowLogo((prev) =>
+              prev !== shouldShowLogo ? shouldShowLogo : prev,
+            );
+          }
 
-      // Throttle shadow update to prevent excessive re-renders
-      const currentScrollY = window.scrollY;
-      if (Math.abs(currentScrollY - lastScrollY) > 5) {
-        setHasScrolled(currentScrollY > 10);
-        lastScrollY = currentScrollY;
+          // Update shadow effect only if scrolled more than 10px
+          const currentScrollY = window.scrollY;
+          setHasScrolled(currentScrollY > 10);
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
 
@@ -57,12 +61,12 @@ const MobileNavbarHome: React.FC = () => {
     hidden: {
       x: "-100%",
       opacity: 0,
-      transition: { duration: 0.25, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" },
     },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.25, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" },
     },
   };
 

@@ -11,7 +11,7 @@ const SubNavbarMobile: React.FC = () => {
       {!isLoading && (
         <nav
           ref={navbarRef}
-          className="border-t border-[#B22C2B] flex lg:hidden overflow-hidden items-center justify-center w-full bg-transparent px-6 py-4 z-40 sticky top-0 transition-all duration-500"
+          className="border-t border-[#B22C2B] flex lg:hidden overflow-hidden items-center justify-center w-full bg-transparent px-6 py-4 transition-all duration-500"
           id={"sub-navbar"}
         >
           {/* Links Section */}
