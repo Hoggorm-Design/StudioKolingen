@@ -78,10 +78,24 @@ const MakersSpaceContent = () => {
                       </a>
                     </p>
                   ))}
+                  {selectedPost.regularImages
+                    ?.slice(0, 1)
+                    .map((image, index) => (
+                      <div
+                        key={index}
+                        className="w-full aspect-square overflow-hidden"
+                      >
+                        <img
+                          className="w-full h-full object-cover"
+                          src={image?.asset?.url}
+                          alt={image?.altText || `Image ${index + 1}`}
+                        />
+                      </div>
+                    ))}
                 </div>
                 <article className="grid grid-cols-1 sm:grid-cols-3 gap-16 px-5 sm:px-0">
                   {selectedPost.regularImages
-                    ?.slice(0, 3)
+                    ?.slice(1, 4)
                     .map((image, index) => (
                       <div
                         key={index}
@@ -112,20 +126,6 @@ const MakersSpaceContent = () => {
           {/* Makers Space Cards Section */}
           {selectedPost && (
             <article className="bg-[#1a1a2e] px-5 sm:px-10 py-16">
-              <article className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 xl:gap-14">
-                {selectedPost.regularImages?.slice(3, 6).map((image, index) => (
-                  <div
-                    key={index}
-                    className="w-full aspect-square overflow-hidden"
-                  >
-                    <img
-                      className="w-full h-full object-cover"
-                      src={image?.asset?.url}
-                      alt={image?.altText || `Image ${index + 4}`}
-                    />
-                  </div>
-                ))}
-              </article>
               {/* Carousel Component */}
               <MyCarousel
                 images={selectedPost.carouselImages?.filter(
