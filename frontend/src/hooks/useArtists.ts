@@ -12,18 +12,22 @@ const useArtists = () => {
       setIsLoading(true);
       try {
         const query = `*[_type == "artists"] | order(publishedAt desc){
-                   image{
-                       asset->{
-                           _id,
-                           url
-                       },
-                   },
-                   header,
-                   alt,
-                   text,
-                   link,
-                   publishedAt
-               }`;
+          image{
+            asset->{
+              _id,
+              url
+            },
+          },
+          header,
+          alt,
+          text,
+          link{
+            name,
+            url
+          },
+          publishedAt
+        }`;
+
         const data: Artist[] = await sanityClient.fetch(query);
         setArtists(data);
       } catch (error) {

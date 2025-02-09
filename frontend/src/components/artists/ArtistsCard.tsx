@@ -35,12 +35,14 @@ const ArtistCard = () => {
                   </div>
 
                   {/* Link */}
-                  <Link
-                    to={artist.link}
-                    className="text-md mt-3 text-[#B22C2B] hover:text-[#7c1e1d] transition"
-                  >
-                    Visit artist's page
-                  </Link>
+                  {artist.link && artist.link.url && (
+                    <Link
+                      to={artist.link.url}
+                      className="text-md mt-3 text-[#B22C2B] hover:text-[#7c1e1d] transition"
+                    >
+                      Visit artist's page
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}
