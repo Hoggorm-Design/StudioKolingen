@@ -50,8 +50,8 @@ const ApartmentInfo: React.FC = () => {
               {/* Mobile Layout */}
               <section className="w-screen relative left-1/2 -translate-x-1/2 bg-[#1D192C] block sm:hidden">
                 <div className="pt-[138px] pb-[64px] px-5">
-                  {additionalImages[0] && (
-                    <div className="mb-6">
+                  {additionalImages.length === 1 && (
+                    <div className="flex flex-col gap-y-2">
                       <div className="relative w-full aspect-square overflow-hidden">
                         <img
                           src={additionalImages[0]?.asset?.url || ""}
@@ -68,12 +68,12 @@ const ApartmentInfo: React.FC = () => {
                     </div>
                   )}
 
-                  {additionalImages.length > 1 && (
-                    <div className="flex flex-row justify-center gap-6">
-                      {additionalImages.slice(1).map((image, index) => (
+                  {additionalImages.length === 2 && (
+                    <div className="flex flex-row justify-center gap-4">
+                      {additionalImages.map((image, index) => (
                         <div
                           key={index}
-                          className="flex flex-col gap-y-2 w-[150px]"
+                          className="flex flex-col gap-y-2 w-1/2"
                         >
                           <div className="relative w-full aspect-square overflow-hidden">
                             <img
@@ -89,10 +89,50 @@ const ApartmentInfo: React.FC = () => {
                       ))}
                     </div>
                   )}
+
+                  {additionalImages.length === 3 && (
+                    <div className="flex flex-col gap-6">
+                      {/* First image: larger */}
+                      <div className="flex flex-col gap-y-2">
+                        <div className="relative w-full aspect-square overflow-hidden">
+                          <img
+                            src={additionalImages[0]?.asset?.url || ""}
+                            alt={
+                              additionalImages[0]?.altText || "Additional image"
+                            }
+                            className="absolute inset-0 w-full h-full object-cover"
+                          />
+                        </div>
+                        <p className="text-center text-white">
+                          {additionalImages[0]?.altText ||
+                            "No description available"}
+                        </p>
+                      </div>
+                      {/* Next two images in a row */}
+                      <div className="flex flex-row justify-center gap-4">
+                        {additionalImages.slice(1).map((image, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col gap-y-2 w-1/2"
+                          >
+                            <div className="relative w-full aspect-square overflow-hidden">
+                              <img
+                                src={image?.asset?.url || ""}
+                                alt={image?.altText || "Additional image"}
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
+                            </div>
+                            <p className="text-center text-white">
+                              {image?.altText || "No description available"}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </section>
 
-              {/* Larger Screens Layout */}
               <section className="w-screen relative left-1/2 -translate-x-1/2 bg-[#1D192C] hidden sm:block">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pt-[138px] pb-[64px] lg:py-16 px-5 md:px-36 xl:px-64">
                   {additionalImages.map((image, index) => (
