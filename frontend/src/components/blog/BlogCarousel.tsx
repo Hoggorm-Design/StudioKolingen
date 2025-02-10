@@ -67,8 +67,9 @@ const CustomDot: React.FC<{
   ></button>
 );
 
-interface Image {
+export interface Image {
   asset: {
+    _ref: string;
     url: string;
   };
   alt?: string;
