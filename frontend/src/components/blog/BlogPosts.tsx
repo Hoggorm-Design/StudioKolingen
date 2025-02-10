@@ -13,6 +13,7 @@ import {
   BlogImageTextKey,
   BlogPost,
 } from "../../interfaces/blogposts.ts";
+import { Image } from "../blog/BlogCarousel.tsx";
 import MyCarousel from "./BlogCarousel.tsx";
 import BlogCard from "./CompressedBlogCard.tsx";
 
@@ -183,7 +184,9 @@ const BlogPosts = () => {
                       selectedPost.image8,
                       selectedPost.image9,
                       selectedPost.image10,
-                    ].filter((image) => image && image.asset)}
+                    ].filter((image): image is Image =>
+                      Boolean(image && image.asset)
+                    )}
                   />
                 </section>
               </div>

@@ -1,8 +1,8 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import ApartmentInfo from "./components/facilities/ApartmentInfo.tsx";
 import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import MobileNavbar from "./components/shared/MobileNavbar.tsx";
 import ScrollToAnchor from "./components/shared/ScrollToAnchor.tsx";
+import ApartmentPage from "./pages/ApartmentPage.tsx";
 import Artists from "./pages/Artists";
 import Blog from "./pages/Blog.tsx";
 import Facilities from "./pages/Facilities";
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/artists" element={<Artists />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/makersspace" element={<MakersSpace />} />
-        <Route path="/facilities/:header" element={<ApartmentInfo />} />
+        <Route path="/facilities/:header" element={<ApartmentPage />} />
       </Routes>
     </div>
   );
