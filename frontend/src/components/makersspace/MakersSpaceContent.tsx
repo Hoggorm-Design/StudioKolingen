@@ -63,9 +63,9 @@ const MakersSpaceContent = () => {
             <section>
               <article className="bg-[#1a1a2e] py-14 w-full">
                 {/* Artists info */}
-                <div className="bg-white flex flex-col gap-10 w-screen sm:px-10">
-                  <div className="lg:flex justify-center lg:gap-10 lg:h-[70vh] mx-4 lg:mx-20 mt-20">
-                    <div className="lg:w-1/2 order-2 lg:order-1">
+                <div className="bg-white flex flex-col gap-10 w-screen px-5 sm:px-10">
+                  <div className="flex flex-col lg:flex-row w-full gap-12 lg:gap-44 py-14 items-start">
+                    <div className="flex flex-col lg:w-1/2 space-y-8">
                       <h2 className="text-black">{selectedPost.header}</h2>
                       <div className="bg-white flex flex-col gap-10 w-full">
                         {/* Displaying Only the First Text Block */}
@@ -74,19 +74,21 @@ const MakersSpaceContent = () => {
                           .map((block, index) => <p key={index}>{block}</p>)}
                       </div>
                       {/* Displaying Text Blocks with Links */}
-                      {selectedPost.links?.map((block, index) => (
-                        <p key={index}>
-                          <a
-                            href={block.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className=""
-                          >
-                            {block.name}
-                          </a>
-                        </p>
-                      ))}
-                      <div className="mt-10 mb-20">
+                      <div>
+                        {selectedPost.links?.map((block, index) => (
+                          <p key={index}>
+                            <a
+                              href={block.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:text-[#B22C2B] transition-300 transition-all cursor-pointer"
+                            >
+                              {block.name}
+                            </a>
+                          </p>
+                        ))}
+                      </div>
+                      <div className="">
                         {/* Displaying All Text Blocks Except the First One */}
                         {selectedPost.firstTextfield
                           ?.slice(2)
@@ -98,7 +100,7 @@ const MakersSpaceContent = () => {
                       .map((image, index) => (
                         <div
                           key={index}
-                          className="lg:w-1/2 w-full aspect-square overflow-hidden mb-4 lg:mb-10 order-1 lg:order-2 "
+                          className="lg:w-1/2 w-full aspect-square overflow-hidden order-1 lg:order-2 "
                         >
                           <img
                             className="w-full h-full object-cover"
@@ -110,22 +112,36 @@ const MakersSpaceContent = () => {
                   </div>
                 </div>
 
-                <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 px-5 sm:px-0 m-20">
-                  {selectedPost.regularImages
-                    ?.slice(1, 4)
-                    .map((image, index) => (
-                      <div
-                        key={index}
-                        className="w-full aspect-square overflow-hidden"
+                {selectedPost &&
+                  (() => {
+                    const filteredImages = selectedPost.regularImages
+                      ?.slice(1, 4)
+                      .filter((image) => image?.asset); // Fjern tomme bilder
+
+                    const imageCount = filteredImages.length; // Tell antall bilder
+
+                    return (
+                      <article
+                        className={`grid gap-16 px-5 sm:px-10 pt-16
+          ${imageCount === 1 ? "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]" : ""}
+          ${imageCount === 2 ? "grid-cols-2 place-content-center gap-8 lg:px-[10vw]" : ""}
+          ${imageCount >= 3 ? "grid-cols-1 md:grid-cols-3" : ""}`}
                       >
-                        <img
-                          className="w-full h-full object-cover"
-                          src={image?.asset?.url}
-                          alt={image?.altText || `Image ${index + 1}`}
-                        />
-                      </div>
-                    ))}
-                </article>
+                        {filteredImages.map((image, index) => (
+                          <div
+                            key={index}
+                            className="w-full aspect-square overflow-hidden"
+                          >
+                            <img
+                              className="w-full h-full object-cover"
+                              src={image?.asset?.url}
+                              alt={image?.altText || `Image ${index + 1}`}
+                            />
+                          </div>
+                        ))}
+                      </article>
+                    );
+                  })()}
               </article>
 
               {/* Text Blocks Section */}
@@ -142,11 +158,11 @@ const MakersSpaceContent = () => {
 
           {/* Makers Space Cards Section */}
           {selectedPost && (
-            <article className="bg-[#1a1a2e] px-5 sm:px-10 py-16">
+            <article className="bg-[#1a1a2e] px-5 sm:px-10 pb-14 pt-12 lg:pt-8">
               {/* Carousel Component */}
               <MyCarousel
                 images={selectedPost.carouselImages?.filter(
-                  (image) => image?.asset
+                  (image) => image?.asset,
                 )}
               />
 
