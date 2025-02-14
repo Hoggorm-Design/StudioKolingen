@@ -67,7 +67,16 @@ const CustomDot: React.FC<{
   ></button>
 );
 
-const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
+export interface Image {
+  asset: {
+    _ref: string;
+    url: string;
+  };
+  alt?: string;
+  altText?: string;
+}
+
+const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1280 },
@@ -134,9 +143,7 @@ const MyCarousel: React.FC<{ images: any[] }> = ({ images }) => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-center text-white">
-                {image?.imageText ? image?.imageText : ""}
-              </p>
+              <p className="text-center text-white">{image?.altText || ""}</p>
             </React.Fragment>
           ))}
         </Carousel>
