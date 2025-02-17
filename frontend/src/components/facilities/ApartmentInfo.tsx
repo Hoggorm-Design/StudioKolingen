@@ -12,7 +12,7 @@ const ApartmentInfo: React.FC = () => {
   // Find facility that corresponds to header
   const facility = facilities?.find(
     (item) =>
-      header && item.header.toLowerCase().trim().replace(/ /g, "-") === header,
+      header && item.header.toLowerCase().trim().replace(/ /g, "-") === header
   );
 
   const additionalImages = facility?.carouselImages.slice(1);
@@ -61,8 +61,7 @@ const ApartmentInfo: React.FC = () => {
                       />
                     </div>
                     <p className="text-left text-white">
-                      {additionalImages[0]?.altText ||
-                        "No description available"}
+                      {additionalImages[0]?.altText || ""}
                     </p>
                   </div>
                 )}
@@ -79,7 +78,7 @@ const ApartmentInfo: React.FC = () => {
                           />
                         </div>
                         <p className="text-left text-white">
-                          {image?.altText || "No description available"}
+                          {image?.altText || ""}
                         </p>
                       </div>
                     ))}
@@ -100,7 +99,7 @@ const ApartmentInfo: React.FC = () => {
                         />
                       </div>
                       <p className="text-left text-white">
-                        {image?.altText || "No description available"}
+                        {image?.altText || ""}
                       </p>
                     </div>
                   ))}
