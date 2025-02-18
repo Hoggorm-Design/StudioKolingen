@@ -11,31 +11,51 @@ export default defineType({
       type: 'string',
       description: 'Here you can write the title of the blog post.',
     }),
-    ...Array.from({length: 6}, (_, i) =>
-      defineField({
-        name: `text${i + 1}`,
-        title: `Text ${i + 1}`,
-        type: 'text',
-        description: `Write the content for text section ${i + 1}.`,
-      }),
-    ),
-    ...Array.from({length: 10}, (_, i) => [
-      defineField({
-        name: `image${i + 1}`,
-        title: `Image ${i + 1}`,
-        type: 'image',
-        options: {
-          hotspot: true,
+    defineField({
+      name: 'textBlocks',
+      title: 'Text Content',
+      type: 'array',
+      of: [{type: 'text'}],
+      description: 'Text blocks for a blogpost',
+    }),
+
+    defineField({
+      name: 'regularImages',
+      title: 'Regular images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          fields: [
+            defineField({
+              name: 'altText',
+              title: 'Alternative text',
+              type: 'string',
+              description: 'Alternative text for this image',
+            }),
+          ],
         },
-        description: `Provide image ${i + 1} for the blog post.`,
-      }),
-      defineField({
-        name: `imageText${i + 1}`,
-        title: `Image Text ${i + 1}`,
-        type: 'string',
-        description: `Provide a description or caption for image ${i + 1}.`,
-      }),
-    ]).flat(),
+      ],
+    }),
+    defineField({
+      name: 'carouselImages',
+      title: 'Image carousel',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          fields: [
+            defineField({
+              name: 'altText',
+              title: 'Alternative text',
+              type: 'string',
+              description: 'Alternative text for this image',
+            }),
+          ],
+        },
+      ],
+    }),
+
     defineField({
       name: 'publishedAt',
       title: 'Published At',
