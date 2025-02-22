@@ -37,8 +37,8 @@ const ArtDisplay = () => {
                 {/* Kvadratisk bildecontainer */}
                 <div className="w-full aspect-square overflow-hidden">
                   <img
-                    src={facility?.carouselImages[0]?.asset?.url}
-                    alt={facility?.carouselImages[0]?.altText}
+                    src={facility?.mainImage?.asset?.url}
+                    alt={facility?.mainImage?.altText}
                     className="w-full h-full object-cover"
                   />
                 </div>

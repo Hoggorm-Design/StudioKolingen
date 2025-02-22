@@ -95,51 +95,64 @@ const MakersSpaceContent = () => {
                           .map((block, index) => <p key={index}>{block}</p>)}
                       </div>
                     </div>
-                    {selectedPost.regularImages
-                      ?.slice(0, 1)
-                      .map((image, index) => (
-                        <div
-                          key={index}
-                          className="lg:w-1/2 w-full aspect-square overflow-hidden order-1 lg:order-2 "
-                        >
-                          <img
-                            className="w-full h-full object-cover"
-                            src={image?.asset?.url}
-                            alt={image?.altText || `Image ${index + 1}`}
-                          />
-                        </div>
-                      ))}
+                    {selectedPost.mainImage && (
+                      <div className="lg:w-1/2 w-full aspect-square overflow-hidden order-1 lg:order-2 ">
+                        <img
+                          className="w-full h-full object-cover"
+                          src={selectedPost.mainImage?.asset?.url}
+                          alt={selectedPost.mainImage?.altText || ""}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {selectedPost &&
                   (() => {
-                    const filteredImages = selectedPost.regularImages
-                      ?.slice(1, 4)
-                      .filter((image) => image?.asset); // Fjern tomme bilder
+                    const additionalImages =
+                      selectedPost.images.filter((img) => img?.asset) || [];
+                    const imageCount = additionalImages.length;
 
-                    const imageCount = filteredImages.length; // Tell antall bilder
+                    if (imageCount > 4) {
+                      return (
+                        <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
+                          <MyCarousel images={additionalImages} />
+                        </section>
+                      );
+                    }
 
                     return (
-                      <article
-                        className={`grid gap-16 px-5 sm:px-10 pt-16
-          ${imageCount === 1 ? "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]" : ""}
-          ${imageCount === 2 ? "grid-cols-2 place-content-center gap-8 lg:px-[10vw]" : ""}
-          ${imageCount >= 3 ? "grid-cols-1 md:grid-cols-3" : ""}`}
-                      >
-                        {filteredImages.map((image, index) => (
-                          <div
-                            key={index}
-                            className="w-full aspect-square overflow-hidden"
-                          >
-                            <img
-                              className="w-full h-full object-cover"
-                              src={image?.asset?.url}
-                              alt={image?.altText || `Image ${index + 1}`}
-                            />
-                          </div>
-                        ))}
-                      </article>
+                      <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
+                        <article
+                          className={`grid gap-16 px-5 sm:px-10 pt-16
+                          ${
+                            imageCount === 1
+                              ? "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]"
+                              : ""
+                          }
+                          ${
+                            imageCount === 2
+                              ? "grid-cols-2 place-content-center gap-8 lg:px-[10vw]"
+                              : ""
+                          }
+                          ${
+                            imageCount >= 3 ? "grid-cols-1 md:grid-cols-3" : ""
+                          }`}
+                        >
+                          {additionalImages.map((img, index) => (
+                            <div
+                              key={index}
+                              className="w-full aspect-square overflow-hidden"
+                            >
+                              <img
+                                className="w-full h-full object-cover"
+                                src={img.asset.url}
+                                alt={img.altText || `Image ${index + 1}`}
+                              />
+                            </div>
+                          ))}
+                        </article>
+                      </section>
                     );
                   })()}
               </article>
@@ -147,7 +160,6 @@ const MakersSpaceContent = () => {
               {/* Text Blocks Section */}
               <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
                 <div className="bg-white flex flex-col gap-10">
-                  {/* Displaying Plain Text Blocks */}
                   {selectedPost.textBlocks?.map((block, index) => (
                     <p key={index}>{block}</p>
                   ))}
@@ -159,14 +171,6 @@ const MakersSpaceContent = () => {
           {/* Makers Space Cards Section */}
           {selectedPost && (
             <article className="bg-[#1a1a2e] px-5 sm:px-10 pb-14 pt-12 lg:pt-8">
-              {/* Carousel Component */}
-              <MyCarousel
-                images={selectedPost.carouselImages?.filter(
-                  (image) => image?.asset,
-                )}
-              />
-
-              {/* More Posts Section */}
               <section className="bg-[#1D192C] pt-14 space-y-4">
                 <h3 className="pb-4 text-[#fffdf8]">More Posts</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-12 xl:gap-14">

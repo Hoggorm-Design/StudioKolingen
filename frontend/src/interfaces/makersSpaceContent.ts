@@ -1,18 +1,18 @@
 export interface MakersSpaceContentProps {
   _id: string;
   header: string;
-  _type: "makersSpaceContent";
+  _type: "makersSpaceYears";
   firstTextfield: string[];
   textBlocks: string[];
   links: { name: string; url: string }[];
-  carouselImages: {
+  mainImage: {
     asset: {
       _ref: string;
       url: string;
     };
     altText: string;
-  }[];
-  regularImages: {
+  } | null;
+  images: {
     asset: {
       _ref: string;
       url: string;

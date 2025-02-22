@@ -48,26 +48,21 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'carouselImages',
-      title: 'Carousel Images',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          fields: [
-            defineField({
-              name: 'altText',
-              title: 'Alt Text',
-              type: 'string',
-              description: 'Alternative text for this image',
-            }),
-          ],
-        },
+      name: 'mainImage',
+      title: 'Main image of content',
+      type: 'image',
+      fields: [
+        defineField({
+          name: 'altText',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Alternative text for this image',
+        }),
       ],
     }),
     defineField({
-      name: 'regularImages',
-      title: 'Regular Images',
+      name: 'images',
+      title: 'Images',
       type: 'array',
       of: [
         {

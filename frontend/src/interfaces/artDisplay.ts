@@ -9,5 +9,6 @@ export interface FacilityImage {
 export interface Facilities {
   header: string;
   textBlocks: string[];
-  carouselImages: FacilityImage[];
+  mainImage: FacilityImage;
+  images: FacilityImage[];
 }

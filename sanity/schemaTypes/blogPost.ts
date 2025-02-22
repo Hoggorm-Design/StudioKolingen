@@ -18,28 +18,9 @@ export default defineType({
       of: [{type: 'text'}],
       description: 'Text blocks for a blogpost',
     }),
-
     defineField({
-      name: 'regularImages',
-      title: 'Regular images',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          fields: [
-            defineField({
-              name: 'altText',
-              title: 'Alternative text',
-              type: 'string',
-              description: 'Alternative text for this image',
-            }),
-          ],
-        },
-      ],
-    }),
-    defineField({
-      name: 'carouselImages',
-      title: 'Image carousel',
+      name: 'images',
+      title: 'Images',
       type: 'array',
       of: [
         {

@@ -15,7 +15,13 @@ const useFacilities = () => {
           *[_type == "facilities"]{
             header,
             textBlocks,
-            carouselImages[]{
+            mainImage{
+              asset->{
+                _ref,
+                url
+              }
+            },
+            images[]{
               asset->{
                 _ref,
                 url
