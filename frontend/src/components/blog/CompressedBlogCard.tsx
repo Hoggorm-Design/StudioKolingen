@@ -1,13 +1,14 @@
 import React from "react";
+import { BlogPost } from "../../interfaces/blogposts";
 
 interface BlogCardProps {
-  post: any;
+  post: BlogPost;
   onClick: () => void;
   isMobile: boolean;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, onClick, isMobile }) => {
-  const mainImage = post.regularImages && post.regularImages[0];
+  const mainImage = post.images[0];
   const previewText = post.textBlocks && post.textBlocks[0];
 
   return (

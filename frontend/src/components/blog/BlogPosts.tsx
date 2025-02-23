@@ -67,6 +67,16 @@ const BlogPosts = () => {
   if (isLoading) {
     return null;
   }
+  const getImageGridConfig = (imageCount: number): string => {
+    switch (imageCount) {
+      case 2:
+        return "grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto";
+      case 3:
+        return "grid-cols-1 sm:grid-cols-3";
+      default:
+        return "grid-cols-1 max-w-2xl mx-auto";
+    }
+  };
 
   return (
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
@@ -80,15 +90,13 @@ const BlogPosts = () => {
                 selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
             </section>
             <section className="lg:w-1/2">
-              {selectedPost.regularImages &&
-                selectedPost.regularImages[0] &&
-                selectedPost.regularImages[0].asset && (
+              {selectedPost.images &&
+                selectedPost.images[0] &&
+                selectedPost.images[0].asset && (
                   <div className="w-full aspect-square overflow-hidden">
                     <img
-                      src={selectedPost.regularImages[0].asset.url}
-                      alt={
-                        selectedPost.regularImages[0].altText || "Main image"
-                      }
+                      src={selectedPost.images[0].asset.url}
+                      alt={selectedPost.images[0].altText || "Main image"}
                       className="w-full h-full object-cover object-center"
                     />
                   </div>
@@ -104,52 +112,48 @@ const BlogPosts = () => {
           >
             {showMore && (
               <div>
-                <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
-                  {/* Show additional regular images, if any */}
-                  {selectedPost.regularImages &&
-                    selectedPost.regularImages.length > 1 && (
-                      <div
-                        className={`grid gap-16 xs:gap-8 xl:gap-14 ${
-                          selectedPost.regularImages.length === 2
-                            ? "grid-cols-2 place-content-center lg:px-[10vw]"
-                            : selectedPost.regularImages.length >= 3
-                              ? "grid-cols-1 sm:grid-cols-3"
-                              : "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]"
-                        }`}
-                      >
-                        {selectedPost.regularImages.slice(1).map((img, i) =>
-                          img && img.asset ? (
-                            <div
-                              key={i}
-                              className="w-full aspect-square overflow-hidden"
-                            >
-                              <img
-                                className="w-full h-full object-cover"
-                                src={img.asset.url}
-                                alt={img.altText || `Image ${i + 2}`}
-                              />
-                              {img.altText && (
-                                <p className="text-white">{img.altText}</p>
-                              )}
-                            </div>
-                          ) : null
-                        )}
-                      </div>
-                    )}
-                </section>
+                {/* Carousel Section */}
+                {selectedPost.images.length > 4 ? (
+                  <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
+                    <MyCarousel images={selectedPost.images} />
+                  </section>
+                ) : (
+                  <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
+                    {/* Show additional images, if any */}
+                    {selectedPost.images &&
+                      selectedPost.images.length > 1 &&
+                      selectedPost.images.length <= 4 && (
+                        <div
+                          className={`grid gap-16 xs:gap-8 xl:gap-14 ${getImageGridConfig(selectedPost.images.length - 1)}`}
+                        >
+                          {selectedPost.images.slice(1).map((img, i) =>
+                            img && img.asset ? (
+                              <div
+                                key={i}
+                                className="w-full aspect-square overflow-hidden"
+                              >
+                                <img
+                                  className="w-full h-full object-cover"
+                                  src={img.asset.url}
+                                  alt={img.altText || `Image ${i + 2}`}
+                                />
+                                {img.altText && (
+                                  <p className="text-white text-center mt-2">
+                                    {img.altText}
+                                  </p>
+                                )}
+                              </div>
+                            ) : null
+                          )}
+                        </div>
+                      )}
+                  </section>
+                )}
 
                 <section className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
                   <div className="bg-white flex flex-col gap-10">
                     {/* If you need additional text content, you could use more textBlocks */}
                   </div>
-                </section>
-
-                <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
-                  {/* Carousel Section */}
-                  {selectedPost.carouselImages &&
-                    selectedPost.carouselImages.length > 0 && (
-                      <MyCarousel images={selectedPost.carouselImages} />
-                    )}
                 </section>
               </div>
             )}
@@ -174,6 +178,7 @@ const BlogPosts = () => {
       {/* Blog Cards List */}
       <section className="bg-[#1D192C] px-5 sm:px-10 py-14 space-y-4">
         <h3 className="pb-4 text-white">More Posts</h3>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:sm:grid-cols-3 gap-16 md:gap-12 xl:gap-14">
           {blogPosts
             .filter((post) => post !== selectedPost)

@@ -2,11 +2,7 @@ export interface BlogPost {
   _id: string;
   header: string;
   textBlocks: string[];
-  regularImages: {
-    asset: { _ref: string; url: string };
-    altText?: string;
-  }[];
-  carouselImages: {
+  images: {
     asset: { _ref: string; url: string };
     altText?: string;
   }[];

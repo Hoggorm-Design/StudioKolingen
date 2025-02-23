@@ -21,8 +21,21 @@ export default defineType({
         Rule.required().min(1).max(2).error('Please provide at least 1 text block'),
     }),
     defineField({
-      name: 'carouselImages',
-      title: 'Carousel Images',
+      name: 'mainImage',
+      title: 'Main image of content',
+      type: 'image',
+      fields: [
+        defineField({
+          name: 'altText',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Alternative text for this image',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'images',
+      title: 'Images',
       type: 'array',
       of: [
         {
@@ -37,9 +50,6 @@ export default defineType({
           ],
         },
       ],
-      description: 'Add images to be used in the carousel',
-      validation: (Rule) =>
-        Rule.required().min(2).max(10).error('Please provide at least 2 images'),
     }),
   ],
 })

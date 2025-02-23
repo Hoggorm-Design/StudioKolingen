@@ -16,11 +16,7 @@ export const useBlogPosts = () => {
            _id,
            header,
            textBlocks[],
-           regularImages[]{
-            asset->{_ref, url}, 
-            altText
-            },
-           carouselImages[]{
+           images[]{
             asset->{_ref, url}, 
             altText
             },

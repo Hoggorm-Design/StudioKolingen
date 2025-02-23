@@ -16,67 +16,134 @@ const client = createClient({
   apiVersion: '2023-01-01',
 })
 
-const getImageObject = (image, imageText) => {
+/**
+ * Helper: Given an image object (from any old field),
+ * returns a formatted image object with asset ref and altText.
+ */
+const getImageObject = (image) => {
   if (image && image.asset && typeof image.asset._ref === 'string') {
-    return {asset: {_ref: image.asset._ref}, altText: imageText}
+    // Support either "altText" or "imageText" (as some old docs might use "imageText")
+    return {asset: {_ref: image.asset._ref}, altText: image.altText || image.imageText || ''}
   } else {
-    console.log('No valid image found:', image, imageText)
+    console.log('No valid image found:', image)
+    return null
   }
-  return null
 }
 
+/**
+ * BLOG POSTS MIGRATION
+ * Old fields: regularImages, carouselImages
+ * New field: images (merged)
+ */
 const migrateBlogPosts = async () => {
-  console.log('Starting migration...')
+  console.log('Starting migration for blogPost...')
 
-  const oldPosts = await client.fetch(`
-    *[_type == "blogPost"]{
-      _id, 
-      header, 
-      text1, text2, text3, text4, text5, text6,
-      image1 { asset->{_ref}, imageText1 },
-      image2 { asset->{_ref}, imageText2 },
-      image3 { asset->{_ref}, imageText3 },
-      image4 { asset->{_ref}, imageText4 },
-      image5 { asset->{_ref}, imageText5 },
-      image6 { asset->{_ref}, imageText6 },
-      image7 { asset->{_ref}, imageText7 },
-      image8 { asset->{_ref}, imageText8 },
-      image9 { asset->{_ref}, imageText9 },
-      image10 { asset->{_ref}, imageText10 },
-      publishedAt
+  const posts = await client.fetch(`
+    *[_type == "blogPost" && (defined(regularImages) || defined(carouselImages))]{
+      _id,
+      regularImages,
+      carouselImages
     }
   `)
 
-  const updates = oldPosts.map((post) => ({
-    _id: post._id,
-    _type: 'blogPost',
-    header: post.header,
-    textBlocks: [post.text1, post.text2, post.text3, post.text4, post.text5, post.text6].filter(
-      Boolean,
-    ),
-    regularImages: [
-      getImageObject(post.image1, post.imageText1),
-      getImageObject(post.image2, post.imageText2),
-      getImageObject(post.image3, post.imageText3),
-      getImageObject(post.image4, post.imageText4),
-      getImageObject(post.image5, post.imageText5),
-      getImageObject(post.image6, post.imageText6),
-      getImageObject(post.image7, post.imageText7),
-      getImageObject(post.image8, post.imageText8),
-      getImageObject(post.image9, post.imageText9),
-      getImageObject(post.image10, post.imageText10),
-    ].filter((img) => img !== null),
-    publishedAt: post.publishedAt,
-  }))
+  for (const post of posts) {
+    const regular = post.regularImages || []
+    const carousel = post.carouselImages || []
+    const mergedImages = [...regular, ...carousel].map(getImageObject).filter((img) => img !== null)
 
-  for (const update of updates) {
-    await client.createOrReplace(update)
-    console.log(`Updated blog post: ${update._id}`)
+    await client
+      .patch(post._id)
+      .set({images: mergedImages})
+      .unset(['regularImages', 'carouselImages'])
+      .commit()
+    console.log(`Migrated blog post: ${post._id}`)
   }
-
-  console.log('Migration completed!')
+  console.log('BlogPost migration completed!')
 }
 
-migrateBlogPosts().catch((error) => {
+/**
+ * MAKERS SPACE YEARS MIGRATION
+ * Old fields: carouselImages, regularImages
+ * New fields: mainImage, images
+ * The first image in the merged array becomes mainImage; the rest go into images.
+ */
+const migrateMakersSpaceYears = async () => {
+  console.log('Starting migration for makersSpaceYears...')
+
+  const docs = await client.fetch(`
+    *[_type == "makersSpaceYears" && (defined(regularImages) || defined(carouselImages))]{
+      _id,
+      regularImages,
+      carouselImages
+    }
+  `)
+
+  for (const doc of docs) {
+    const regular = doc.regularImages || []
+    const carousel = doc.carouselImages || []
+    const mergedImages = [...regular, ...carousel].map(getImageObject).filter((img) => img !== null)
+
+    let mainImage = null
+    let images = mergedImages
+    if (mergedImages.length > 0) {
+      mainImage = mergedImages[0]
+      images = mergedImages.slice(1)
+    }
+
+    await client
+      .patch(doc._id)
+      .set({mainImage, images})
+      .unset(['regularImages', 'carouselImages'])
+      .commit()
+    console.log(`Migrated makersSpaceYears document: ${doc._id}`)
+  }
+  console.log('MakersSpaceYears migration completed!')
+}
+
+/**
+ * FACILITIES MIGRATION
+ * Old field: carouselImages
+ * New fields: mainImage, images
+ * The first image becomes mainImage and the remaining become images.
+ */
+const migrateFacilities = async () => {
+  console.log('Starting migration for facilities...')
+
+  const docs = await client.fetch(`
+    *[_type == "facilities" && defined(carouselImages)]{
+      _id,
+      carouselImages
+    }
+  `)
+
+  for (const doc of docs) {
+    const oldImages = doc.carouselImages || []
+    const mergedImages = oldImages.map(getImageObject).filter((img) => img !== null)
+
+    let mainImage = null
+    let images = mergedImages
+    if (mergedImages.length > 0) {
+      mainImage = mergedImages[0]
+      images = mergedImages.slice(1)
+    }
+
+    await client.patch(doc._id).set({mainImage, images}).unset(['carouselImages']).commit()
+    console.log(`Migrated facilities document: ${doc._id}`)
+  }
+  console.log('Facilities migration completed!')
+}
+
+/**
+ * Run all migrations sequentially.
+ */
+const runMigrations = async () => {
+  await migrateBlogPosts()
+  await migrateMakersSpaceYears()
+  await migrateFacilities()
+  console.log('All migrations completed!')
+}
+
+runMigrations().catch((error) => {
   console.error('Migration error:', error)
+  process.exit(1)
 })

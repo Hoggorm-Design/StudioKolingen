@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useLocation from "../../hooks/useLocation.ts";
-import useLinks from "../../hooks/useLink.ts";
-import useContact from "../../hooks/useContactUs.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import useContact from "../../hooks/useContactUs.ts";
+import useLinks from "../../hooks/useLink.ts";
+import useLocation from "../../hooks/useLocation.ts";
 import LocationCarousel from "../LocationCarousel.tsx";
 
 const Location = () => {
@@ -18,9 +18,9 @@ const Location = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(
-    contact?.address || "",
-  )}&output=embed`;
+  // const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(
+  //   contact?.address || ""
+  // )}&output=embed`;
 
   return (
     <>
@@ -31,12 +31,11 @@ const Location = () => {
           {/* Map Display */}
           <section>
             {contact?.address && (
-              <div className="relative w-full min-h-[500px]">
+              <div className="relative w-full min-h-[500px] flex items-center justify-center">
                 <iframe
-                  title="Google Map"
-                  src={mapUrl}
-                  allowFullScreen
-                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.google.com/maps/d/u/0/embed?mid=15gtce907QoUkeUAvp99UP9Opc86NrBM&ehbc=2E312F&noprof=1"
+                  width="640"
+                  height="480"
                 ></iframe>
               </div>
             )}

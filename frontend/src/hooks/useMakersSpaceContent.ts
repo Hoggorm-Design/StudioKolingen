@@ -22,14 +22,13 @@ const useMakersSpaceContent = () => {
             name,  
             url    
           },
-          carouselImages[] {
+          mainImage {
             asset->{
               _ref,
               url
             },
-            altText
           },
-          regularImages[] {
+          images[] {
             asset->{
               _ref,
               url

@@ -1,7 +1,4 @@
-import {
-  faArrowAltCircleLeft,
-  faArrowAltCircleRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Carousel from "react-multi-carousel";
@@ -20,30 +17,26 @@ const ButtonGroup: React.FC<{
       {/* Left Arrow */}
       <button
         onClick={previous}
-        className="hidden sm:block text-white focus:outline-none -left-16 absolute"
+        className="hidden sm:block focus:outline-none absolute -left-16"
         aria-label="Previous slide"
         type="button"
       >
-        <FontAwesomeIcon
-          icon={faArrowAltCircleLeft}
-          size="2x"
-          aria-hidden="true"
-        />
+        <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
+          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+        </div>
         <span className="sr-only">Previous</span>
       </button>
 
       {/* Right Arrow */}
       <button
         onClick={next}
-        className="hidden sm:block text-white focus:outline-none -right-16 absolute"
+        className="hidden sm:block focus:outline-none absolute -right-16"
         aria-label="Next slide"
         type="button"
       >
-        <FontAwesomeIcon
-          icon={faArrowAltCircleRight}
-          size="2x"
-          aria-hidden="true"
-        />
+        <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
+          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+        </div>
         <span className="sr-only">Next</span>
       </button>
     </div>

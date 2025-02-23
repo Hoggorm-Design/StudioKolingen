@@ -1,7 +1,8 @@
 import React from "react";
+import { MakersSpaceContentProps } from "../../interfaces/makersSpaceContent";
 
 const MakersSpaceCard: React.FC<{
-  post: any;
+  post: MakersSpaceContentProps;
   onClick: () => void;
   isMobile: boolean;
 }> = ({ post, onClick, isMobile }) => {
@@ -19,8 +20,8 @@ const MakersSpaceCard: React.FC<{
       {/* Square image container */}
       <div className="w-full aspect-video overflow-hidden">
         <img
-          src={post.regularImages?.[0]?.asset?.url}
-          alt={post.regularImages?.[0]?.altText || "Image 1"}
+          src={post.mainImage?.asset?.url}
+          alt={post.mainImage?.altText || "Image 1"}
           className="w-full h-full object-cover"
         />
       </div>
