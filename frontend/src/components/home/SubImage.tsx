@@ -46,7 +46,7 @@ const SubImage: React.FC = () => {
                       <img
                       src={item.image.asset.url}
                       alt={item.alt}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transform transition duration-500 hover:scale-125 flex justify-center items-center"
                     />
                     </a>
                   </div>
