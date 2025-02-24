@@ -42,11 +42,13 @@ const SubImage: React.FC = () => {
               ].map((item, index) => (
                 <div key={index}>
                   <div className="w-full aspect-square overflow-hidden">
-                    <img
+                    <a href={item.link}>
+                      <img
                       src={item.image.asset.url}
                       alt={item.alt}
                       className="w-full h-full object-cover"
                     />
+                    </a>
                   </div>
 
                   <h4 className="text-white py-2">{item.header}</h4>
