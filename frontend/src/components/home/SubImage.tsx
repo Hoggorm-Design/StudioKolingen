@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useSubImage from "../../hooks/useSubImage.ts";
 import MyCarousel from "./Carousel.tsx";
@@ -10,6 +10,13 @@ import { motion } from "framer-motion";
 const SubImage: React.FC = () => {
   const { subImage } = useSubImage();
   const { isLoading } = useLoading();
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string, postTitle?: string) => {
+    navigate(path, {
+      state: postTitle ? { selectedPost: postTitle } : undefined,
+    });
+  };
 
   return (
     <>
@@ -18,7 +25,6 @@ const SubImage: React.FC = () => {
           <MyCarousel />
 
           <section className="w-screen">
-            {/* Container to display images in a row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 sm:gap-8 xl:gap-14 px-5 py-10 sm:p-10">
               {[
                 {
@@ -26,6 +32,7 @@ const SubImage: React.FC = () => {
                   alt: subImage.alt,
                   header: subImage.header,
                   link: "/blog",
+                  selectedPost: "Emergency residence",
                 },
                 {
                   image: subImage.image2,
@@ -41,7 +48,12 @@ const SubImage: React.FC = () => {
                 },
               ].map((item, index) => (
                 <div key={index}>
-                  <div className="w-full aspect-square overflow-hidden">
+                  <div
+                    className="w-full aspect-square overflow-hidden cursor-pointer"
+                    onClick={() =>
+                      handleNavigation(item.link, item.selectedPost)
+                    }
+                  >
                     <img
                       src={item.image.asset.url}
                       alt={item.alt}
@@ -51,37 +63,15 @@ const SubImage: React.FC = () => {
 
                   <h4 className="text-white py-2">{item.header}</h4>
 
-                  {/* Read More Link with Animation */}
-                  <Link
-                    to={item.link}
-                    className="text-white font-light text-md inline-block"
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover="hover"
                   >
-                    <motion.div
-                      className="flex items-center gap-2"
-                      whileHover="hover"
-                      initial="initial"
-                    >
-                      <motion.span
-                        variants={{
-                          initial: { opacity: 1 },
-                          hover: { opacity: 0.75 },
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        Read more
-                      </motion.span>
-
-                      <motion.span
-                        variants={{
-                          initial: { opacity: 1, x: 0 },
-                          hover: { opacity: 0.75, x: 5 }, // Moves right & fades
-                        }}
-                        transition={{ type: "tween", duration: 0.3 }}
-                      >
-                        <FontAwesomeIcon icon={faChevronRight} />
-                      </motion.span>
-                    </motion.div>
-                  </Link>
+                    <motion.span>Read more</motion.span>
+                    <motion.span>
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </motion.span>
+                  </motion.div>
                 </div>
               ))}
             </div>
