@@ -47,7 +47,10 @@ const SubImage: React.FC = () => {
                   link: "/blog",
                 },
               ].map((item, index) => (
-                <div className="sm:hover:scale-105 " key={index}>
+                <div
+                  className="sm:transform sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:cursor-pointer"
+                  key={index}
+                >
                   <div
                     className="w-full aspect-square overflow-hidden cursor-pointer"
                     onClick={() =>
