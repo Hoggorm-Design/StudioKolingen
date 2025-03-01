@@ -17,15 +17,9 @@ const BlogPosts = () => {
   const { blogPosts } = useBlogPosts();
   const { isLoading } = useLoading();
   const [showMore, setShowMore] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(
-    location.state?.selectedPost || null
-  );
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [visiblePosts, setVisiblePosts] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
-
-  const handleSeeMore = () => {
-    setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
-  };
 
   useEffect(() => {
     const updateIsMobile = () => {
@@ -39,11 +33,20 @@ const BlogPosts = () => {
 
   useEffect(() => {
     if (location.state?.selectedPost) {
-      setSelectedPost(location.state.selectedPost);
+      const foundPost = blogPosts.find(
+        (post) => post.header === location.state.selectedPost,
+      );
+      if (foundPost) {
+        setSelectedPost(foundPost);
+      }
     } else if (!selectedPost && blogPosts.length > 0) {
       setSelectedPost(blogPosts[0]);
     }
-  }, [location.state, blogPosts, selectedPost]);
+  }, [location.state, blogPosts]);
+
+  const handleSeeMore = () => {
+    setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
+  };
 
   const handleShowMoreClick = () => {
     if (showMore) {
@@ -67,6 +70,7 @@ const BlogPosts = () => {
   if (isLoading) {
     return null;
   }
+
   const getImageGridConfig = (imageCount: number): string => {
     switch (imageCount) {
       case 2:
@@ -82,7 +86,6 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-          {/* Blog Post Details */}
           <section className="flex flex-col lg:flex-row w-full gap-16 px-5 sm:px-10 py-14 justify-center">
             <section className="flex flex-col lg:w-1/2 space-y-4">
               <h1>{selectedPost.header}</h1>
@@ -104,7 +107,6 @@ const BlogPosts = () => {
             </section>
           </section>
 
-          {/* Animated Content Section */}
           <div
             className={`transition-all duration-500 overflow-hidden ${
               showMore ? "max-h-[10000px] opacity-100" : "max-h-0 opacity-0"
@@ -112,14 +114,12 @@ const BlogPosts = () => {
           >
             {showMore && (
               <div>
-                {/* Carousel Section */}
                 {selectedPost.images.length > 4 ? (
                   <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
                     <MyCarousel images={selectedPost.images} />
                   </section>
                 ) : (
                   <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
-                    {/* Show additional images, if any */}
                     {selectedPost.images &&
                       selectedPost.images.length > 1 &&
                       selectedPost.images.length <= 4 && (
@@ -143,23 +143,19 @@ const BlogPosts = () => {
                                   </p>
                                 )}
                               </div>
-                            ) : null
+                            ) : null,
                           )}
                         </div>
                       )}
                   </section>
                 )}
-
                 <section className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
-                  <div className="bg-white flex flex-col gap-10">
-                    {/* If you need additional text content, you could use more textBlocks */}
-                  </div>
+                  <div className="bg-white flex flex-col gap-10"></div>
                 </section>
               </div>
             )}
           </div>
 
-          {/* Toggle Show More Button */}
           <div className="flex justify-center">
             <button
               className="w-screen text-left px-10 py-4 text-white font-light bg-[#B22C2B]"
@@ -175,7 +171,6 @@ const BlogPosts = () => {
         </div>
       )}
 
-      {/* Blog Cards List */}
       <section className="bg-[#1D192C] px-5 sm:px-10 py-14 space-y-4">
         <h3 className="pb-4 text-white">More Posts</h3>
 
