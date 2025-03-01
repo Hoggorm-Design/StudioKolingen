@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useSubImage from "../../hooks/useSubImage.ts";
 import MyCarousel from "./Carousel.tsx";
@@ -62,16 +62,25 @@ const SubImage: React.FC = () => {
                   </div>
 
                   <h4 className="text-white py-2">{item.header}</h4>
-
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover="hover"
+                  <Link
+                    to={item.link}
+                    state={
+                      item.selectedPost
+                        ? { selectedPost: item.selectedPost }
+                        : undefined
+                    }
+                    className="text-white font-light text-md inline-block"
                   >
-                    <motion.span>Read more</motion.span>
-                    <motion.span>
-                      <FontAwesomeIcon icon={faChevronRight} />
-                    </motion.span>
-                  </motion.div>
+                    <motion.div
+                      className="flex items-center gap-2 sm:hidden"
+                      whileHover="hover"
+                    >
+                      <motion.span>Read more</motion.span>
+                      <motion.span>
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </motion.span>
+                    </motion.div>
+                  </Link>
                 </div>
               ))}
             </div>
