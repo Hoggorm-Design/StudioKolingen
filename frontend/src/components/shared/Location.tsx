@@ -34,8 +34,8 @@ const Location = () => {
               <div className="relative w-full min-h-[500px] flex items-center justify-center">
                 <iframe
                   src="https://www.google.com/maps/d/u/0/embed?mid=15gtce907QoUkeUAvp99UP9Opc86NrBM&ehbc=2E312F&noprof=1"
-                  width="800"
-                  height="550"
+                  width="100%"
+                  height="500"
                 ></iframe>
               </div>
             )}

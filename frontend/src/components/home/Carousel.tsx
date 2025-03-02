@@ -14,7 +14,7 @@ const ButtonGroup: React.FC<{
 }> = ({ next, previous }) => {
   return (
     <div
-      className="absolute top-[40%] w-full flex justify-between items-center"
+      className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between items-center"
       role="group"
       aria-label="Carousel Navigation"
     >
@@ -138,7 +138,7 @@ const MyCarousel: React.FC = () => {
                 <img
                   src={image?.image?.asset?.url}
                   alt={image?.alt || `Carousel image ${index + 1}`}
-                  className="w-[90%] mx-auto h-full object-cover"
+                  className="w-[90%] mx-auto h-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200"
                   onClick={() => handleImageClick(image?.image)}
                 />
                 <ImageModal

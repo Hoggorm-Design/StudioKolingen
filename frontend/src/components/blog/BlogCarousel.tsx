@@ -139,7 +139,7 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
                 <img
                   src={image?.asset.url}
                   alt={image?.alt || `Blog image ${index + 1}`}
-                  className="w-full h-full object-cover hover:cursor-pointer"
+                  className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200"
                   onClick={() => handleImageClick(image)}
                 />
               </div>

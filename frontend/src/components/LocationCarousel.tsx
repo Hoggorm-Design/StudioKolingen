@@ -119,7 +119,7 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
           {links.map((link, index) => (
             <div
               key={index}
-              className="w-full h-[350px] flex-shrink-0 overflow-hidden"
+              className="w-full h-[350px] flex-shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-200"
               role="group"
               aria-roledescription="slide"
               aria-label={`Slide ${index + 1} of ${links.length}`}
