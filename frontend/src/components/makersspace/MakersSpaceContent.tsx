@@ -161,15 +161,17 @@ const MakersSpaceContent = () => {
               </article>
 
               {/* Text Blocks Section */}
-              <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
-                <div className="bg-white flex flex-col gap-4">
-                  {selectedPost.textBlocks?.map((block, index) => (
-                    <p key={index}>{block}</p>
-                  ))}
-                </div>
-              </article>
+              {selectedPost.textBlocks?.length > 0 && (
+                <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
+                  <div className="bg-white flex flex-col gap-4">
+                    {selectedPost.textBlocks.map((block, index) => (
+                      <p key={index}>{block}</p>
+                    ))}
+                  </div>
+                </article>
+              )}
 
-              {selectedPost &&
+              {selectedPost.images2?.length > 0 &&
                 (() => {
                   const additionalImages2 =
                     selectedPost.images2.filter((img) => img?.asset) || [];
@@ -217,14 +219,17 @@ const MakersSpaceContent = () => {
                     </section>
                   );
                 })()}
-              {/* Text Blocks Section */}
-              <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
-                <div className="bg-white flex flex-col gap-4">
-                  {selectedPost.textBlocks2?.map((block, index) => (
-                    <p key={index}>{block}</p>
-                  ))}
-                </div>
-              </article>
+
+              {/* Text Blocks 2 Section */}
+              {selectedPost.textBlocks2?.length > 0 && (
+                <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
+                  <div className="bg-white flex flex-col gap-4">
+                    {selectedPost.textBlocks2?.map((block, index) => (
+                      <p key={index}>{block}</p>
+                    ))}
+                  </div>
+                </article>
+              )}
             </section>
           )}
 
