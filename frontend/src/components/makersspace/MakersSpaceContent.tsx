@@ -65,16 +65,19 @@ const MakersSpaceContent = () => {
                 {/* Artists info */}
                 <div className="bg-white flex flex-col gap-10 w-screen px-5 sm:px-10">
                   <div className="flex flex-col lg:flex-row w-full gap-12 lg:gap-44 py-14 items-start">
-                    <div className="flex flex-col lg:w-1/2 space-y-8">
+                    <div className="flex flex-col lg:w-1/2 space-y-4">
                       <h2 className="text-black">{selectedPost.header}</h2>
-                      <div className="bg-white flex flex-col gap-10 w-full">
+                      <div className="bg-white flex flex-col w-full">
                         {/* Displaying Only the First Text Block */}
                         {selectedPost.firstTextfield
-                          ?.slice(0, 2)
+                          ?.slice(0, 1)
                           .map((block, index) => <p key={index}>{block}</p>)}
                       </div>
                       {/* Displaying Text Blocks with Links */}
-                      <div>
+                      <div className="space-y-2">
+                        {selectedPost.firstTextfield
+                          ?.slice(1, 2)
+                          .map((block, index) => <p key={index}>{block}</p>)}
                         {selectedPost.links?.map((block, index) => (
                           <p key={index}>
                             <a
@@ -159,7 +162,7 @@ const MakersSpaceContent = () => {
 
               {/* Text Blocks Section */}
               <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
-                <div className="bg-white flex flex-col gap-10">
+                <div className="bg-white flex flex-col gap-4">
                   {selectedPost.textBlocks?.map((block, index) => (
                     <p key={index}>{block}</p>
                   ))}
