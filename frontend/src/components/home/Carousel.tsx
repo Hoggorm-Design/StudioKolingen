@@ -1,12 +1,12 @@
-import {
-  faArrowAltCircleLeft,
-  faArrowAltCircleRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import useCarousel from "../../hooks/useCarousel.ts";
+import { Image } from "../blog/BlogCarousel.tsx";
+import ImageModal from "../shared/ImageModal.tsx";
 
 const ButtonGroup: React.FC<{
   next: () => void;
@@ -14,28 +14,34 @@ const ButtonGroup: React.FC<{
 }> = ({ next, previous }) => {
   return (
     <div
-      className="absolute top-[40%] w-full flex justify-between items-center"
+      className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between items-center"
       role="group"
       aria-label="Carousel Navigation"
     >
       {/* Left Arrow */}
       <button
         onClick={previous}
-        className="hidden sm:block text-white focus:outline-none -left-16 absolute"
-        aria-label="Previous Slide"
+        className="hidden sm:block focus:outline-none absolute -left-16"
+        aria-label="Previous slide"
         type="button"
       >
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} size="2x" />
+        <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
+          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+        </div>
+        <span className="sr-only">Previous</span>
       </button>
 
       {/* Right Arrow */}
       <button
         onClick={next}
-        className="hidden sm:block text-white focus:outline-none -right-16 absolute"
+        className="hidden sm:block focus:outline-none absolute -right-16"
         aria-label="Next slide"
         type="button"
       >
-        <FontAwesomeIcon icon={faArrowAltCircleRight} size="2x" />
+        <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
+          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+        </div>
+        <span className="sr-only">Next</span>
       </button>
     </div>
   );
@@ -61,6 +67,11 @@ const CustomDot: React.FC<{
 
 const MyCarousel: React.FC = () => {
   const { carousels } = useCarousel();
+
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+  const handleImageClick = (image: Image) => {
+    setSelectedImage(image);
+  };
 
   const responsive = {
     desktop: {
@@ -125,9 +136,14 @@ const MyCarousel: React.FC = () => {
                 aria-label={`Slide ${index + 1} of ${carousels.length}`}
               >
                 <img
-                  src={image.image.asset.url}
-                  alt={image.alt || `Carousel image ${index + 1}`}
-                  className="w-[90%] mx-auto h-full object-cover"
+                  src={image?.image?.asset?.url}
+                  alt={image?.alt || `Carousel image ${index + 1}`}
+                  className="w-[90%] mx-auto h-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                  onClick={() => handleImageClick(image?.image)}
+                />
+                <ImageModal
+                  selectedImage={selectedImage}
+                  setSelectedImage={setSelectedImage}
                 />
               </div>
             ))}

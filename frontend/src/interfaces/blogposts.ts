@@ -6,5 +6,7 @@ export interface BlogPost {
     asset: { _ref: string; url: string };
     altText?: string;
   }[];
+  textBlocks2: string[];
+
   publishedAt: string;
 }

@@ -1,13 +1,13 @@
-import useContact from "../../hooks/useContactUs.ts";
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {
   faEnvelope,
-  faPhone,
   faMapMarkerAlt,
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import useContact from "../../hooks/useContactUs.ts";
 
 const ContactUs: React.FC = () => {
   const { contact } = useContact();
@@ -52,7 +52,7 @@ const ContactUs: React.FC = () => {
                 />
                 <a
                   href={`https://www.google.com/maps/search/${encodeURIComponent(
-                    contact.address,
+                    contact.address
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"

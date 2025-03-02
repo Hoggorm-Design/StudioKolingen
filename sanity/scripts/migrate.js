@@ -1,4 +1,3 @@
-/* eslint-env node */
 const {createClient} = require('@sanity/client')
 
 const token = process.env.SANITY_TOKEN
@@ -18,12 +17,18 @@ const client = createClient({
 
 /**
  * Helper: Given an image object (from any old field),
- * returns a formatted image object with asset ref and altText.
+ * returns a formatted image object with asset ref and alt text.
  */
-const getImageObject = (image) => {
+const getImageObject = (image, altText) => {
   if (image && image.asset && typeof image.asset._ref === 'string') {
-    // Support either "altText" or "imageText" (as some old docs might use "imageText")
-    return {asset: {_ref: image.asset._ref}, altText: image.altText || image.imageText || ''}
+    return {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: image.asset._ref,
+      },
+      alt: altText || '',
+    }
   } else {
     console.log('No valid image found:', image)
     return null
@@ -31,115 +36,90 @@ const getImageObject = (image) => {
 }
 
 /**
- * BLOG POSTS MIGRATION
- * Old fields: regularImages, carouselImages
- * New field: images (merged)
+ * Top 3 images migration
  */
-const migrateBlogPosts = async () => {
-  console.log('Starting migration for blogPost...')
+const migrateTop3Images = async () => {
+  console.log('Starting migration for frontPageTop3Images...')
 
-  const posts = await client.fetch(`
-    *[_type == "blogPost" && (defined(regularImages) || defined(carouselImages))]{
-      _id,
-      regularImages,
-      carouselImages
+  try {
+    // Fetch all documents of the old schema type
+    const oldDocuments = await client.fetch(`*[_type == "frontPageTop3Images"]`)
+
+    if (oldDocuments.length === 0) {
+      console.log('No frontPageTop3Images documents found to migrate')
+      return
     }
-  `)
 
-  for (const post of posts) {
-    const regular = post.regularImages || []
-    const carousel = post.carouselImages || []
-    const mergedImages = [...regular, ...carousel].map(getImageObject).filter((img) => img !== null)
+    console.log(`Found ${oldDocuments.length} frontPageTop3Images documents to migrate`)
 
-    await client
-      .patch(post._id)
-      .set({images: mergedImages})
-      .unset(['regularImages', 'carouselImages'])
-      .commit()
-    console.log(`Migrated blog post: ${post._id}`)
+    // For each old document, create 3 new documents
+    for (const oldDoc of oldDocuments) {
+      // Create three new documents, one for each image in the old document
+      const newDocuments = []
+
+      // First image
+      if (oldDoc.image && oldDoc.image.asset) {
+        const newDoc1 = {
+          _type: 'imagePageLink',
+          header: oldDoc.header || '',
+          image: getImageObject(oldDoc.image, oldDoc.alt),
+        }
+        newDocuments.push(newDoc1)
+      }
+
+      // Second image
+      if (oldDoc.image2 && oldDoc.image2.asset) {
+        const newDoc2 = {
+          _type: 'imagePageLink',
+          header: oldDoc.header2 || '',
+          image: getImageObject(oldDoc.image2, oldDoc.alt2),
+        }
+        newDocuments.push(newDoc2)
+      }
+
+      // Third image
+      if (oldDoc.image3 && oldDoc.image3.asset) {
+        const newDoc3 = {
+          _type: 'imagePageLink',
+          header: oldDoc.header3 || '',
+          image: getImageObject(oldDoc.image3, oldDoc.alt3),
+        }
+        newDocuments.push(newDoc3)
+      }
+
+      // Create all the new documents
+      for (const newDoc of newDocuments) {
+        try {
+          const result = await client.create(newDoc)
+          console.log(`Created new imagePageLink document with ID: ${result._id}`)
+        } catch (err) {
+          console.error('Error creating new document:', err)
+        }
+      }
+
+      // Optionally: Delete or archive the old document after successful migration
+      // Uncomment this if you want to remove old documents
+
+      // try {
+      //   await client.d(oldDoc._id)
+      //   console.log(`Deleted old document with ID: ${oldDoc._id}`)
+      // } catch (err) {
+      //   console.error(`Error deleting old document ${oldDoc._id}:`, err)
+      // }
+    }
+
+    console.log('frontPageTop3Images migration completed')
+  } catch (error) {
+    console.error('Error during frontPageTop3Images migration:', error)
   }
-  console.log('BlogPost migration completed!')
-}
-
-/**
- * MAKERS SPACE YEARS MIGRATION
- * Old fields: carouselImages, regularImages
- * New fields: mainImage, images
- * The first image in the merged array becomes mainImage; the rest go into images.
- */
-const migrateMakersSpaceYears = async () => {
-  console.log('Starting migration for makersSpaceYears...')
-
-  const docs = await client.fetch(`
-    *[_type == "makersSpaceYears" && (defined(regularImages) || defined(carouselImages))]{
-      _id,
-      regularImages,
-      carouselImages
-    }
-  `)
-
-  for (const doc of docs) {
-    const regular = doc.regularImages || []
-    const carousel = doc.carouselImages || []
-    const mergedImages = [...regular, ...carousel].map(getImageObject).filter((img) => img !== null)
-
-    let mainImage = null
-    let images = mergedImages
-    if (mergedImages.length > 0) {
-      mainImage = mergedImages[0]
-      images = mergedImages.slice(1)
-    }
-
-    await client
-      .patch(doc._id)
-      .set({mainImage, images})
-      .unset(['regularImages', 'carouselImages'])
-      .commit()
-    console.log(`Migrated makersSpaceYears document: ${doc._id}`)
-  }
-  console.log('MakersSpaceYears migration completed!')
-}
-
-/**
- * FACILITIES MIGRATION
- * Old field: carouselImages
- * New fields: mainImage, images
- * The first image becomes mainImage and the remaining become images.
- */
-const migrateFacilities = async () => {
-  console.log('Starting migration for facilities...')
-
-  const docs = await client.fetch(`
-    *[_type == "facilities" && defined(carouselImages)]{
-      _id,
-      carouselImages
-    }
-  `)
-
-  for (const doc of docs) {
-    const oldImages = doc.carouselImages || []
-    const mergedImages = oldImages.map(getImageObject).filter((img) => img !== null)
-
-    let mainImage = null
-    let images = mergedImages
-    if (mergedImages.length > 0) {
-      mainImage = mergedImages[0]
-      images = mergedImages.slice(1)
-    }
-
-    await client.patch(doc._id).set({mainImage, images}).unset(['carouselImages']).commit()
-    console.log(`Migrated facilities document: ${doc._id}`)
-  }
-  console.log('Facilities migration completed!')
 }
 
 /**
  * Run all migrations sequentially.
  */
 const runMigrations = async () => {
-  await migrateBlogPosts()
-  await migrateMakersSpaceYears()
-  await migrateFacilities()
+  await migrateTop3Images()
+
   console.log('All migrations completed!')
 }
 

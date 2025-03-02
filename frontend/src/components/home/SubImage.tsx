@@ -1,14 +1,13 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useLoading } from "../../context/LoadingContext.tsx";
-import useSubImage from "../../hooks/useSubImage.ts";
-import MyCarousel from "./Carousel.tsx";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoading } from "../../context/LoadingContext.tsx";
+import useSubImages from "../../hooks/useSubImages.ts";
+import MyCarousel from "./Carousel.tsx";
 
-const SubImage: React.FC = () => {
-  const { subImage } = useSubImage();
+const SubImage = () => {
+  const { subImages } = useSubImages();
   const { isLoading } = useLoading();
   const navigate = useNavigate();
 
@@ -18,35 +17,34 @@ const SubImage: React.FC = () => {
     });
   };
 
+  const headerToLink = (header: string) => {
+    const mapping: Record<string, string> = {
+      "Emergency residence": "/blog",
+      "Makers Space": "/makersspace",
+    };
+    return mapping[header] || "/blog";
+  };
+
+  const mappedSubImages = subImages
+    .map((item) => [
+      {
+        image: item.image.asset.url,
+        alt: item.image.alt,
+        header: item.header,
+        link: headerToLink(item.header),
+        selectedPost: item.header,
+      },
+    ])
+    .flat();
   return (
     <>
-      {!isLoading && subImage && (
+      {!isLoading && subImages && (
         <section className="bg-[#1a1a2e] py-10 w-screen mx:overflow-x-hidden">
           <MyCarousel />
 
           <section className="w-screen">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 sm:gap-8 xl:gap-14 px-5 py-10 sm:p-10">
-              {[
-                {
-                  image: subImage.image,
-                  alt: subImage.alt,
-                  header: subImage.header,
-                  link: "/blog",
-                  selectedPost: "Emergency residence",
-                },
-                {
-                  image: subImage.image2,
-                  alt: subImage.alt2,
-                  header: subImage.header2,
-                  link: "/makersspace",
-                },
-                {
-                  image: subImage.image3,
-                  alt: subImage.alt3,
-                  header: subImage.header3,
-                  link: "/blog",
-                },
-              ].map((item, index) => (
+              {mappedSubImages.map((item, index) => (
                 <div
                   className="sm:transform sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:cursor-pointer"
                   key={index}
@@ -58,7 +56,7 @@ const SubImage: React.FC = () => {
                     }
                   >
                     <img
-                      src={item.image.asset.url}
+                      src={item.image}
                       alt={item.alt}
                       className="w-full h-full object-cover"
                     />
