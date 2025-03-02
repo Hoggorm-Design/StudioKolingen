@@ -13,7 +13,7 @@ export default defineType({
     }),
     defineField({
       name: 'textBlocks',
-      title: 'Text Content',
+      title: 'Text Content 1',
       type: 'array',
       of: [{type: 'text'}],
       description: 'Text blocks for a blogpost',
@@ -35,6 +35,14 @@ export default defineType({
           ],
         },
       ],
+    }),
+
+    defineField({
+      name: 'textBlocks2',
+      title: 'Text Content 2',
+      type: 'array',
+      of: [{type: 'text'}],
+      description: 'More Text blocks for a blogpost',
     }),
 
     defineField({

@@ -6,10 +6,10 @@ import SubImage from "../components/home/SubImage.tsx";
 import DesktopNavbarHome from "../components/shared/DesktopNavbarHome.tsx";
 import Footer from "../components/shared/Footer.tsx";
 import Location from "../components/shared/Location.tsx";
-import Prices from "../components/shared/Prices.tsx";
-import { useLoading } from "../context/LoadingContext.tsx";
-import SubNavbarMobile from "../components/shared/SubNavbarMobile.tsx";
 import MobileNavbarHome from "../components/shared/MobileNavbarHome.tsx";
+import Prices from "../components/shared/Prices.tsx";
+import SubNavbarMobile from "../components/shared/SubNavbarMobile.tsx";
+import { useLoading } from "../context/LoadingContext.tsx";
 
 const Home = () => {
   const { setIsLoading } = useLoading();

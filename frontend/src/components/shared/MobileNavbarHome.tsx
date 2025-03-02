@@ -1,7 +1,7 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { Squash } from "hamburger-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Squash } from "hamburger-react";
-import { motion, AnimatePresence } from "framer-motion";
 import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
@@ -26,7 +26,7 @@ const MobileNavbarHome: React.FC = () => {
 
             // Only update state if value actually changes (prevents flickering)
             setShowLogo((prev) =>
-              prev !== shouldShowLogo ? shouldShowLogo : prev,
+              prev !== shouldShowLogo ? shouldShowLogo : prev
             );
           }
 

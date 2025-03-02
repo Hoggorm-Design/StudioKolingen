@@ -21,6 +21,7 @@
     "hamburger-react": "^2.5.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-modal": "^3.16.3",
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^7.1.0",
     "react-scroll": "^1.9.0"
@@ -29,6 +30,7 @@
     "@eslint/js": "^9.17.0",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
+    "@types/react-modal": "^3.16.3",
     "@types/react-scroll": "^1.8.10",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",

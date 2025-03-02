@@ -1,6 +1,8 @@
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
+import ImageModal from "../shared/ImageModal";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -70,6 +72,10 @@ export interface Image {
 }
 
 const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+  const handleImageClick = (image: Image) => {
+    setSelectedImage(image);
+  };
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1280 },
@@ -133,10 +139,15 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
                 <img
                   src={image?.asset.url}
                   alt={image?.alt || `Blog image ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover cursor-pointer"
+                  onClick={() => handleImageClick(image)}
                 />
               </div>
               <p className="text-center text-white">{image?.altText || ""}</p>
+              <ImageModal
+                selectedImage={selectedImage}
+                setSelectedImage={setSelectedImage}
+              />
             </React.Fragment>
           ))}
         </Carousel>

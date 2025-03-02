@@ -20,6 +20,7 @@ export const useBlogPosts = () => {
             asset->{_ref, url}, 
             altText
             },
+            textBlocks2[],
            publishedAt
          }
        `;

@@ -1,3 +1,4 @@
+import Modal from "react-modal";
 import { Route, Routes, useLocation } from "react-router-dom";
 import DesktopNavbar from "./components/shared/DesktopNavbar.tsx";
 import MobileNavbar from "./components/shared/MobileNavbar.tsx";
@@ -11,6 +12,8 @@ import MakersSpace from "./pages/MakersSpace.tsx";
 
 const App = () => {
   const location = useLocation();
+  Modal.setAppElement("#root"); // Make sure this matches your root div in index.html
+
   return (
     <div>
       {location.pathname !== "/" && <MobileNavbar />}

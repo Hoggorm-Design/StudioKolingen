@@ -34,7 +34,7 @@ const BlogPosts = () => {
   useEffect(() => {
     if (location.state?.selectedPost) {
       const foundPost = blogPosts.find(
-        (post) => post.header === location.state.selectedPost,
+        (post) => post.header === location.state.selectedPost
       );
       if (foundPost) {
         setSelectedPost(foundPost);
@@ -42,7 +42,7 @@ const BlogPosts = () => {
     } else if (!selectedPost && blogPosts.length > 0) {
       setSelectedPost(blogPosts[0]);
     }
-  }, [location.state, blogPosts]);
+  }, [location.state, blogPosts, selectedPost]);
 
   const handleSeeMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
@@ -143,14 +143,19 @@ const BlogPosts = () => {
                                   </p>
                                 )}
                               </div>
-                            ) : null,
+                            ) : null
                           )}
                         </div>
                       )}
                   </section>
                 )}
                 <section className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
-                  <div className="bg-white flex flex-col gap-10"></div>
+                  <div className="bg-white flex flex-col gap-4">
+                    {selectedPost.textBlocks2 &&
+                      selectedPost.textBlocks2.map((text, index) => (
+                        <p key={index}>{text}</p>
+                      ))}
+                  </div>
                 </section>
               </div>
             )}
