@@ -61,7 +61,7 @@ const MakersSpaceContent = () => {
           {/* Selected Post Section */}
           {selectedPost && (
             <section>
-              <article className="bg-[#1a1a2e] py-14 w-full">
+              <article className="bg-[#1a1a2e] pt-14 w-full">
                 {/* Artists info */}
                 <div className="bg-white flex flex-col gap-10 w-screen px-5 sm:px-10">
                   <div className="flex flex-col lg:flex-row w-full gap-12 lg:gap-44 py-14 items-start">
@@ -118,7 +118,7 @@ const MakersSpaceContent = () => {
 
                     if (imageCount > 4) {
                       return (
-                        <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
+                        <section className="bg-[#1D192C] sm:px-10 py-12 sm:py-4 space-y-10">
                           <MyCarousel images={additionalImages} />
                         </section>
                       );
@@ -164,6 +164,63 @@ const MakersSpaceContent = () => {
               <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
                 <div className="bg-white flex flex-col gap-4">
                   {selectedPost.textBlocks?.map((block, index) => (
+                    <p key={index}>{block}</p>
+                  ))}
+                </div>
+              </article>
+
+              {selectedPost &&
+                (() => {
+                  const additionalImages2 =
+                    selectedPost.images2.filter((img) => img?.asset) || [];
+                  const imageCount = additionalImages2.length;
+
+                  if (imageCount > 4) {
+                    return (
+                      <section className="bg-[#1D192C] sm:px-10 py-12 sm:py-4 space-y-10">
+                        <MyCarousel images={additionalImages2} />
+                      </section>
+                    );
+                  }
+
+                  return (
+                    <section className="bg-[#1D192C] px-5 sm:px-10 pb-14">
+                      <article
+                        className={`grid gap-16 px-5 sm:px-10 pt-16
+                          ${
+                            imageCount === 1
+                              ? "grid-cols-1 place-items-center md:px-[20vw] lg:px-[30vw]"
+                              : ""
+                          }
+                          ${
+                            imageCount === 2
+                              ? "grid-cols-2 place-content-center gap-8 lg:px-[10vw]"
+                              : ""
+                          }
+                          ${
+                            imageCount >= 3 ? "grid-cols-1 md:grid-cols-3" : ""
+                          }`}
+                      >
+                        {additionalImages2.map((img, index) => (
+                          <div
+                            key={index}
+                            className="w-full aspect-square overflow-hidden"
+                          >
+                            <img
+                              className="w-full h-full object-cover"
+                              src={img.asset.url}
+                              alt={img.altText || `Image ${index + 1}`}
+                            />
+                          </div>
+                        ))}
+                      </article>
+                    </section>
+                  );
+                })()}
+              {/* Text Blocks Section */}
+              <article className="flex justify-center items-center px-5 py-12 xs:px-8 md:px-36 xl:px-64">
+                <div className="bg-white flex flex-col gap-4">
+                  {selectedPost.textBlocks2?.map((block, index) => (
                     <p key={index}>{block}</p>
                   ))}
                 </div>

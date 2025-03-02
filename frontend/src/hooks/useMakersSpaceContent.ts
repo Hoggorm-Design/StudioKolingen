@@ -17,7 +17,8 @@ const useMakersSpaceContent = () => {
           _id,
           header,
           firstTextfield[],  
-          textBlocks[],  
+          textBlocks[],
+          textBlocks2[],  
           links[] {  
             name,  
             url    
@@ -29,6 +30,13 @@ const useMakersSpaceContent = () => {
             },
           },
           images[] {
+            asset->{
+              _ref,
+              url
+            },
+            altText
+          },
+          images2[] {
             asset->{
               _ref,
               url

@@ -6,6 +6,19 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'mainImage',
+      title: 'Main image of content',
+      type: 'image',
+      fields: [
+        defineField({
+          name: 'altText',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Alternative text for this image',
+        }),
+      ],
+    }),
+    defineField({
       name: 'header',
       title: 'Header',
       type: 'string',
@@ -13,12 +26,6 @@ export default defineType({
     }),
     defineField({
       name: 'firstTextfield',
-      title: 'Text Blocks',
-      type: 'array',
-      of: [{type: 'text'}],
-    }),
-    defineField({
-      name: 'textBlocks',
       title: 'Text Blocks',
       type: 'array',
       of: [{type: 'text'}],
@@ -48,20 +55,37 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'mainImage',
-      title: 'Main image of content',
-      type: 'image',
-      fields: [
-        defineField({
-          name: 'altText',
-          title: 'Alt Text',
-          type: 'string',
-          description: 'Alternative text for this image',
-        }),
-      ],
+      name: 'textBlocks',
+      title: 'Text Blocks',
+      type: 'array',
+      of: [{type: 'text'}],
     }),
     defineField({
       name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          fields: [
+            defineField({
+              name: 'altText',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Alternative text for this image',
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'textBlocks2',
+      title: 'Text Blocks',
+      type: 'array',
+      of: [{type: 'text'}],
+    }),
+    defineField({
+      name: 'images2',
       title: 'Images',
       type: 'array',
       of: [

@@ -158,7 +158,9 @@ const BlogPosts = () => {
 
           <div className="flex justify-center">
             <button
-              className="w-screen text-left px-10 py-8 text-white font-light bg-[#B22C2B] -mt-14"
+              className={`w-screen text-left px-10 py-8 text-white font-light bg-[#B22C2B] ${
+                !showMore ? "-mt-14" : ""
+              }`}
               onClick={handleShowMoreClick}
             >
               {showMore ? "Close post" : "See entire post"}
