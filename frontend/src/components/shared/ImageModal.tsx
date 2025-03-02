@@ -61,7 +61,7 @@ const ImageModal = ({ selectedImage, setSelectedImage }: ModalProps) => {
     >
       <div className="relative bg-transparent p-0 max-w-3xl sm:max-w-2xl md:max-w-4xl lg:max-w-5xl w-full border-none mx-auto px-4">
         <button
-          className="absolute top-1 right-5 text-[#1D192C] bg-white w-12 h-12 flex items-center justify-center rounded-full z-10 hover:bg-[#B22C2B] hover:text-white transition-all"
+          className="absolute top-3 right-7 text-[#1D192C] bg-white w-12 h-12 flex items-center justify-center rounded-full z-10 hover:bg-[#B22C2B] hover:text-white transition-all"
           onClick={() => setSelectedImage(null)}
         >
           <FontAwesomeIcon icon={faX} />
@@ -71,7 +71,7 @@ const ImageModal = ({ selectedImage, setSelectedImage }: ModalProps) => {
             <img
               src={selectedImage.asset.url || "/placeholder.svg"}
               alt={selectedImage.alt || "Full-size image"}
-              className="max-h-[80vh] object-contain max-w-full  "
+              className="max-h-[80vh] object-contain max-w-full border-[#1D192C] border-4 "
             />
           </div>
         )}
