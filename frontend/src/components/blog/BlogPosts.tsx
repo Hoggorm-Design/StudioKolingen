@@ -60,7 +60,7 @@ const BlogPosts = () => {
   const handleCardClick = (post: BlogPost) => {
     if (selectedPost !== post) {
       setSelectedPost(post);
-      setShowMore(false);
+      setShowMore(true);
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 50);
@@ -158,7 +158,7 @@ const BlogPosts = () => {
 
           <div className="flex justify-center">
             <button
-              className="w-screen text-left px-10 py-4 text-white font-light bg-[#B22C2B]"
+              className="w-screen text-left px-10 py-8 text-white font-light bg-[#B22C2B] -mt-14"
               onClick={handleShowMoreClick}
             >
               {showMore ? "Close post" : "See entire post"}
