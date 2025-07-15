@@ -2,6 +2,8 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import ImageModal from "../shared/ImageModal";
+import Chevron_left from "../../assets/Chevron_left.svg";
+import Chevron_right from "../../assets/Chevron_right.svg";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -24,7 +26,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+          <img src={Chevron_left}/>
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -37,7 +39,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+          <img src={Chevron_right}/>
         </div>
         <span className="sr-only">Next</span>
       </button>

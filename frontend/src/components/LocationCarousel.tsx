@@ -1,10 +1,10 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Chevron_left from "../assets/Chevron_left.svg";
+import Chevron_right from "../assets/Chevron_right.svg";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
+
 
 // Button group for navigation
 const ButtonGroup: React.FC<{
@@ -13,19 +13,19 @@ const ButtonGroup: React.FC<{
 }> = ({ next, previous }) => {
   return (
     <div
-      className="absolute top-[40%] w-full flex justify-between items-center"
+      className="absolute inset-0 flex top-1/3 w-full h-full z-10 pointer-events-none"
       role="group"
       aria-label="Carousel Navigation"
     >
       {/* Left Arrow */}
       <button
         onClick={previous}
-        className="hidden sm:block focus:outline-none absolute -left-16"
+        className="hidden sm:block focus:outline-none absolute left-14 sm:-left-0 pointer-events-auto"
         aria-label="Previous slide"
         type="button"
       >
-        <div className="bg-[#1D192C] text-white w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+        <div className="bg-[#1D192C] text-white w-13 h-10 rounded-full flex items-center justify-center ">
+          <img src={Chevron_left}/> 
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -33,12 +33,12 @@ const ButtonGroup: React.FC<{
       {/* Right Arrow */}
       <button
         onClick={next}
-        className="hidden sm:block focus:outline-none absolute -right-16"
+        className="hidden sm:block focus:outline-none absolute right-14 sm:-right-0 pointer-events-auto"
         aria-label="Next slide"
         type="button"
       >
-        <div className="bg-[#1D192C] text-white w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+        <div className="bg-[#1D192C] text-white w-13 h-10 rounded-full flex items-center justify-center">
+            <img src={Chevron_right}/> 
         </div>
         <span className="sr-only">Next</span>
       </button>
@@ -86,10 +86,10 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
 
   return (
     <section
-      className="w-full flex flex-col items-center px-5 py-10 sm:p-10"
+      className="w-full flex flex-col items-center px-0 py-8 "
       aria-label="Blog Image Carousel"
     >
-      <div className="relative w-full sm:w-[85%] xl:w-[90%]">
+      <div className="relative w-full sm:w-[100%] xl:w-[100%]">
         <Carousel
           responsive={responsive}
           ssr={true}
@@ -100,7 +100,7 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
           customTransition="transform 0.5s ease-in-out"
           transitionDuration={500}
           containerClass="carousel-container"
-          itemClass="px-2 sm:px-4 flex"
+          itemClass="px-4 sm:px-2 flex"
           renderButtonGroupOutside={true}
           customButtonGroup={
             <ButtonGroup next={() => {}} previous={() => {}} />
@@ -119,7 +119,7 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
           {links.map((link, index) => (
             <div
               key={index}
-              className="w-full h-[350px] flex-shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-200"
+              className="max-h-[125%] w-full flex-shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto"
               role="group"
               aria-roledescription="slide"
               aria-label={`Slide ${index + 1} of ${links.length}`}
@@ -128,9 +128,9 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
                 <img
                   src={link.image?.asset?.url}
                   alt={link.imageAlt}
-                  className="w-full h-3/4 object-cover"
+                  className="h-[80%] w-full object-cover"
                 />
-                <p className="text-black h-1/4 mt-2">{link.imageAlt}</p>
+                <p className="text-black h-[20%] mt-2">{link.imageAlt}</p>
               </Link>
             </div>
           ))}
