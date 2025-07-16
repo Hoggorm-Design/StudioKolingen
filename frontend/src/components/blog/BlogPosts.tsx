@@ -86,23 +86,21 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-          <section className="flex flex-col lg:flex-row w-full gap-16 px-5 sm:px-10 py-14 justify-center">
-            <section className="flex flex-col lg:w-1/2 space-y-4">
+          <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5 sm:px-10 py-14 min-h-[700px]">
+            <section className="flex flex-col lg:w-1/1 space-y-4 mr-[25px] ml-[25px]">
               <h1>{selectedPost.header}</h1>
               {selectedPost.textBlocks &&
                 selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
             </section>
-            <section className="lg:w-1/2">
+            <section className="flex overflow-hidden flex-shrink-0 max-h-[500px] max-w-[500px] mr-[25px] ml-[25px] w-full lg:w-1/2">
               {selectedPost.images &&
                 selectedPost.images[0] &&
                 selectedPost.images[0].asset && (
-                  <div className="w-full aspect-square overflow-hidden">
-                    <img
-                      src={selectedPost.images[0].asset.url}
-                      alt={selectedPost.images[0].altText || "Main image"}
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
+                  <img
+                    src={selectedPost.images[0].asset.url}
+                    alt={selectedPost.images[0].altText || "Main image"}
+                    className="object-cover min-h-[500px] min-w-[500px]"
+                  />
                 )}
             </section>
           </section>
@@ -200,7 +198,7 @@ const BlogPosts = () => {
               onClick={handleSeeMore}
               className="flex items-center text-white text-lg font-light gap-6"
             >
-              See more posts
+              See all posts
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
