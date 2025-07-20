@@ -6,20 +6,27 @@ export default defineType({
     type: 'document',
     fields: [
         defineField({
-            name: "image",
-            title: "Image",
-            type: "image",
-            options: {
-                hotspot: true,
-            },
-            description:"Provide an image icon of the footer"
-        }),
-        defineField({
-            name: "alt",
-            title: "Alt Text ",
-            type: "string",
-            description: "Provide a short description of the image icon for accessibility.",
-        }),
+            name: 'images',
+            title: 'Images',
+            type: 'array',
+            of: [
+                {
+                type: 'image',
+                options: {
+                        hotspot: true,
+                    },
+                fields: [
+                    defineField({
+                    name: 'altText',
+                    title: 'Alt Text',
+                    type: 'string',
+                    
+                    description: 'Alternative text for this image',
+                    }),
+                ],
+                },
+            ],
+            }),
         defineField({
             name: 'header',
             title: 'Header',

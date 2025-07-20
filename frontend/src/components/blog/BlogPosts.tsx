@@ -86,24 +86,24 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-          <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5 sm:px-10 py-14 min-h-[700px]">
-            <section className="flex flex-col lg:w-1/1 space-y-4 mr-[25px] ml-[25px]">
-              <h1>{selectedPost.header}</h1>
-              {selectedPost.textBlocks &&
-                selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
+            <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
+              <section className="flex flex-col lg:w-1/1 space-y-4 mr-[30px] ml-[30px]">
+                <h1>{selectedPost.header}</h1>
+                {selectedPost.textBlocks &&
+                  selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
+              </section>
+              <section className="flex flex-shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
+                {selectedPost.images &&
+                  selectedPost.images[0] &&
+                  selectedPost.images[0].asset && (
+                    <img
+                      src={selectedPost.images[0].asset.url}
+                      alt={selectedPost.images[0].altText || "Main image"}
+                      className="object-cover max-w-[300px] h-[300px] sm:max-w-[500px] sm:h-[500px]"
+                    />
+                  )}
+              </section>
             </section>
-            <section className="flex overflow-hidden flex-shrink-0 max-h-[500px] max-w-[500px] mr-[25px] ml-[25px] w-full lg:w-1/2">
-              {selectedPost.images &&
-                selectedPost.images[0] &&
-                selectedPost.images[0].asset && (
-                  <img
-                    src={selectedPost.images[0].asset.url}
-                    alt={selectedPost.images[0].altText || "Main image"}
-                    className="object-cover min-h-[500px] min-w-[500px]"
-                  />
-                )}
-            </section>
-          </section>
 
           <div
             className={`transition-all duration-500 overflow-hidden ${
@@ -116,8 +116,10 @@ const BlogPosts = () => {
                   <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
                     <MyCarousel images={selectedPost.images} />
                   </section>
+
+                /* FIKSE HER */
                 ) : (
-                  <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
+                  <section className="bg-[#1D192C] px-4 sm:px-4 py-4 flex-1 ">
                     {selectedPost.images &&
                       selectedPost.images.length > 1 &&
                       selectedPost.images.length <= 4 && (
@@ -128,10 +130,10 @@ const BlogPosts = () => {
                             img && img.asset ? (
                               <div
                                 key={i}
-                                className="w-full aspect-square overflow-hidden"
+                                className="flex w-full overflow-hidden items-center"
                               >
                                 <img
-                                  className="w-full h-full object-cover"
+                                  className="w-full object-cover max-h-[500px] min-h-[400px]"
                                   src={img.asset.url}
                                   alt={img.altText || `Image ${i + 2}`}
                                 />
@@ -162,7 +164,7 @@ const BlogPosts = () => {
           <div className="flex justify-center">
             <button
               className={`w-screen text-left px-10 py-8 text-white font-light bg-[#B22C2B] ${
-                !showMore ? "-mt-14" : ""
+                !showMore ? "" : ""
               }`}
               onClick={handleShowMoreClick}
             >

@@ -4,13 +4,17 @@ import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useFooter from "../../hooks/useFooter.ts";
 
+
+
 const Footer = () => {
   const { footer } = useFooter();
   const { isLoading } = useLoading();
 
+  
   return (
     <>
       {!isLoading && footer && (
+
         <footer className="px-5 sm:px-10 py-16">
           <div className="max-w-screen  border border-black py-14 px-4 xs:px-8 md:px-16 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-0">
             {/* Left Section */}
@@ -65,16 +69,25 @@ const Footer = () => {
               </div>
             </div>
 
+            
             {/* Right Section */}
+            
             <div className="flex flex-row sm:justify-end justify-center w-full">
-              <div className="flex flex-row w-[300px] h-auto overflow-hidden ">
-                <img
-                  src={footer.image.asset.url}
-                  alt={footer.alt}
-                  className="w-full h-full object-cover"
-                />
+              <div className="flex flex-col w-[300px] h-auto overflow-hidden gap-[32px]">
+                {footer.images?.map((img, idx) => (
+                  <div> 
+                    <img
+                      key={idx}
+                      src={img.asset?.url}
+                      alt={img.altText || ""}
+                      className="your-tailwind-classes"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
+            
+
           </div>
 
           {/* Footer Bottom */}

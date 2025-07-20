@@ -1,5 +1,3 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import ImageModal from "../shared/ImageModal";
 import Chevron_left from "../../assets/Chevron_left.svg";
