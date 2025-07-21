@@ -2,7 +2,7 @@ import { createClient } from "@sanity/client";
 
 const sanityClient = createClient({
   projectId: "mcc4dfqm",
-  dataset: "staging",
+  dataset: "production",
   apiVersion: "v2022-03-07",
   useCdn: true,
 });

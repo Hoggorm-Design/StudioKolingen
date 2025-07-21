@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'Studio Kolingen',
 
   projectId: 'mcc4dfqm',
-  dataset: 'staging',
+  dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
 
