@@ -116,8 +116,7 @@ const BlogPosts = () => {
                   <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
                     <MyCarousel images={selectedPost.images} />
                   </section>
-
-                /* FIKSE HER */
+                  
                 ) : (
                   <section className="bg-[#1D192C] px-4 sm:px-4 py-4 flex-1 ">
                     {selectedPost.images &&

@@ -25,7 +25,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-[#1D192C] text-white w-13 h-10 rounded-full flex items-center justify-center ">
-          <img src={Chevron_left}/> 
+          <img src={Chevron_left} alt="Previous"/> 
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -38,7 +38,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-[#1D192C] text-white w-13 h-10 rounded-full flex items-center justify-center">
-            <img src={Chevron_right}/> 
+            <img src={Chevron_right} alt="Next"/> 
         </div>
         <span className="sr-only">Next</span>
       </button>
