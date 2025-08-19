@@ -1,12 +1,11 @@
-import Chevron_left from "../assets/Chevron_left.svg";
-import Chevron_right from "../assets/Chevron_right.svg";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
+import Chevron_left from "../assets/Chevron_left.svg";
+import Chevron_right from "../assets/Chevron_right.svg";
+import { LinkData } from "../interfaces/linkData";
 
-
-// Button group for navigation
 const ButtonGroup: React.FC<{
   next: () => void;
   previous: () => void;
@@ -25,7 +24,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-[#1D192C] text-white w-13 h-10 rounded-full flex items-center justify-center ">
-          <img src={Chevron_left} alt="Previous"/> 
+          <img src={Chevron_left} alt="Previous" />
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -38,7 +37,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-[#1D192C] text-white w-13 h-10 rounded-full flex items-center justify-center">
-            <img src={Chevron_right} alt="Next"/> 
+          <img src={Chevron_right} alt="Next" />
         </div>
         <span className="sr-only">Next</span>
       </button>
@@ -64,7 +63,7 @@ const CustomDot: React.FC<{
   ></button>
 );
 
-const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
+const LocationCarousel: React.FC<{ links: LinkData[] }> = ({ links }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1280 },
