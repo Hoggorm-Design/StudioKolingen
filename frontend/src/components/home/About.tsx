@@ -16,7 +16,7 @@ const About: React.FC = () => {
                 <p className="text-[18px]">{about.text2}</p>
                 <p className="text-[18px]">{about.text3}</p>
               </section>
-              <section className="flex overflow-hidden flex-shrink-0 max-h-[500px] max-w-[500px] mr-[25px] ml-[25px] w-full lg:w-1/2">
+              <section className="flex overflow-hidden shrink-0 max-h-[500px] max-w-[500px] mr-[25px] ml-[25px] w-full lg:w-1/2">
                 {about.image && (
                   <img
                     src={about.image.asset.url}

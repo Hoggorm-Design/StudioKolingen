@@ -92,7 +92,7 @@ const BlogPosts = () => {
                 {selectedPost.textBlocks &&
                   selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
               </section>
-              <section className="flex flex-shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
+              <section className="flex shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
                 {selectedPost.images &&
                   selectedPost.images[0] &&
                   selectedPost.images[0].asset && (

@@ -46,7 +46,7 @@ export const LoadingProvider = ({
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
       {children}
       {showSpinner && (
-        <div className="fixed inset-0 flex items-center justify-center z-[9999] bg-white">
+        <div className="fixed inset-0 flex items-center justify-center z-9999 bg-white">
           <div className="rounded-lg p-4">
             <Spinner size="large" />
           </div>

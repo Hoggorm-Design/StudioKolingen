@@ -89,7 +89,7 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
       className="w-full flex flex-col items-center px-0 py-8 "
       aria-label="Blog Image Carousel"
     >
-      <div className="relative w-full sm:w-[100%] xl:w-[100%]">
+      <div className="relative w-full sm:w-full xl:w-full">
         <Carousel
           responsive={responsive}
           ssr={true}
@@ -119,7 +119,7 @@ const LocationCarousel: React.FC<{ links: any[] }> = ({ links }) => {
           {links.map((link, index) => (
             <div
               key={index}
-              className="max-h-[125%] w-full flex-shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto"
+              className="max-h-[125%] w-full shrink-0 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto"
               role="group"
               aria-roledescription="slide"
               aria-label={`Slide ${index + 1} of ${links.length}`}

@@ -129,7 +129,7 @@ const MyCarousel: React.FC = () => {
             {carousels.map((image, index) => (
               <div
                 key={index}
-                className="aspect-square w-full max-w-[350px] flex-shrink-0 overflow-hidden mx-auto z-0"
+                className="aspect-square w-full max-w-[350px] shrink-0 overflow-hidden mx-auto z-0"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${index + 1} of ${carousels.length}`}
