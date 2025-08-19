@@ -86,24 +86,24 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-            <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
-              <section className="flex flex-col lg:w-1/1 space-y-4 mr-[30px] ml-[30px]">
-                <h1>{selectedPost.header}</h1>
-                {selectedPost.textBlocks &&
-                  selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
-              </section>
-              <section className="flex shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
-                {selectedPost.images &&
-                  selectedPost.images[0] &&
-                  selectedPost.images[0].asset && (
-                    <img
-                      src={selectedPost.images[0].asset.url}
-                      alt={selectedPost.images[0].altText || "Main image"}
-                      className="object-cover max-w-[300px] h-[300px] sm:max-w-[500px] sm:h-[500px]"
-                    />
-                  )}
-              </section>
+          <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
+            <section className="flex flex-col lg:w-full space-y-4 mr-[30px] ml-[30px]">
+              <h1>{selectedPost.header}</h1>
+              {selectedPost.textBlocks &&
+                selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
             </section>
+            <section className="flex shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
+              {selectedPost.images &&
+                selectedPost.images[0] &&
+                selectedPost.images[0].asset && (
+                  <img
+                    src={selectedPost.images[0].asset.url}
+                    alt={selectedPost.images[0].altText || "Main image"}
+                    className="object-cover max-w-[300px] h-[300px] sm:max-w-[500px] sm:h-[500px]"
+                  />
+                )}
+            </section>
+          </section>
 
           <div
             className={`transition-all duration-500 overflow-hidden ${
@@ -116,7 +116,6 @@ const BlogPosts = () => {
                   <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
                     <MyCarousel images={selectedPost.images} />
                   </section>
-                  
                 ) : (
                   <section className="bg-[#1D192C] px-4 sm:px-4 py-4 flex-1 ">
                     {selectedPost.images &&

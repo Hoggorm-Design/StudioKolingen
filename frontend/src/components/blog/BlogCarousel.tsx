@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ImageModal from "../shared/ImageModal";
-import Chevron_left from "../../assets/Chevron_left.svg";
-import Chevron_right from "../../assets/Chevron_right.svg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Chevron_left from "../../assets/Chevron_left.svg";
+import Chevron_right from "../../assets/Chevron_right.svg";
+import ImageModal from "../shared/ImageModal";
 
 const ButtonGroup: React.FC<{
   next: () => void;
@@ -23,7 +23,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <img src={Chevron_left} alt="previous"/>
+          <img src={Chevron_left} alt="previous" />
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -36,7 +36,7 @@ const ButtonGroup: React.FC<{
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <img src={Chevron_right} alt="next"/>
+          <img src={Chevron_right} alt="next" />
         </div>
         <span className="sr-only">Next</span>
       </button>
@@ -97,7 +97,7 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
   return (
     <section
       className="w-full flex flex-col items-center px-0 py-3 sm:p-2"
-        aria-label="Image Carousel"
+      aria-label="Image Carousel"
     >
       <div className="relative w-full sm:w-[95%] xl:w-[97%]">
         <Carousel
@@ -128,9 +128,9 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
           }
         >
           {images.map((image, index) => (
-            <React.Fragment key={index}>
+            <div key={index} className="flex flex-col">
               <div
-                className="aspect-square w-full max-w-[350px] shrink-0 overflow-hidden mx-auto z-0"
+                className="aspect-square w-full max-w-[350px] shrink-0 overflow-hidden mx-auto z-0 "
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${index + 1} of ${images.length}`}
@@ -142,15 +142,17 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
                   onClick={() => handleImageClick(image)}
                 />
               </div>
-              <p className="text-center text-white">{image?.altText || ""}</p>
-              <ImageModal
-                selectedImage={selectedImage}
-                setSelectedImage={setSelectedImage}
-              />
-            </React.Fragment>
+              <p className="text-center text-white mt-2 mb-8">
+                {image?.altText || ""}
+              </p>
+            </div>
           ))}
         </Carousel>
       </div>
+      <ImageModal
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+      />
     </section>
   );
 };
