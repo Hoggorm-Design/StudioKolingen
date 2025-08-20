@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { Squash } from "hamburger-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -57,7 +57,7 @@ const MobileNavbarHome: React.FC = () => {
     }
   }, [isOpen]);
 
-  const logoVariants = {
+  const logoVariants: Variants = {
     hidden: {
       x: "-100%",
       opacity: 0,

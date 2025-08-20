@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import navbarLogo from "../../assets/logo.svg";
@@ -45,7 +45,7 @@ const DesktopNavbarHome: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const logoVariants = {
+  const logoVariants: Variants = {
     hidden: {
       x: "-100%",
       opacity: 0,
@@ -63,7 +63,7 @@ const DesktopNavbarHome: React.FC = () => {
     },
   };
 
-  const linksVariants = {
+  const linksVariants: Variants = {
     center: {
       x: "-6%",
       opacity: 1,
