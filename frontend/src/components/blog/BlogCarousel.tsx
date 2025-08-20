@@ -1,10 +1,9 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import ImageModal from "../shared/ImageModal";
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Chevron_left from "../../assets/Chevron_left.svg";
+import Chevron_right from "../../assets/Chevron_right.svg";
+import ImageModal from "../shared/ImageModal";
 
 const ButtonGroup: React.FC<{
   next: () => void;
@@ -12,19 +11,19 @@ const ButtonGroup: React.FC<{
 }> = ({ next, previous }) => {
   return (
     <div
-      className="absolute top-[40%] w-full flex justify-between items-center"
+      className="absolute inset-0 flex items-center justify-between w-full h-full z-10 pointer-events-none"
       role="group"
       aria-label="Carousel Navigation"
     >
       {/* Left Arrow */}
       <button
         onClick={previous}
-        className="hidden sm:block focus:outline-none absolute -left-16"
+        className="hidden sm:block focus:outline-none absolute left-14 sm:-left-4 pointer-events-auto"
         aria-label="Previous slide"
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+          <img src={Chevron_left} alt="previous" />
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -32,12 +31,12 @@ const ButtonGroup: React.FC<{
       {/* Right Arrow */}
       <button
         onClick={next}
-        className="hidden sm:block focus:outline-none absolute -right-16"
+        className="hidden sm:block focus:outline-none absolute right-14 sm:-right-4 pointer-events-auto"
         aria-label="Next slide"
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+          <img src={Chevron_right} alt="next" />
         </div>
         <span className="sr-only">Next</span>
       </button>
@@ -79,7 +78,7 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1280 },
-      items: 4,
+      items: 4.5,
     },
     medium: {
       breakpoint: { max: 1280, min: 1024 },
@@ -91,16 +90,16 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 1,
+      items: 1.4,
     },
   };
 
   return (
     <section
-      className="w-full flex flex-col items-center px-5 sm:p-10"
-      aria-label="Blog Image Carousel"
+      className="w-full flex flex-col items-center px-0 py-3 sm:p-2"
+      aria-label="Image Carousel"
     >
-      <div className="relative pb-14 w-full sm:w-[85%] xl:w-[90%]">
+      <div className="relative w-full sm:w-[95%] xl:w-[97%]">
         <Carousel
           responsive={responsive}
           ssr={true}
@@ -129,9 +128,9 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
           }
         >
           {images.map((image, index) => (
-            <React.Fragment key={index}>
+            <div key={index} className="flex flex-col">
               <div
-                className="w-full h-[300px] flex-shrink-0 overflow-hidden"
+                className="aspect-square w-full max-w-[350px] shrink-0 overflow-hidden mx-auto z-0 "
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${index + 1} of ${images.length}`}
@@ -143,15 +142,17 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
                   onClick={() => handleImageClick(image)}
                 />
               </div>
-              <p className="text-center text-white">{image?.altText || ""}</p>
-              <ImageModal
-                selectedImage={selectedImage}
-                setSelectedImage={setSelectedImage}
-              />
-            </React.Fragment>
+              <p className="text-center text-white mt-2 mb-8">
+                {image?.altText || ""}
+              </p>
+            </div>
           ))}
         </Carousel>
       </div>
+      <ImageModal
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+      />
     </section>
   );
 };

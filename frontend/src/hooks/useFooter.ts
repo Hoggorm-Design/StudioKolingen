@@ -12,19 +12,19 @@ const useFooter = () => {
       setIsLoading(true);
       try {
         const query = `*[_type == "footer"][0]{
-                   image {
-                       asset->{
-                           _ref,
-                           url
-                       }
-                   },
-                   alt,
-                   header,
-                   address,
-                   contact1,
-                   phonenumber1,
-                   contact2,
-                   phonenumber2
+                  images[]{
+                    asset ->{
+                      _ref,
+                      url
+                    },
+                    altText
+                  },
+                  header,
+                  address,
+                  contact1,
+                  phonenumber1,
+                  contact2,
+                  phonenumber2
                }`;
         const data = await sanityClient.fetch(query);
         setFooter(data);

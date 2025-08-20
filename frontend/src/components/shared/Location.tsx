@@ -73,7 +73,7 @@ const Location = () => {
 
           {/* Text Section */}
           <section className="flex flex-col pt-5">
-            <p>{location.text}</p>
+            <p>{location.text} </p>
             {/* Conditionally Render Grid or Carousel */}
             {links.length > 0 ? (
               isMobileView ? (

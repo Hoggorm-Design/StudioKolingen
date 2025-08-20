@@ -86,23 +86,21 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-          <section className="flex flex-col lg:flex-row w-full gap-16 px-5 sm:px-10 py-14 justify-center">
-            <section className="flex flex-col lg:w-1/2 space-y-4">
+          <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
+            <section className="flex flex-col lg:w-full space-y-4 mr-[30px] ml-[30px]">
               <h1>{selectedPost.header}</h1>
               {selectedPost.textBlocks &&
                 selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
             </section>
-            <section className="lg:w-1/2">
+            <section className="flex shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
               {selectedPost.images &&
                 selectedPost.images[0] &&
                 selectedPost.images[0].asset && (
-                  <div className="w-full aspect-square overflow-hidden">
-                    <img
-                      src={selectedPost.images[0].asset.url}
-                      alt={selectedPost.images[0].altText || "Main image"}
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
+                  <img
+                    src={selectedPost.images[0].asset.url}
+                    alt={selectedPost.images[0].altText || "Main image"}
+                    className="object-cover max-w-[300px] h-[300px] sm:max-w-[500px] sm:h-[500px]"
+                  />
                 )}
             </section>
           </section>
@@ -119,7 +117,7 @@ const BlogPosts = () => {
                     <MyCarousel images={selectedPost.images} />
                   </section>
                 ) : (
-                  <section className="bg-[#1D192C] px-5 sm:px-10 py-14">
+                  <section className="bg-[#1D192C] px-4 sm:px-4 py-4 flex-1 ">
                     {selectedPost.images &&
                       selectedPost.images.length > 1 &&
                       selectedPost.images.length <= 4 && (
@@ -130,10 +128,10 @@ const BlogPosts = () => {
                             img && img.asset ? (
                               <div
                                 key={i}
-                                className="w-full aspect-square overflow-hidden"
+                                className="flex w-full overflow-hidden items-center"
                               >
                                 <img
-                                  className="w-full h-full object-cover"
+                                  className="w-full object-cover max-h-[500px] min-h-[400px]"
                                   src={img.asset.url}
                                   alt={img.altText || `Image ${i + 2}`}
                                 />
@@ -164,7 +162,7 @@ const BlogPosts = () => {
           <div className="flex justify-center">
             <button
               className={`w-screen text-left px-10 py-8 text-white font-light bg-[#B22C2B] ${
-                !showMore ? "-mt-14" : ""
+                !showMore ? "" : ""
               }`}
               onClick={handleShowMoreClick}
             >
@@ -200,7 +198,7 @@ const BlogPosts = () => {
               onClick={handleSeeMore}
               className="flex items-center text-white text-lg font-light gap-6"
             >
-              See more posts
+              See all posts
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>

@@ -17,7 +17,7 @@ const ArtistCard = () => {
                 className="bg-white flex flex-col sm:flex-row sm:h-auto min-h-80 w-full sm:p-5 gap-4"
               >
                 {/* Image */}
-                <div className="w-full max-h-[350px] sm:w-1/2 aspect-w-4 aspect-h-3 flex-shrink-0">
+                <div className="w-full max-h-[350px] sm:w-1/2 aspect-w-4 aspect-h-3 shrink-0">
                   <img
                     src={artist.image.asset.url}
                     alt={artist.alt}

@@ -1,32 +1,31 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import useCarousel from "../../hooks/useCarousel.ts";
 import { Image } from "../blog/BlogCarousel.tsx";
 import ImageModal from "../shared/ImageModal.tsx";
+import Chevron_left from "../../assets/Chevron_left.svg";
+import Chevron_right from "../../assets/Chevron_right.svg";
+
 
 const ButtonGroup: React.FC<{
   next: () => void;
   previous: () => void;
-}> = ({ next, previous }) => {
-  return (
-    <div
-      className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between items-center"
-      role="group"
-      aria-label="Carousel Navigation"
+  }> = ({ next, previous }) => {
+    return (
+      <div
+    className="absolute inset-0 flex items-center justify-between w-full h-full z-10 pointer-events-none"
+    aria-label="Carousel Navigation"
     >
       {/* Left Arrow */}
       <button
         onClick={previous}
-        className="hidden sm:block focus:outline-none absolute -left-16"
+        className="hidden sm:block focus:outline-none absolute left-14 sm:-left-4 pointer-events-auto"
         aria-label="Previous slide"
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+          <img src={Chevron_left} alt="Previous"/>
         </div>
         <span className="sr-only">Previous</span>
       </button>
@@ -34,12 +33,12 @@ const ButtonGroup: React.FC<{
       {/* Right Arrow */}
       <button
         onClick={next}
-        className="hidden sm:block focus:outline-none absolute -right-16"
+        className="hidden sm:block focus:outline-none absolute right-14 sm:-right-4 pointer-events-auto"
         aria-label="Next slide"
         type="button"
       >
         <div className="bg-white text-[#1D192C] w-10 h-10 rounded-full flex items-center justify-center">
-          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+          <img src={Chevron_right} alt="Next"/>
         </div>
         <span className="sr-only">Next</span>
       </button>
@@ -76,7 +75,7 @@ const MyCarousel: React.FC = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1280 },
-      items: 4,
+      items: 4.5,
     },
     medium: {
       breakpoint: { max: 1280, min: 1024 },
@@ -96,10 +95,10 @@ const MyCarousel: React.FC = () => {
   return (
     <>
       <section
-        className="w-full flex flex-col items-center px-5 py-10 sm:p-10"
+        className="w-full flex flex-col items-center px-0 py-3 sm:p-2"
         aria-label="Image Carousel"
       >
-        <div className="relative w-full sm:w-[85%] xl:w-[90%]">
+        <div className="relative w-full sm:w-[95%] xl:w-[97%]">
           <Carousel
             responsive={responsive}
             ssr={true}
@@ -110,7 +109,7 @@ const MyCarousel: React.FC = () => {
             customTransition="transform 0.5s ease-in-out"
             transitionDuration={500}
             containerClass="carousel-container"
-            itemClass="px-2 sm:px-4 flex"
+            itemClass="px-4 sm:px-2 flex"
             renderButtonGroupOutside={true}
             customButtonGroup={
               <ButtonGroup next={() => {}} previous={() => {}} />
@@ -130,7 +129,7 @@ const MyCarousel: React.FC = () => {
             {carousels.map((image, index) => (
               <div
                 key={index}
-                className="w-full h-[300px] flex-shrink-0 overflow-hidden"
+                className="aspect-square w-full max-w-[350px] shrink-0 overflow-hidden mx-auto z-0"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${index + 1} of ${carousels.length}`}
@@ -138,7 +137,7 @@ const MyCarousel: React.FC = () => {
                 <img
                   src={image?.image?.asset?.url}
                   alt={image?.alt || `Carousel image ${index + 1}`}
-                  className="w-[90%] mx-auto h-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                  className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200"
                   onClick={() => handleImageClick(image?.image)}
                 />
                 <ImageModal
