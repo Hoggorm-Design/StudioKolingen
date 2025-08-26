@@ -148,12 +148,7 @@ export const structure: StructureResolver = (S) =>
                     .schemaType('makersSpacePageInfo')
                     .documentId('fd7818e4-7a6f-44cd-8799-1e6a9817eb6f')
             ),
-                /*
-            S.listItem()
-                .title("Makers Space Years")
-                .icon(CalendarIcon)
-                .child(S.documentTypeList("makersSpaceYears").title("Makers Space years")),
-                */
+    
             S.divider(),
 
             S.listItem()
