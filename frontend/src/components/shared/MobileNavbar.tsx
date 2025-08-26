@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Squash } from "hamburger-react";
-import navbarLogo from "../../assets/logo.svg";
+import  useLogo from "../../hooks/useLogo.ts";
 import { useLoading } from "../../context/LoadingContext.tsx";
 
 const MobileNavbarHome: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading } = useLoading();
   const [hasScrolled, setHasScrolled] = useState(false);
+  const { logo } =  useLogo();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +31,7 @@ const MobileNavbarHome: React.FC = () => {
               <div key="logo" className="flex items-center">
                 <Link to="/" className="flex items-center space-x-4">
                   <img
-                    src={navbarLogo}
+                    src={logo?.footerLogo?.asset.url}
                     alt="Studio kolingen logo"
                     className="h-10"
                   />

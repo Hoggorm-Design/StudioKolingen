@@ -19,6 +19,13 @@ const useFooter = () => {
                     },
                     altText
                   },
+                  logoImage {
+                    asset -> {
+                    _ref,
+                    url
+                    },
+                    altText
+                  },
                   header,
                   address,
                   contact1,

@@ -7,18 +7,19 @@ import facilities from './facilities'
 import facilitiesPageInfo from './facilitiesPageInfo'
 import footer from './footer'
 import frontPageImageCarousel from './frontPageImageCarousel'
-import frontPageTop3Images from './frontPageTop3Images'
 import link from './link'
 import makersSpaceYears from './makersSpaceContent'
 import makersSpacePageInfo from './makersSpacePageInfo'
 import ourLocation from './ourLocation'
 import prices from './prices'
+import frontPageImages from './frontPageImages'
+import logoImages from './logoImages'
 
 export const schemaTypes = [
   frontPageImageCarousel,
-  frontPageTop3Images,
   aboutStudioKolingenAir,
   prices,
+  frontPageImages,
   ourLocation,
   link,
   contactUs,
@@ -30,4 +31,5 @@ export const schemaTypes = [
   makersSpacePageInfo,
   makersSpaceYears,
   footer,
+  logoImages,
 ]

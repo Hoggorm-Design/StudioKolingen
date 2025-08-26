@@ -9,7 +9,7 @@ if (!token) {
 
 const client = createClient({
   projectId: 'mcc4dfqm',
-  dataset: 'production',
+  dataset: 'staging',
   useCdn: false,
   token,
   apiVersion: '2023-01-01',

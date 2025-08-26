@@ -1,9 +1,13 @@
 export interface CarouselImage {
-  image: {
-    asset: {
-      _ref: string;
-      url: string;
-    };
+  carouselImages: CarouselImage[];
+}
+
+
+export interface CarouselImage {
+  asset: {
+    _ref: string;
+    url: string;
   };
-  alt: string;
+  alt: string;  
+  
 }

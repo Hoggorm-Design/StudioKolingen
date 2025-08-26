@@ -6,6 +6,7 @@ const ArtistCard = () => {
   const { artists } = useArtists();
   const { isLoading } = useLoading();
 
+
   return (
     <>
       {!isLoading && artists && (

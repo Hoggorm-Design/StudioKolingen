@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
-import mainImage from "../../assets/StudioKolingen_logo_stor.png";
 import { useLoading } from "../../context/LoadingContext.tsx";
+import  useLogo from "../../hooks/useLogo.ts";
 
 const Header = () => {
   const { isLoading } = useLoading();
+  const { logo } = useLogo();
 
   return (
     <>
-      {!isLoading && mainImage && (
+      {!isLoading && logo && (
         <header className="pt-10 sm:pt-20 lg:p-0">
           <section className="flex flex-col justify-center items-center p-16 sm:p-20 gap-8">
             <Link to="/">
               <img
                 className="w-full max-w-xl h-auto"
-                src={mainImage}
+                src={logo.mainLogo?.asset?.url}
                 alt="Logo of Studio Kolingen"
               />
             </Link>

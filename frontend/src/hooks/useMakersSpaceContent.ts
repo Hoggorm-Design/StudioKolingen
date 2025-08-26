@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext";
-import { MakersSpaceContentProps } from "../interfaces/makersSpaceContent.ts";
+import { MakersSpaceContentProps } from "../interfaces/aboutMakersSpace.ts";
 
 const useMakersSpaceContent = () => {
   const [makersSpaceContent, setMakersSpaceContent] = useState<
-    MakersSpaceContentProps[]
-  >([]);
+    MakersSpaceContentProps[] 
+    >([]);
   const { setIsLoading } = useLoading();
 
   useEffect(() => {
     const fetchMakersSpaceContent = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "makersSpaceYears"] | order(publishedAt desc){
+        const query = `*[_type == "makersSpacePageInfo"][0].makersSpaceContent[] | order(publishedAt desc)->{
           _id,
           header,
           firstTextfield[],  
