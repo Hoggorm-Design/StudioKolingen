@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useMakersSpaceContent from "../../hooks/useMakersSpaceContent.ts";
-import { MakersSpaceContentProps } from "../../interfaces/makersSpaceContent.ts";
+import { MakersSpaceContentProps } from "../../interfaces/aboutMakersSpace.ts";
 import MyCarousel from "../blog/BlogCarousel.tsx";
 import MakersSpaceCard from "./CompressedMakersSpaceCard.tsx";
 

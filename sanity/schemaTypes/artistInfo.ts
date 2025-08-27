@@ -17,5 +17,20 @@ export default defineType({
       type: 'text',
       description: 'Here you can write the first textual content of the artist page.',
     }),
+    defineField({
+      name: 'artists',
+      title: 'Artists',
+      type: 'array',
+      of: [{
+        type: 'reference',
+        title: 'Artists',
+        to: [
+          {type: 'artists'  }
+        ]
+    }],
+      
+
+    })
+
   ],
 })

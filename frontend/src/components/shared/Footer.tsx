@@ -1,25 +1,23 @@
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import navbarLogo from "../../assets/logo.svg";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useFooter from "../../hooks/useFooter.ts";
-
-
+import useLogo from "../../hooks/useLogo.ts";
 
 const Footer = () => {
   const { footer } = useFooter();
   const { isLoading } = useLoading();
-
+  const { logo } = useLogo();
   
   return (
     <>
-      {!isLoading && footer && (
+      {!isLoading && footer && logo && (
 
         <footer className="px-5 sm:px-10 py-16">
           <div className="max-w-screen  border border-black py-14 px-4 xs:px-8 md:px-16 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-0">
             {/* Left Section */}
-            <div className="flex flex-col gap-y-6 [&_p]:text-[18px] [&_a]:text-[18px] w-[450px] [&_p]:lg:text-start [&_p]:text-center">
-              <img src={navbarLogo} alt="Studio kolingen logo" ></img>
+            <div className="flex flex-col gap-y-6 [&_p]:text-[18px] [&_a]:text-[18px] w-fill [&_p]:lg:text-start [&_p]:text-center">
+              <img src={logo?.footerLogo?.asset?.url} alt="Studio kolingen logo" ></img>
               <div>
                 <p className="font-normal">{footer.header}</p>
                 <p className="footerText">{footer.address}</p>
@@ -75,9 +73,9 @@ const Footer = () => {
             <div className="flex flex-row lg:justify-end justify-center w-full">
               <div className="flex flex-col w-[300px] h-auto overflow-hidden gap-[32px]">
                 {footer.images?.map((img, idx) => (
-                  <div> 
+                  <div key={idx}> 
                     <img
-                      key={idx}
+                      
                       src={img.asset?.url}
                       alt={img.altText || ""}
                       className="w-full h-auto object-cover"

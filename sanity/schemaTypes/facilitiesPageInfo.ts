@@ -17,5 +17,20 @@ export default defineType({
       type: 'text',
       description: 'Here you can write the first textual content of the facilities page.',
     }),
+    defineField({
+      name: 'facilities',
+      type: 'array',
+      title: 'Facilities',
+      of: [
+        {
+        type: 'reference',
+        title: 'Facilities',
+        to: [
+          {type: 'facilities'},
+          ]
+        }
+      ]
+
+    })
   ],
 })

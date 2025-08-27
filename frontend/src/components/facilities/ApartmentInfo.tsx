@@ -4,6 +4,7 @@ import { useLoading } from "../../context/LoadingContext";
 import useFacilities from "../../hooks/useFacilities";
 import MyCarousel from "../blog/BlogCarousel";
 
+
 const ApartmentInfo: React.FC = () => {
   const { header } = useParams<{ header: string }>();
   const { facilities } = useFacilities();
@@ -22,7 +23,7 @@ const ApartmentInfo: React.FC = () => {
     images && (
       <div className="pt-[64px] lg:p-0">
         <section className="flex flex-col">
-          <section className="flex flex-col md:flex-row w-full gap-12 px-5 sm:px-10 md:gap-44 py-14 items-start">
+            <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
             <div className="flex flex-col md:w-1/2 space-y-8">
               <h2 className="text-nowrap">{facility.header}</h2>
               {facility.textBlocks.map((text, index) => (
@@ -30,18 +31,16 @@ const ApartmentInfo: React.FC = () => {
               ))}
             </div>
 
-            <div className="flex flex-col md:w-1/2">
-              <div className="w-full aspect-square overflow-hidden">
+              <section className="flex flex-shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
                 <img
                   src={facility.mainImage?.asset?.url || ""}
                   alt={facility.mainImage?.altText || "Additional image"}
-                  className="w-full h-full object-cover"
+                  className="object-cover sm:w-[500px] sm:h-[500px]"
                 />
-              </div>
+              </section>
               <p className="text-left pt-2">
                 {facility.mainImage?.altText || ""}
               </p>
-            </div>
           </section>
 
           {images.length < 4 ? (
@@ -118,7 +117,9 @@ const ApartmentInfo: React.FC = () => {
             </section>
           )}
         </section>
+
       </div>
+      
     )
   );
 };

@@ -52,7 +52,7 @@ const CustomDot: React.FC<{
 }> = ({ onClick, active, index, totalSlides }) => (
   <button
     onClick={onClick}
-    className={`w-3 h-3 rounded-full mx-1 border-2 transition-all focus:outline-none ${
+    className={`w-3 h-3 rounded-full mx-1 border-2 transition-all focus:outline-none relative top-10 ${
       active ? "bg-white border-white" : "border-white bg-transparent"
     }`}
     aria-label={`Go to slide ${index + 1} of ${totalSlides}`}
@@ -110,7 +110,7 @@ const MyCarousel: React.FC<{ images: Image[] }> = ({ images }) => {
           customTransition="transform 0.5s ease-in-out"
           transitionDuration={500}
           containerClass="carousel-container"
-          itemClass="sm:px-4"
+          itemClass="px-4 sm:px-2"
           renderButtonGroupOutside={true}
           customButtonGroup={
             <ButtonGroup next={() => {}} previous={() => {}} />

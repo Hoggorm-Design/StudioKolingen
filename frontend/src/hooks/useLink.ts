@@ -1,4 +1,4 @@
-import { LinkData } from "../interfaces/linkData.ts";
+import { LinkData } from "../interfaces/location.ts";
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext.tsx";
@@ -11,7 +11,7 @@ const useLinks = () => {
     const fetchLinksData = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "link"]{
+        const query = `*[_type == "ourLocation"][0].locations[] -> {
                    url,
                    image{
                      asset->{
@@ -21,8 +21,8 @@ const useLinks = () => {
                    },
                    imageAlt
                }`;
-        const linksData = await sanityClient.fetch(query);
-        setLinks(linksData);
+        const data: LinkData[] = await sanityClient.fetch(query);
+        setLinks(data);
       } catch (error) {
         console.error("Error fetching links data:", error);
       } finally {

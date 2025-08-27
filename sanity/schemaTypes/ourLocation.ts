@@ -17,5 +17,26 @@ export default defineType({
       type: 'text',
       description: 'Here you can write the textual content of the location.',
     }),
+    defineField({
+      name: 'mapURL',
+      title: 'Map URL',
+      type: 'string',
+      description: 'Here you can paste the URL for the map.',
+    }),
+
+    defineField({
+      name:'locations',
+      title: 'Locations',
+      type:'array',
+      of: [{
+        type: 'reference',
+        title: 'Location',
+        to: [
+          { type: 'link'}
+        ]
+      }]
+
+    })
+
   ],
 })

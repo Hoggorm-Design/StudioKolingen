@@ -4,21 +4,30 @@ export default defineType({
   name: 'frontPageImageCarousel',
   title: 'Front Page Image Carousel',
   type: 'document',
-  fields: [
-    defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      description: 'Provide an image for the image carousel',
-    }),
-    defineField({
-      name: 'alt',
-      title: 'Alt Text',
-      type: 'string',
-      description: 'Provide a short description of the image for accessibility.',
-    }),
-  ],
+  fields: [{
+    title: 'Image Carousel',
+    name: 'carouselImages',
+    type: 'array',
+    of: [{
+        type: 'image',
+        options: {
+                        hotspot: true,
+                    },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Alternative text for this image',
+            }),
+        ],
+        
+    }],
+  }],
+  preview: {
+    prepare() {
+      return {title: 'Front page image carousel'}
+    },
+  },
+  
 })

@@ -11,22 +11,14 @@ const useArtists = () => {
     const fetchArtists = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "artists"] | order(publishedAt desc){
-          image{
-            asset->{
-              _id,
-              url
-            },
-          },
-          header,
-          alt,
-          text,
-          link{
-            name,
-            url
-          },
-          publishedAt
-        }`;
+        const query = `*[_type == "artistPageInfo"][0].artists[]->{
+        image { asset->{ _id, url } },
+        header,
+        alt,
+        text,
+        link{ name, url },
+        publishedAt
+      }`;
 
         const data: Artist[] = await sanityClient.fetch(query);
         setArtists(data);

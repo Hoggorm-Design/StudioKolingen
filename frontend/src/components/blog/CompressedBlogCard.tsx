@@ -8,7 +8,7 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post, onClick, isMobile }) => {
-  const mainImage = post.images[0];
+  const mainImage = post.mainImage;
   const previewText = post.textBlocks && post.textBlocks[0];
 
   return (

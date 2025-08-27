@@ -26,5 +26,6 @@ export default defineType({
       type: 'string',
       description: 'Alt text for the image to improve accessibility',
     }),
+    
   ],
 })

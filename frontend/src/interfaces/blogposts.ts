@@ -9,4 +9,14 @@ export interface BlogPost {
   textBlocks2: string[];
 
   publishedAt: string;
+
+  frontpage: boolean;
+
+  mainImage: {
+    asset: {
+      _ref: string;
+      url: string;
+    }
+    altText: string;
+  }
 }
