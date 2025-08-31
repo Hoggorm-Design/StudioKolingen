@@ -60,7 +60,7 @@ const SubImage = () => {
   
   return (
     <>
-      {!isLoading && subImages.length == 3 && (
+      {!isLoading && subImages.length === 3 && (
         <section className="bg-[#1a1a2e] py-10 w-screen mx:overflow-x-hidden">
           <MyCarousel />
 

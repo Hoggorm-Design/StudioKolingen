@@ -86,7 +86,7 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-            <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-fill gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
+            <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-full gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
               <section className="flex flex-col lg:w-full  space-y-4 mr-[15px] ml-[15px]">
                 <h1 >{selectedPost.header}</h1>
                 
@@ -126,7 +126,7 @@ const BlogPosts = () => {
               showMore ? "max-h-[10000px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            {showMore && selectedPost.images != null && (
+            {showMore && selectedPost.images !== null && selectedPost.images !== undefined && (
               <div>
                 {selectedPost.images.length > 4 ? (
                   <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
