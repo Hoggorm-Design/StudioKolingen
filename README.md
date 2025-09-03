@@ -1,1 +1,1 @@
-# StudioKolingen
+# StudioKolingen.
