@@ -66,7 +66,8 @@ const CustomDot: React.FC<{
 
 const MyCarousel: React.FC = () => {
   const { carousels } = useCarousel();
-
+  const carouselImages = carousels?.[0]?.carouselImages || [];
+  
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const handleImageClick = (image: Image) => {
     setSelectedImage(image);
@@ -90,7 +91,8 @@ const MyCarousel: React.FC = () => {
       items: 1.4,
     },
   };
-  if (!carousels?.length) return null;
+  if (!carouselImages?.length) return null;
+
 
   return (
     <>
@@ -122,23 +124,23 @@ const MyCarousel: React.FC = () => {
                 onClick={() => {}}
                 active={false}
                 index={0}
-                totalSlides={carousels.length}
+                totalSlides={carouselImages.length}
               />
             }
           >
-            {carousels.map((image, index) => (
+            {carouselImages.map((image, index) => (
               <div
                 key={index}
                 className="aspect-square w-full max-w-[350px] shrink-0 overflow-hidden mx-auto z-0"
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`Slide ${index + 1} of ${carousels.length}`}
+                aria-label={`Slide ${index + 1} of ${carouselImages.length}`}
               >
                 <img
-                  src={image?.image?.asset?.url}
+                  src={image?.asset?.url}
                   alt={image?.alt || `Carousel image ${index + 1}`}
                   className="w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200"
-                  onClick={() => handleImageClick(image?.image)}
+                  onClick={() => handleImageClick(image)}
                 />
                 <ImageModal
                   selectedImage={selectedImage}

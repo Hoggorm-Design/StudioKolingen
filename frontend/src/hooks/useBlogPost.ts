@@ -21,7 +21,11 @@ export const useBlogPosts = () => {
             altText
             },
             textBlocks2[],
-           publishedAt
+           publishedAt,
+           mainImage {
+            asset->{_ref, url},
+           altText
+           },
          }
        `;
         const data: BlogPost[] = await sanityClient.fetch(query);

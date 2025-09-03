@@ -14,3 +14,10 @@ export interface Artist {
   };
   publishedAt: string;
 }
+
+
+export interface ArtistInfo {
+    header: string;
+    text: string;
+    Artists: Artist[];
+}

@@ -12,7 +12,6 @@ const useAboutMakersSpace = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Fetch both queries in parallel
         const [aboutData] = await Promise.all([
           sanityClient.fetch(`*[_type == "makersSpacePageInfo"][0]{
             aboutHeader,

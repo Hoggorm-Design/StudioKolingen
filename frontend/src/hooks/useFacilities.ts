@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import sanityClient from "../client.ts";
 import { useLoading } from "../context/LoadingContext.tsx";
-import { Facilities } from "../interfaces/artDisplay";
+import { Facilities } from "../interfaces/apartmentInfo";
 
 const useFacilities = () => {
   const [facilities, setFacilities] = useState<Facilities[] | null>(null);
@@ -12,7 +12,7 @@ const useFacilities = () => {
       setIsLoading(true);
       try {
         const query = `
-          *[_type == "facilities"]{
+          *[_type == "facilitiesPageInfo"][0].facilities[]->{
             header,
             textBlocks,
             mainImage{

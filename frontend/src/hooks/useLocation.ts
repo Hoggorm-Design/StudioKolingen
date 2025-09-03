@@ -13,7 +13,8 @@ const useLocation = () => {
       try {
         const query = `*[_type == "ourLocation"][0]{
                    header,
-                   text
+                   text,
+                   mapURL
                }`;
         const data = await sanityClient.fetch(query);
         setLocation(data);

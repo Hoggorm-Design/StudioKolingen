@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoading } from "../../context/LoadingContext.tsx";
 import useFacilities from "../../hooks/useFacilities.ts";
-import { Facilities } from "../../interfaces/artDisplay.ts";
+import { Facilities } from "../../interfaces/apartmentInfo.ts";
 
 const ArtDisplay = () => {
   const { facilities } = useFacilities();

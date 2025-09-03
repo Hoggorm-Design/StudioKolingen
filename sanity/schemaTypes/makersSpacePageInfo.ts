@@ -17,5 +17,18 @@ export default defineType({
       type: 'text',
       description: 'Here you can edit the subtext for About Title',
     }),
-  ],
+    defineField({
+          name: 'makersSpaceYears',
+          title: 'Makers Space Years',
+          type: 'array',
+          of: [{
+            type: 'reference',
+            title: 'Makers Space Years',
+            to: [
+              {type: 'makersSpaceYears'  }
+            ]
+        }],
+      })
+    ],
 })
+

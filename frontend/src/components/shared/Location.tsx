@@ -31,10 +31,6 @@ const Location = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
-  // const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(
-  //   contact?.address || ""
-  // )}&output=embed`;
-
   return (
     <>
       {!isLoading && location && (
@@ -62,7 +58,7 @@ const Location = () => {
 
                 {/* Kartet */}
                 <iframe
-                  src="https://www.google.com/maps/d/u/0/embed?mid=15gtce907QoUkeUAvp99UP9Opc86NrBM&ehbc=2E312F&noprof=1"
+                  src={location.mapURL}
                   width="100%"
                   height="500"
                   className={`${isInteractive ? "" : "pointer-events-none"}`} // Hindrer scroll inntil aktivert

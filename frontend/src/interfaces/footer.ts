@@ -8,6 +8,13 @@ export interface FooterImage {
 
 
 export interface Footer {
+  logoImage: {
+    asset: {
+      _ref: string;
+      url: string;
+    };
+    altText: string;
+  };
   images: FooterImage[];
   header: string;
   address: string;

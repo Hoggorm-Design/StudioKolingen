@@ -32,17 +32,17 @@ const BlogPosts = () => {
   }, []);
 
   useEffect(() => {
-    if (location.state?.selectedPost) {
-      const foundPost = blogPosts.find(
-        (post) => post.header === location.state.selectedPost
-      );
-      if (foundPost) {
-        setSelectedPost(foundPost);
-      }
-    } else if (!selectedPost && blogPosts.length > 0) {
-      setSelectedPost(blogPosts[0]);
+  if (location.state?.selectedPost) {
+    const foundPost = blogPosts.find(
+      (post) => post.header === location.state.selectedPost
+    );
+    if (foundPost) {
+      setSelectedPost(foundPost);
     }
-  }, [location.state, blogPosts, selectedPost]);
+  } else if (blogPosts.length > 0 && !selectedPost) {
+    setSelectedPost(blogPosts[0]);
+  }
+}, [location.state, blogPosts]);
 
   const handleSeeMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 6, blogPosts.length));
@@ -86,31 +86,47 @@ const BlogPosts = () => {
     <div id="blog-posts-container" className="pt-[64px] lg:p-0">
       {selectedPost && (
         <div>
-          <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-screen gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
-            <section className="flex flex-col lg:w-full space-y-4 mr-[30px] ml-[30px]">
-              <h1>{selectedPost.header}</h1>
-              {selectedPost.textBlocks &&
-                selectedPost.textBlocks.map((text, i) => <p key={i}>{text}</p>)}
+            <section className="flex flex-col-reverse lg:flex-row md:justify-center justify-center items-center w-full gap-10 lg:gap-30 px-5  sm:px-10 overflow-auto my-10">
+              <section className="flex flex-col lg:w-full  space-y-4 mr-[15px] ml-[15px]">
+                <h1 >{selectedPost.header}</h1>
+                
+                {selectedPost.textBlocks &&
+                  selectedPost.textBlocks.map((text, i) => {
+                    if (text.includes("https://") || text.includes("http://")) {
+                      return (
+                        <a
+                          key={i}
+                          href={text}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="break-words break-all md:break-normal hover:underline text-blue-500"
+                        >
+                          {text}
+                        </a>
+                      );
+                    } else {
+                      return <p key={i}>{text}</p>;
+                    }
+                  })}
+              </section>
+              <section className="flex flex-shrink-0  mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
+                {selectedPost.mainImage &&
+                  selectedPost.mainImage.asset && (
+                    <img
+                      src={selectedPost.mainImage.asset.url}
+                      alt={selectedPost.mainImage.altText || "Main image"}
+                      className="object-cover sm:w-[500px] sm:h-[500px]"
+                    />
+                  )}
+              </section>
             </section>
-            <section className="flex shrink-0   mr-[30px] ml-[30px] lg:w-1/2 items-center justify-center">
-              {selectedPost.images &&
-                selectedPost.images[0] &&
-                selectedPost.images[0].asset && (
-                  <img
-                    src={selectedPost.images[0].asset.url}
-                    alt={selectedPost.images[0].altText || "Main image"}
-                    className="object-cover max-w-[300px] h-[300px] sm:max-w-[500px] sm:h-[500px]"
-                  />
-                )}
-            </section>
-          </section>
 
           <div
             className={`transition-all duration-500 overflow-hidden ${
               showMore ? "max-h-[10000px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            {showMore && (
+            {showMore && selectedPost.images !== null && selectedPost.images !== undefined && (
               <div>
                 {selectedPost.images.length > 4 ? (
                   <section className="bg-[#1D192C] sm:px-10 pb-12 pt-8 sm:py-1 space-y-10">
@@ -119,12 +135,12 @@ const BlogPosts = () => {
                 ) : (
                   <section className="bg-[#1D192C] px-4 sm:px-4 py-4 flex-1 ">
                     {selectedPost.images &&
-                      selectedPost.images.length > 1 &&
-                      selectedPost.images.length <= 4 && (
+                      selectedPost.images.length > 0 &&
+                      selectedPost.images.length <= 3 && (
                         <div
-                          className={`grid gap-16 xs:gap-8 xl:gap-14 ${getImageGridConfig(selectedPost.images.length - 1)}`}
+                          className={`grid gap-16 xs:gap-8 xl:gap-14 ${getImageGridConfig(selectedPost.images.length)}`}
                         >
-                          {selectedPost.images.slice(1).map((img, i) =>
+                          {selectedPost.images.map((img, i) =>
                             img && img.asset ? (
                               <div
                                 key={i}
@@ -135,11 +151,12 @@ const BlogPosts = () => {
                                   src={img.asset.url}
                                   alt={img.altText || `Image ${i + 2}`}
                                 />
+                                {/*
                                 {img.altText && (
                                   <p className="text-white text-center mt-2">
                                     {img.altText}
                                   </p>
-                                )}
+                                )}*/}
                               </div>
                             ) : null
                           )}
