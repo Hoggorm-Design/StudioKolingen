@@ -1,5 +1,5 @@
 import React from "react";
-import { MakersSpaceContentProps } from "../../interfaces/makersSpaceContent";
+import { MakersSpaceContentProps } from "../../interfaces/aboutMakersSpace";
 
 const MakersSpaceCard: React.FC<{
   post: MakersSpaceContentProps;

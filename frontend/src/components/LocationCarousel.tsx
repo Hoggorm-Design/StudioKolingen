@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import Chevron_left from "../assets/Chevron_left.svg";
 import Chevron_right from "../assets/Chevron_right.svg";
-import { LinkData } from "../interfaces/linkData";
+import { LinkData } from "../interfaces/location";
 
 const ButtonGroup: React.FC<{
   next: () => void;
