@@ -13,7 +13,7 @@ const useMakersSpaceContent = () => {
     const fetchMakersSpaceContent = async () => {
       setIsLoading(true);
       try {
-        const query = `*[_type == "makersSpacePageInfo"][0].makersSpaceContent[] | order(publishedAt desc)->{
+        const query = `*[_type == "makersSpacePageInfo"][0].makersSpaceYears[] | order(publishedAt desc)->{
           _id,
           header,
           firstTextfield[],  
